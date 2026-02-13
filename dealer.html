@@ -90,8 +90,16 @@
     .search-bar input { flex: 1; padding: 12px 12px; font-size: 16px; border: none; outline: none; font-family: inherit; background: transparent; }
     .search-bar button { background: #2A60CA; color: #fff; border: none; padding: 12px 32px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; border-radius: 8px; flex-shrink: 0; }
     .filters { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; margin-bottom: 16px; padding-bottom: 24px; border-bottom: 1px solid #e5e7eb; }
+    .filter-wrap { position: relative; }
     .filter-btn { padding: 10px 20px; font-size: 14px; color: #374151; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 8px; }
-    .filter-btn::after { content: '▾'; font-size: 10px; color: #9ca3af; }
+    .filter-btn::after { content: '▾'; font-size: 10px; color: #9ca3af; transition: transform 0.2s; }
+    .filter-wrap.open .filter-btn { border-color: #2a60ca; color: #2a60ca; }
+    .filter-wrap.open .filter-btn::after { transform: rotate(180deg); color: #2a60ca; }
+    .filter-dropdown { position: absolute; top: calc(100% + 6px); left: 0; min-width: 200px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; z-index: 50; display: none; }
+    .filter-wrap.open .filter-dropdown { display: block; }
+    .filter-option { padding: 10px 16px; font-size: 14px; color: #374151; cursor: pointer; font-family: inherit; transition: background 0.15s; }
+    .filter-option:hover { background: #f2f3fa; }
+    .filter-option.selected { color: #2a60ca; font-weight: 600; }
 
     /* JOB LISTINGS */
     .listings-header { text-align: left; max-width: 1300px; margin: 0 auto; padding: 0 64px; font-size: 13px; color: #9ca3af; margin-bottom: 16px; }
@@ -368,13 +376,89 @@
       <button>Search</button>
     </div>
     <div class="filters">
-      <button class="filter-btn">All Stores</button>
-      <button class="filter-btn">All Positions</button>
-      <button class="filter-btn">Job Type</button>
-      <button class="filter-btn">Experience</button>
-      <button class="filter-btn">Pay</button>
-      <button class="filter-btn">Within 50 mi</button>
+      <div class="filter-wrap">
+        <button class="filter-btn" onclick="toggleFilter(this)">All Stores</button>
+        <div class="filter-dropdown">
+          <div class="filter-option selected" onclick="selectFilter(this)">All Stores</div>
+          <div class="filter-option" onclick="selectFilter(this)">Hawk Chevrolet</div>
+          <div class="filter-option" onclick="selectFilter(this)">Hawk Ford of St Charles</div>
+          <div class="filter-option" onclick="selectFilter(this)">Hawk Cadillac of Joliet</div>
+          <div class="filter-option" onclick="selectFilter(this)">Hawk CDJR Fiat</div>
+          <div class="filter-option" onclick="selectFilter(this)">Hawk Mazda of Joliet</div>
+        </div>
+      </div>
+      <div class="filter-wrap">
+        <button class="filter-btn" onclick="toggleFilter(this)">All Positions</button>
+        <div class="filter-dropdown">
+          <div class="filter-option selected" onclick="selectFilter(this)">All Positions</div>
+          <div class="filter-option" onclick="selectFilter(this)">Technician</div>
+          <div class="filter-option" onclick="selectFilter(this)">Sales</div>
+          <div class="filter-option" onclick="selectFilter(this)">Finance</div>
+          <div class="filter-option" onclick="selectFilter(this)">Admin</div>
+          <div class="filter-option" onclick="selectFilter(this)">Service</div>
+        </div>
+      </div>
+      <div class="filter-wrap">
+        <button class="filter-btn" onclick="toggleFilter(this)">Job Type</button>
+        <div class="filter-dropdown">
+          <div class="filter-option selected" onclick="selectFilter(this)">All Types</div>
+          <div class="filter-option" onclick="selectFilter(this)">Full-time</div>
+          <div class="filter-option" onclick="selectFilter(this)">Part-time</div>
+          <div class="filter-option" onclick="selectFilter(this)">Contract</div>
+        </div>
+      </div>
+      <div class="filter-wrap">
+        <button class="filter-btn" onclick="toggleFilter(this)">Experience</button>
+        <div class="filter-dropdown">
+          <div class="filter-option selected" onclick="selectFilter(this)">Any Experience</div>
+          <div class="filter-option" onclick="selectFilter(this)">Entry Level</div>
+          <div class="filter-option" onclick="selectFilter(this)">1-3 Years</div>
+          <div class="filter-option" onclick="selectFilter(this)">3-5 Years</div>
+          <div class="filter-option" onclick="selectFilter(this)">5+ Years</div>
+        </div>
+      </div>
+      <div class="filter-wrap">
+        <button class="filter-btn" onclick="toggleFilter(this)">Pay</button>
+        <div class="filter-dropdown">
+          <div class="filter-option selected" onclick="selectFilter(this)">Any Pay</div>
+          <div class="filter-option" onclick="selectFilter(this)">$30k - $45k</div>
+          <div class="filter-option" onclick="selectFilter(this)">$45k - $65k</div>
+          <div class="filter-option" onclick="selectFilter(this)">$65k - $85k</div>
+          <div class="filter-option" onclick="selectFilter(this)">$85k+</div>
+        </div>
+      </div>
+      <div class="filter-wrap">
+        <button class="filter-btn" onclick="toggleFilter(this)">Within 50 mi</button>
+        <div class="filter-dropdown">
+          <div class="filter-option" onclick="selectFilter(this)">Within 10 mi</div>
+          <div class="filter-option" onclick="selectFilter(this)">Within 25 mi</div>
+          <div class="filter-option selected" onclick="selectFilter(this)">Within 50 mi</div>
+          <div class="filter-option" onclick="selectFilter(this)">Within 100 mi</div>
+          <div class="filter-option" onclick="selectFilter(this)">Any Distance</div>
+        </div>
+      </div>
     </div>
+    <script>
+    function toggleFilter(btn) {
+      var wrap = btn.parentElement;
+      var wasOpen = wrap.classList.contains('open');
+      document.querySelectorAll('.filter-wrap.open').forEach(function(w) { w.classList.remove('open'); });
+      if (!wasOpen) wrap.classList.add('open');
+    }
+    function selectFilter(opt) {
+      var wrap = opt.closest('.filter-wrap');
+      var btn = wrap.querySelector('.filter-btn');
+      wrap.querySelectorAll('.filter-option').forEach(function(o) { o.classList.remove('selected'); });
+      opt.classList.add('selected');
+      btn.textContent = opt.textContent;
+      wrap.classList.remove('open');
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.filter-wrap')) {
+        document.querySelectorAll('.filter-wrap.open').forEach(function(w) { w.classList.remove('open'); });
+      }
+    });
+    </script>
   </section>
 
   <!-- LISTINGS -->
