@@ -36,8 +36,15 @@
     .hero-btn-secondary:hover { background: #f5f6f8; }
     .hero-images { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 0 auto; max-width: 1300px; }
     .hero-images img { width: 100%; height: 340px; object-fit: cover; border-radius: 16px; }
-    .hero-images .video-wrap { position: relative; }
-    .hero-images .video-wrap::after { content: '▶'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 56px; height: 56px; background: rgba(255,255,255,0.95); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #2a60ca; line-height: 56px; text-align: center; }
+    .hero-images .video-wrap { position: relative; cursor: pointer; }
+    .hero-images .video-wrap::after { content: '▶'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 56px; height: 56px; background: rgba(255,255,255,0.95); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #2a60ca; line-height: 56px; text-align: center; transition: transform 0.2s; }
+    .hero-images .video-wrap:hover::after { transform: translate(-50%,-50%) scale(1.1); }
+    .video-modal { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
+    .video-modal.open { display: flex; opacity: 1; }
+    .video-modal-inner { position: relative; width: 90%; max-width: 900px; aspect-ratio: 16/9; border-radius: 16px; overflow: hidden; transform: scale(0.9); transition: transform 0.3s ease; }
+    .video-modal.open .video-modal-inner { transform: scale(1); }
+    .video-modal iframe { width: 100%; height: 100%; border: none; }
+    .video-modal-close { position: absolute; top: -40px; right: 0; background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
 
     /* BRANDS */
     .brands { text-align: center; padding: 48px 64px; background: #fff; }
@@ -275,7 +282,7 @@
     </div>
     <div class="hero-images">
       <img src="images/dealer/87210d92.png" alt="Hawk dealership exterior">
-      <div class="video-wrap">
+      <div class="video-wrap" onclick="openVideoModal()">
         <img src="images/dealer/92bca1f7.png" alt="Hawk team photo">
       </div>
       <img src="images/dealer/099f23fc.png" alt="Showroom interior">
@@ -755,6 +762,30 @@
     <span class="footer-text">© 2026 Ford Motor Company</span>
     <img src="images/logo.svg" alt="Ford" style="height:32px;">
   </footer>
+
+  <!-- VIDEO MODAL -->
+  <div class="video-modal" id="videoModal" onclick="closeVideoModal(event)">
+    <div class="video-modal-inner">
+      <button class="video-modal-close" onclick="closeVideoModal(event)">✕</button>
+      <iframe id="videoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+  <script>
+  function openVideoModal() {
+    var modal = document.getElementById('videoModal');
+    document.getElementById('videoIframe').src = 'https://www.youtube.com/embed/UZrjjgobKgY?autoplay=1';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeVideoModal(e) {
+    if (e && e.target !== document.getElementById('videoModal') && !e.target.classList.contains('video-modal-close')) return;
+    var modal = document.getElementById('videoModal');
+    modal.classList.remove('open');
+    document.getElementById('videoIframe').src = '';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeVideoModal({}); });
+  </script>
 
   <script>
   (function() {
