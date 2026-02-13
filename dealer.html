@@ -143,8 +143,14 @@
     .job-detail-panel .detail-logo { width: 92px; height: auto; margin-bottom: 16px; }
     .job-detail-panel .detail-title { font-size: 24px; font-weight: 700; color: #00095b; }
     .job-detail-panel .detail-actions { display: flex; gap: 12px; align-items: center; }
+    .job-detail-panel .detail-save-wrap { position: relative; }
     .job-detail-panel .detail-save { width: 40px; height: 40px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
     .job-detail-panel .detail-save:hover { background: #f2f3fa; border-color: #2a60ca; }
+    .share-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; min-width: 200px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; z-index: 250; }
+    .share-dropdown.open { display: block; }
+    .share-dropdown a { display: flex; align-items: center; gap: 12px; padding: 10px 16px; font-size: 14px; color: #1a2629; text-decoration: none; cursor: pointer; transition: background 0.15s; }
+    .share-dropdown a:hover { background: #f2f3fa; }
+    .share-dropdown a svg { width: 20px; height: 20px; flex-shrink: 0; }
     .job-detail-panel .detail-save svg { width: 20px; height: 20px; stroke: #374151; fill: none; stroke-width: 2; }
     .job-detail-panel .detail-apply-top { background: #2A60CA; color: #fff; font-size: 14px; font-weight: 600; padding: 10px 24px; border-radius: 50px; border: none; cursor: pointer; font-family: inherit; transition: background 0.2s; }
     .job-detail-panel .detail-apply-top:hover { background: #1e4fa8; }
@@ -668,6 +674,34 @@
       window.scrollTo({top: top, behavior: 'smooth'});
     }
 
+    function toggleShareMenu() {
+      var dd = document.getElementById('share-dropdown');
+      dd.classList.toggle('open');
+    }
+    function copyJobLink() {
+      navigator.clipboard.writeText(window.location.href);
+      toggleShareMenu();
+    }
+    function shareViaEmail() {
+      var job = jobPositions[selectedJobIdx];
+      window.open('mailto:?subject=' + encodeURIComponent(job.title + ' at ' + job.store) + '&body=' + encodeURIComponent('Check out this job: ' + window.location.href));
+      toggleShareMenu();
+    }
+    function shareViaSMS() {
+      var job = jobPositions[selectedJobIdx];
+      window.open('sms:?body=' + encodeURIComponent(job.title + ' at ' + job.store + ' — ' + window.location.href));
+      toggleShareMenu();
+    }
+    function shareViaWhatsApp() {
+      var job = jobPositions[selectedJobIdx];
+      window.open('https://wa.me/?text=' + encodeURIComponent(job.title + ' at ' + job.store + ' — ' + window.location.href));
+      toggleShareMenu();
+    }
+    document.addEventListener('click', function(e) {
+      var dd = document.getElementById('share-dropdown');
+      if (dd && !e.target.closest('.detail-save-wrap')) dd.classList.remove('open');
+    });
+
     function selectJob(idx) {
       selectedJobIdx = idx;
       var cards = document.querySelectorAll('.job-card');
@@ -693,7 +727,13 @@
         '<img src="images/dealer/ford-badge.png" alt="Ford" class="detail-logo">' +
         '<div class="detail-header"><span class="detail-title">' + job.title + '</span>' +
         '<div class="detail-actions">' +
-        '<button class="detail-save"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>' +
+        '<div class="detail-save-wrap"><button class="detail-save" onclick="event.stopPropagation();toggleShareMenu()"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>' +
+        '<div class="share-dropdown" id="share-dropdown">' +
+        '<a onclick="copyJobLink()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>Copy link</a>' +
+        '<a onclick="shareViaEmail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>Email</a>' +
+        '<a onclick="shareViaSMS()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Text message</a>' +
+        '<a onclick="shareViaWhatsApp()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.111.547 4.099 1.504 5.831L0 24l6.335-1.631A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.883 0-3.674-.502-5.251-1.453l-.376-.224-3.9 1.009 1.04-3.791-.246-.39A9.698 9.698 0 012.25 12c0-5.385 4.365-9.75 9.75-9.75S21.75 6.615 21.75 12s-4.365 9.75-9.75 9.75z"/></svg>WhatsApp</a>' +
+        '</div></div>' +
         '<button class="detail-apply-top">Apply Now</button></div></div>' +
         '<div class="detail-company">' + job.store + '</div>' +
         '<div class="detail-meta"><span>' + job.location + '</span><span>' + formatPay(job.pay) + '</span><span>' + job.position + '</span><span>' + job.type + '</span><span class="detail-time">' + job.time + '</span></div>' +
