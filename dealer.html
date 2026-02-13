@@ -54,7 +54,7 @@
     .brands-scroll-wrap::before, .brands-scroll-wrap::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
     .brands-scroll-wrap::before { left: 0; background: linear-gradient(to right, #fff 0%, transparent 100%); }
     .brands-scroll-wrap::after { right: 0; background: linear-gradient(to left, #fff 0%, transparent 100%); }
-    .brands-track { display: flex; align-items: center; gap: 64px; animation: scroll-logos 20s linear infinite; width: max-content; }
+    .brands-track { display: flex; align-items: center; gap: 64px; animation: scroll-logos 25s linear infinite; width: max-content; will-change: transform; }
     .brands-track img { height: 72px; width: auto; object-fit: contain; flex-shrink: 0; }
     @keyframes scroll-logos { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -297,7 +297,7 @@
   </section>
 
   <!-- BRANDS -->
-  <section class="brands" id="brands" data-animate>
+  <section class="brands" id="brands">
     <h3>Brands we work with</h3>
     <div class="brands-scroll-wrap">
       <div class="brands-track">
