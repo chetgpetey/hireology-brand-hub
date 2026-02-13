@@ -51,17 +51,18 @@
     @keyframes scroll-logos { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ABOUT US */
-    .about { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 40px; padding: 64px; align-items: start; max-width: 1300px; margin: 0 auto; }
-    .about-sidebar h2 { font-size: clamp(32px, 4vw, 50px); font-weight: 600; color: #00095b; margin-bottom: 24px; line-height: 1.1; white-space: nowrap; }
+    .about { display: grid; grid-template-columns: 220px 1fr 1fr; gap: 48px; padding: 80px 64px; align-items: start; max-width: 1300px; margin: 0 auto; }
+    .about-sidebar h2 { font-size: 50px; font-weight: 700; color: #00095b; margin-bottom: 32px; line-height: 1.1; white-space: nowrap; }
     .about-sidebar-links { display: flex; flex-direction: column; gap: 0; }
-    .about-sidebar-links a { font-size: 16px; font-weight: 500; color: #1a2629; padding: 12px 0; border-bottom: 1px solid #e5e7eb; cursor: pointer; transition: color 0.2s; }
-    .about-sidebar-links a:first-child { border-top: 2px solid #00095b; }
-    .about-sidebar-links a.active { color: #2a60ca; font-weight: 600; }
-    .about-sidebar-links a:hover { color: #2a60ca; }
-    .about-image { width: 100%; height: 400px; object-fit: cover; border-radius: 12px; }
+    .about-sidebar-links a { font-size: 18px; font-weight: 500; color: #1a2629; padding: 20px 0; border-bottom: 1px solid #d1d5db; cursor: pointer; transition: color 0.2s; text-decoration: none; position: relative; }
+    .about-sidebar-links a:first-child { border-top: none; }
+    .about-sidebar-links a.active { color: #00095b; font-weight: 600; }
+    .about-sidebar-links a.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 40px; height: 3px; background: #00095b; }
+    .about-sidebar-links a:hover { color: #00095b; }
+    .about-image { width: 100%; height: 420px; object-fit: cover; border-radius: 12px; }
     .about-text { overflow: hidden; }
-    .about-text h3 { font-size: 40px; font-weight: 600; color: #00095b; margin-bottom: 16px; line-height: 1.2; }
-    .about-text p { font-size: 16px; color: #05082f; line-height: 1.7; margin-bottom: 16px; }
+    .about-text h3 { font-size: 36px; font-weight: 700; color: #00095b; margin-bottom: 20px; line-height: 1.2; }
+    .about-text p { font-size: 15px; color: #1a2629; line-height: 1.8; margin-bottom: 16px; }
     .about-text.slide-out h3, .about-text.slide-out p { animation: slideOut 0.25s ease-in forwards; }
     .about-text.slide-in h3, .about-text.slide-in p { animation: slideIn 0.25s ease-out forwards; }
     @keyframes slideOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-16px); } }
