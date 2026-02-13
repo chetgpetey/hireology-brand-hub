@@ -487,88 +487,97 @@
   </section>
 
   <!-- LISTINGS -->
-  <div class="listings-header">Showing 6 opportunities</div>
+  <div class="listings-header" id="listings-header">Showing 20 opportunities</div>
   <div class="listings">
-    <div class="job-list" data-animate-stagger>
-      <div class="job-card" onclick="window.location.href='job-detail.html'">
-        <div class="job-logo"><img src="images/dealer/job-thumb-1.png" alt=""></div>
-        <div class="job-info">
-          <div class="job-info-header">
-            <h4>Automotive Technician</h4>
-            <span class="job-time">14 hours ago</span>
-          </div>
-          <div class="company">Ford Downtown</div>
-          <div class="job-meta">
-            <span>Detroit, MI</span><span>$45,000 - $65,000</span><span>Technician</span><span>Full-time</span>
-          </div>
-        </div>
-      </div>
-      <div class="job-card" onclick="window.location.href='job-detail.html'">
-        <div class="job-logo"><img src="images/dealer/job-thumb-2.png" alt=""></div>
-        <div class="job-info">
-          <div class="job-info-header">
-            <h4>Sales Representative</h4>
-            <span class="job-time">24 hours ago</span>
-          </div>
-          <div class="company">Chicago Ford Center</div>
-          <div class="job-meta">
-            <span>Chicago, IL</span><span>$40,000 - $80,000</span><span>Sales</span><span>Full-time</span>
-          </div>
-        </div>
-      </div>
-      <div class="job-card" onclick="window.location.href='job-detail.html'">
-        <div class="job-logo"><img src="images/dealer/job-thumb-3.png" alt=""></div>
-        <div class="job-info">
-          <div class="job-info-header">
-            <h4>Service Advisor</h4>
-            <span class="job-time">1 day ago</span>
-          </div>
-          <div class="company">Houston Ford</div>
-          <div class="job-meta">
-            <span>Houston, TX</span><span>$50,000 - $85,000</span><span>Sales</span><span>Full-time</span>
-          </div>
-        </div>
-      </div>
-      <div class="job-card" onclick="window.location.href='job-detail.html'">
-        <div class="job-logo"><img src="images/dealer/job-thumb-4.png" alt=""></div>
-        <div class="job-info">
-          <div class="job-info-header">
-            <h4>Finance Manager</h4>
-            <span class="job-time">2 days ago</span>
-          </div>
-          <div class="company">Phoenix Ford</div>
-          <div class="job-meta">
-            <span>Phoenix, AZ</span><span>$45,000 - $65,000</span><span>Admin</span><span>Part-time</span>
-          </div>
-        </div>
-      </div>
-      <div class="job-card" onclick="window.location.href='job-detail.html'">
-        <div class="job-logo"><img src="images/dealer/job-thumb-5.png" alt=""></div>
-        <div class="job-info">
-          <div class="job-info-header">
-            <h4>Parts Specialist</h4>
-            <span class="job-time">3 days ago</span>
-          </div>
-          <div class="company">Philly Ford</div>
-          <div class="job-meta">
-            <span>Philadelphia, PA</span><span>$45,000 - $65,000</span><span>Sales</span><span>Full-time</span>
-          </div>
-        </div>
-      </div>
-      <div class="job-card" onclick="window.location.href='job-detail.html'">
-        <div class="job-logo"><img src="images/dealer/job-thumb-6.png" alt=""></div>
-        <div class="job-info">
-          <div class="job-info-header">
-            <h4>Body Shop Technician</h4>
-            <span class="job-time">4 days ago</span>
-          </div>
-          <div class="company">San Antonio Ford</div>
-          <div class="job-meta">
-            <span>San Antonio, TX</span><span>$45,000 - $65,000</span><span>Technician</span><span>Full-time</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="job-list" id="job-list"></div>
+    <script>
+    var allJobs = [
+      { title:"Automotive Technician", store:"Hawk Chevrolet", location:"Joliet, IL", pay:55000, position:"Technician", type:"Full-time", experience:"1-3 Years", thumb:"job-thumb-1.png", time:"14 hours ago" },
+      { title:"Sales Representative", store:"Hawk Ford of St Charles", location:"St Charles, IL", pay:60000, position:"Sales", type:"Full-time", experience:"1-3 Years", thumb:"job-thumb-2.png", time:"24 hours ago" },
+      { title:"Service Advisor", store:"Hawk Mazda of Joliet", location:"Joliet, IL", pay:67000, position:"Service", type:"Full-time", experience:"3-5 Years", thumb:"job-thumb-3.png", time:"1 day ago" },
+      { title:"Finance Manager", store:"Hawk Cadillac of Joliet", location:"Joliet, IL", pay:75000, position:"Finance", type:"Full-time", experience:"5+ Years", thumb:"job-thumb-4.png", time:"2 days ago" },
+      { title:"Parts Specialist", store:"Hawk CDJR Fiat", location:"Joliet, IL", pay:42000, position:"Sales", type:"Full-time", experience:"Entry Level", thumb:"job-thumb-5.png", time:"3 days ago" },
+      { title:"Body Shop Technician", store:"Hawk Chevrolet", location:"Joliet, IL", pay:58000, position:"Technician", type:"Full-time", experience:"3-5 Years", thumb:"job-thumb-6.png", time:"4 days ago" },
+      { title:"Lot Attendant", store:"Hawk Ford of St Charles", location:"St Charles, IL", pay:32000, position:"Admin", type:"Part-time", experience:"Entry Level", thumb:"job-thumb-1.png", time:"4 days ago" },
+      { title:"Express Lane Technician", store:"Hawk Mazda of Joliet", location:"Joliet, IL", pay:40000, position:"Technician", type:"Full-time", experience:"Entry Level", thumb:"job-thumb-3.png", time:"5 days ago" },
+      { title:"Internet Sales Manager", store:"Hawk Chevrolet", location:"Joliet, IL", pay:85000, position:"Sales", type:"Full-time", experience:"3-5 Years", thumb:"job-thumb-2.png", time:"5 days ago" },
+      { title:"Receptionist", store:"Hawk Cadillac of Joliet", location:"Joliet, IL", pay:35000, position:"Admin", type:"Full-time", experience:"Entry Level", thumb:"job-thumb-4.png", time:"6 days ago" },
+      { title:"Warranty Administrator", store:"Hawk CDJR Fiat", location:"Joliet, IL", pay:52000, position:"Admin", type:"Full-time", experience:"1-3 Years", thumb:"job-thumb-5.png", time:"6 days ago" },
+      { title:"Master Technician", store:"Hawk Ford of St Charles", location:"St Charles, IL", pay:90000, position:"Technician", type:"Full-time", experience:"5+ Years", thumb:"job-thumb-6.png", time:"1 week ago" },
+      { title:"BDC Representative", store:"Hawk Mazda of Joliet", location:"Joliet, IL", pay:45000, position:"Sales", type:"Full-time", experience:"Entry Level", thumb:"job-thumb-1.png", time:"1 week ago" },
+      { title:"Detailer", store:"Hawk Chevrolet", location:"Joliet, IL", pay:34000, position:"Service", type:"Part-time", experience:"Entry Level", thumb:"job-thumb-3.png", time:"1 week ago" },
+      { title:"F&I Director", store:"Hawk Cadillac of Joliet", location:"Joliet, IL", pay:95000, position:"Finance", type:"Full-time", experience:"5+ Years", thumb:"job-thumb-4.png", time:"1 week ago" },
+      { title:"Service Technician", store:"Hawk CDJR Fiat", location:"Joliet, IL", pay:50000, position:"Technician", type:"Full-time", experience:"1-3 Years", thumb:"job-thumb-2.png", time:"2 weeks ago" },
+      { title:"Sales Consultant", store:"Hawk Ford of St Charles", location:"St Charles, IL", pay:70000, position:"Sales", type:"Full-time", experience:"1-3 Years", thumb:"job-thumb-5.png", time:"2 weeks ago" },
+      { title:"Cashier", store:"Hawk Mazda of Joliet", location:"Joliet, IL", pay:33000, position:"Admin", type:"Part-time", experience:"Entry Level", thumb:"job-thumb-6.png", time:"2 weeks ago" },
+      { title:"Collision Estimator", store:"Hawk Chevrolet", location:"Joliet, IL", pay:62000, position:"Service", type:"Full-time", experience:"3-5 Years", thumb:"job-thumb-1.png", time:"2 weeks ago" },
+      { title:"Accounting Clerk", store:"Hawk Cadillac of Joliet", location:"Joliet, IL", pay:44000, position:"Finance", type:"Contract", experience:"1-3 Years", thumb:"job-thumb-4.png", time:"3 weeks ago" }
+    ];
+
+    var thumbs = ["job-thumb-1.png","job-thumb-2.png","job-thumb-3.png","job-thumb-4.png","job-thumb-5.png","job-thumb-6.png"];
+
+    function getActiveFilters() {
+      var filters = {};
+      document.querySelectorAll('.filter-wrap').forEach(function(wrap, i) {
+        var sel = wrap.querySelector('.filter-option.selected');
+        if (!sel) return;
+        var val = sel.textContent.trim();
+        var keys = ['store','position','type','experience','pay','distance'];
+        filters[keys[i]] = val;
+      });
+      return filters;
+    }
+
+    function matchesPay(jobPay, filterPay) {
+      if (filterPay === 'Any Pay') return true;
+      if (filterPay === '$30k - $45k') return jobPay >= 30000 && jobPay < 45000;
+      if (filterPay === '$45k - $65k') return jobPay >= 45000 && jobPay < 65000;
+      if (filterPay === '$65k - $85k') return jobPay >= 65000 && jobPay < 85000;
+      if (filterPay === '$85k+') return jobPay >= 85000;
+      return true;
+    }
+
+    function formatPay(p) {
+      return '$' + p.toLocaleString();
+    }
+
+    function filterJobs() {
+      var f = getActiveFilters();
+      return allJobs.filter(function(job) {
+        if (f.store && f.store !== 'All Stores' && job.store !== f.store) return false;
+        if (f.position && f.position !== 'All Positions' && job.position !== f.position) return false;
+        if (f.type && f.type !== 'All Types' && job.type !== f.type) return false;
+        if (f.experience && f.experience !== 'Any Experience' && job.experience !== f.experience) return false;
+        if (f.pay && !matchesPay(job.pay, f.pay)) return false;
+        return true;
+      });
+    }
+
+    function renderJobs() {
+      var jobs = filterJobs();
+      var list = document.getElementById('job-list');
+      var header = document.getElementById('listings-header');
+      header.textContent = 'Showing ' + jobs.length + ' opportunit' + (jobs.length === 1 ? 'y' : 'ies');
+      list.innerHTML = jobs.map(function(job) {
+        return '<div class="job-card" onclick="window.location.href=\'job-detail.html\'">' +
+          '<div class="job-logo"><img src="images/dealer/' + job.thumb + '" alt=""></div>' +
+          '<div class="job-info"><div class="job-info-header"><h4>' + job.title + '</h4>' +
+          '<span class="job-time">' + job.time + '</span></div>' +
+          '<div class="company">' + job.store + '</div>' +
+          '<div class="job-meta"><span>' + job.location + '</span><span>' + formatPay(job.pay) + '</span><span>' + job.position + '</span><span>' + job.type + '</span></div>' +
+          '</div></div>';
+      }).join('');
+    }
+
+    // Override selectFilter to also re-render
+    var _origSelect = selectFilter;
+    selectFilter = function(opt) {
+      _origSelect(opt);
+      renderJobs();
+    };
+
+    renderJobs();
+    </script>
 
     <!-- ALERT -->
     <div class="alert-card" data-animate>
