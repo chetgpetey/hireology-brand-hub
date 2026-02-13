@@ -662,7 +662,10 @@
       currentPage = p;
       selectedJobIdx = -1;
       renderJobs();
-      document.getElementById('listings-header').scrollIntoView({behavior:'smooth'});
+      var header = document.getElementById('listings-header');
+      var navHeight = document.querySelector('.nav').offsetHeight + 16;
+      var top = header.getBoundingClientRect().top + window.pageYOffset - navHeight;
+      window.scrollTo({top: top, behavior: 'smooth'});
     }
 
     function selectJob(idx) {
