@@ -97,12 +97,17 @@
     .listings-header { text-align: left; max-width: 1300px; margin: 0 auto; padding: 0 64px; font-size: 13px; color: #9ca3af; margin-bottom: 16px; }
     .listings { max-width: 1300px; margin: 0 auto; padding: 0 64px 64px; display: grid; grid-template-columns: 1fr minmax(300px, 0.8fr); gap: 32px; align-items: start; }
     .job-list { display: flex; flex-direction: column; gap: 12px; }
-    .job-card { display: flex; gap: 20px; padding: 24px; border: 1px solid #e5e7eb; border-radius: 16px; background: #fff; }
+    .job-card { display: flex; gap: 20px; padding: 24px; border: 1px solid #e5e7eb; border-radius: 16px; background: #fff; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); position: relative; }
+    .job-card:hover { border-color: #2a60ca; box-shadow: 0 8px 24px rgba(42, 96, 202, 0.15); transform: translateY(-2px); }
+    .job-card:hover h4 { color: #2a60ca; }
+    .job-card::after { content: '→'; position: absolute; right: 24px; top: 50%; transform: translateY(-50%) translateX(-8px); opacity: 0; font-size: 20px; color: #2a60ca; transition: all 0.3s ease; }
+    .job-card:hover::after { opacity: 1; transform: translateY(-50%) translateX(0); }
+    .job-card a { text-decoration: none; color: inherit; display: contents; }
     .job-logo { width: 88px; height: 88px; border-radius: 12px; background: #e8ecf0; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .job-logo img { width: 100%; height: 100%; object-fit: cover; }
     .job-info { flex: 1; }
     .job-info-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2px; }
-    .job-info h4 { font-size: 18px; font-weight: 600; color: #00095b; }
+    .job-info h4 { font-size: 18px; font-weight: 600; color: #00095b; transition: color 0.3s ease; }
     .job-info .company { font-size: 14px; color: #374151; margin: 4px 0 12px; }
     .job-meta { display: flex; gap: 8px; flex-wrap: nowrap; font-size: 12px; color: #6b7280; }
     .job-meta span { background: #f3f4f6; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
@@ -376,7 +381,7 @@
   <div class="listings-header">Showing 6 opportunities</div>
   <div class="listings">
     <div class="job-list">
-      <div class="job-card">
+      <div class="job-card" onclick="window.location.href='job-detail.html'">
         <div class="job-logo"><img src="images/dealer/job-thumb-1.png" alt=""></div>
         <div class="job-info">
           <div class="job-info-header">
@@ -389,7 +394,7 @@
           </div>
         </div>
       </div>
-      <div class="job-card">
+      <div class="job-card" onclick="window.location.href='job-detail.html'">
         <div class="job-logo"><img src="images/dealer/job-thumb-2.png" alt=""></div>
         <div class="job-info">
           <div class="job-info-header">
@@ -402,7 +407,7 @@
           </div>
         </div>
       </div>
-      <div class="job-card">
+      <div class="job-card" onclick="window.location.href='job-detail.html'">
         <div class="job-logo"><img src="images/dealer/job-thumb-3.png" alt=""></div>
         <div class="job-info">
           <div class="job-info-header">
@@ -415,7 +420,7 @@
           </div>
         </div>
       </div>
-      <div class="job-card">
+      <div class="job-card" onclick="window.location.href='job-detail.html'">
         <div class="job-logo"><img src="images/dealer/job-thumb-4.png" alt=""></div>
         <div class="job-info">
           <div class="job-info-header">
@@ -428,7 +433,7 @@
           </div>
         </div>
       </div>
-      <div class="job-card">
+      <div class="job-card" onclick="window.location.href='job-detail.html'">
         <div class="job-logo"><img src="images/dealer/job-thumb-5.png" alt=""></div>
         <div class="job-info">
           <div class="job-info-header">
@@ -441,7 +446,7 @@
           </div>
         </div>
       </div>
-      <div class="job-card">
+      <div class="job-card" onclick="window.location.href='job-detail.html'">
         <div class="job-logo"><img src="images/dealer/job-thumb-6.png" alt=""></div>
         <div class="job-info">
           <div class="job-info-header">
