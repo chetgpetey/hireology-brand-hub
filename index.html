@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ford Careers | Brand Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; color: #1a2629; background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* NAV */
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 64px; background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 100; }
+    .nav-logo { height: 28px; width: auto; }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 15px; font-weight: 500; color: #1a2629; }
+    .nav-links a:hover { color: #2a60ca; }
+    .nav-cta { background: #2a60ca; color: #fff; font-size: 14px; font-weight: 600; padding: 10px 24px; border-radius: 24px; border: none; cursor: pointer; }
+    .nav-cta:hover { background: #1e4fa8; }
+
+    /* HERO */
+    .hero { text-align: center; padding: 56px 64px 0; }
+    .hero h1 { font-size: 56px; font-weight: 600; color: #00095b; line-height: 1.15; margin-bottom: 16px; }
+    .hero p { font-size: 18px; font-weight: 400; color: #05082f; max-width: 560px; margin: 0 auto 32px; line-height: 1.6; }
+    .hero-btn { display: inline-block; background: #00095b; color: #fff; font-size: 16px; font-weight: 600; padding: 12px 32px; border-radius: 24px; border: 2px solid #00095b; margin-bottom: 40px; }
+    .hero-btn:hover { background: transparent; color: #00095b; }
+    .hero-img { width: 100%; border-radius: 16px; object-fit: cover; max-height: 420px; }
+
+    /* BENEFITS */
+    .benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 40px 64px; }
+    .benefit-card { border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; justify-content: space-between; min-height: 340px; color: #fff; position: relative; overflow: hidden; }
+    .benefit-card:nth-child(1) { background: #081534; }
+    .benefit-card:nth-child(2) { background: #133a7c; }
+    .benefit-card:nth-child(3) { background: #2a6bac; }
+    .benefit-card:nth-child(4) { background: #47a8e5; }
+    .benefit-icon { width: 48px; height: 48px; margin-bottom: 16px; opacity: 0.7; }
+    .benefit-icon img { width: 100%; height: 100%; filter: brightness(0) invert(1); }
+    .benefit-card h3 { font-size: 32px; font-weight: 400; line-height: 1.2; margin-bottom: auto; }
+    .benefit-desc { font-size: 14px; font-weight: 400; line-height: 1.6; opacity: 0.9; margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 16px; }
+
+    /* COMMUNITY */
+    .community { padding: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .community-images { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .community-images img { border-radius: 12px; width: 100%; height: 200px; object-fit: cover; }
+    .community-text { padding-top: 40px; }
+    .community-text h2 { font-size: 40px; font-weight: 600; color: #00095b; margin-bottom: 16px; line-height: 1.2; }
+    .community-text p { font-size: 16px; color: #05082f; line-height: 1.7; margin-bottom: 24px; }
+    .stat-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 15px; color: #1a2629; }
+    .stat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .stat-dot.blue { background: #6b7280; }
+    .stat-dot.navy { background: #1e3a5f; }
+    .stat-dot.teal { background: #22c55e; }
+
+    /* QUOTE */
+    .quote-section { padding: 64px; display: flex; align-items: flex-start; gap: 32px; max-width: 800px; margin: 0 auto; }
+    .quote-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .quote-text { font-size: 28px; font-weight: 400; color: #2e4f66; line-height: 1.5; font-style: normal; }
+    .quote-author { margin-top: 20px; }
+    .quote-author strong { font-size: 18px; color: #1c384a; display: block; }
+    .quote-author span { font-size: 16px; color: #1c384a; font-weight: 400; }
+
+    /* FIND ROLE */
+    .find-role { text-align: center; padding: 64px; background: #fff; }
+    .find-role h2 { font-size: 50px; font-weight: 600; color: #00095b; margin-bottom: 12px; }
+    .find-role > p { font-size: 18px; color: #05082f; margin-bottom: 32px; }
+    .search-bar { display: flex; max-width: 640px; margin: 0 auto 24px; border: 1px solid #d1d5db; border-radius: 8px; overflow: hidden; }
+    .search-bar input { flex: 1; padding: 14px 16px; font-size: 15px; border: none; outline: none; font-family: inherit; }
+    .search-bar button { background: #2a60ca; color: #fff; border: none; padding: 14px 28px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; }
+    .filters { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+    .filter-btn { padding: 8px 16px; font-size: 13px; color: #374151; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 6px; }
+    .filter-btn::after { content: '▾'; font-size: 10px; }
+
+    /* JOB LISTINGS */
+    .listings-header { text-align: left; max-width: 1100px; margin: 0 auto; padding: 0 64px; font-size: 14px; color: #7c8c9e; margin-bottom: 16px; }
+    .listings { max-width: 1100px; margin: 0 auto; padding: 0 64px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+    .job-list { display: flex; flex-direction: column; gap: 12px; }
+    .job-card { display: flex; gap: 16px; padding: 20px; border: 1px solid #e5e7eb; border-radius: 12px; background: #fff; }
+    .job-logo { width: 48px; height: 48px; border-radius: 50%; background: #1e3a5f; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .job-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .job-info h4 { font-size: 16px; font-weight: 600; color: #1a2629; }
+    .job-info .company { font-size: 14px; color: #374151; margin: 2px 0 8px; }
+    .job-meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: #6b7280; }
+    .job-meta span { background: #f3f4f6; padding: 2px 8px; border-radius: 4px; }
+    .job-time { font-size: 12px; color: #9ca3af; white-space: nowrap; }
+
+    /* ALERT CARD */
+    .alert-card { background: #f0f4ff; border-radius: 16px; padding: 40px 32px; text-align: center; }
+    .alert-icon { width: 56px; height: 56px; background: #1e3a5f; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; }
+    .alert-icon svg { width: 28px; height: 28px; fill: #fff; }
+    .alert-card h3 { font-size: 20px; font-weight: 600; color: #1a2629; margin-bottom: 8px; }
+    .alert-card p { font-size: 14px; color: #6b7280; margin-bottom: 20px; line-height: 1.5; }
+    .alert-form { display: flex; gap: 8px; }
+    .alert-form input { flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; font-family: inherit; }
+    .alert-form button { background: #2a60ca; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; font-family: inherit; }
+
+    /* FOOTER */
+    .footer { background: #0a1628; padding: 32px 64px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { height: 24px; filter: brightness(0) invert(1); }
+    .footer-text { font-size: 14px; color: #7c8c9e; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .benefits { grid-template-columns: repeat(2, 1fr); }
+      .community { grid-template-columns: 1fr; }
+      .listings { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 32px 24px 0; }
+      .hero h1 { font-size: 36px; }
+      .benefits { grid-template-columns: 1fr; padding: 24px; }
+      .community { padding: 32px 24px; }
+      .community-text h2 { font-size: 28px; }
+      .quote-section { padding: 32px 24px; flex-direction: column; align-items: center; text-align: center; }
+      .quote-text { font-size: 20px; }
+      .find-role { padding: 32px 24px; }
+      .find-role h2 { font-size: 32px; }
+      .search-bar { flex-direction: column; }
+      .listings { padding: 0 24px 32px; }
+      .alert-form { flex-direction: column; }
+      .footer { padding: 24px; flex-direction: column; gap: 12px; }
+      .listings-header { padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <img src="images/logo.svg" alt="Ford" class="nav-logo">
+    <div class="nav-links">
+      <a href="#about">About Us</a>
+      <a href="#culture">Our Culture</a>
+      <a href="#benefits">Benefits</a>
+    </div>
+    <button class="nav-cta">View Positions</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Build the Future of Mobility</h1>
+    <p>Join a team that's driving innovation and shaping the automotive industry. Explore career opportunities across our nationwide network.</p>
+    <a href="#jobs" class="hero-btn">Explore Opportunities</a>
+    <img src="images/hero.png" alt="Ford team gathering" class="hero-img">
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits" id="benefits">
+    <div class="benefit-card">
+      <div>
+        <div class="benefit-icon"><img src="images/icon-car.svg" alt=""></div>
+        <h3>Your Choice. Your Journey.</h3>
+      </div>
+      <p class="benefit-desc">High-value benefits for you and your family, including $0-premium medical options and mental health support.</p>
+    </div>
+    <div class="benefit-card">
+      <div>
+        <div class="benefit-icon"><img src="images/icon-layers.svg" alt=""></div>
+        <h3>Investing in You.</h3>
+      </div>
+      <p class="benefit-desc">Ford offers strong financial benefits, including retirement contributions, generous matching, and free investment planning tools.</p>
+    </div>
+    <div class="benefit-card">
+      <div>
+        <div class="benefit-icon"><img src="images/icon-atom.svg" alt=""></div>
+        <h3>Time For You and Your Family.</h3>
+      </div>
+      <p class="benefit-desc">Generous vacation, holidays, family care time, and parental support help you recharge and support your growing family.</p>
+    </div>
+    <div class="benefit-card">
+      <div>
+        <div class="benefit-icon"><img src="images/icon-cert.svg" alt=""></div>
+        <h3>Additional Programs</h3>
+      </div>
+      <p class="benefit-desc">Ford offers standout perks like vehicle discounts, medical extras, and access to pet, legal, and identity protection benefits.</p>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section class="community" id="culture">
+    <div class="community-images">
+      <img src="images/community1.png" alt="Ford community">
+      <img src="images/community2.png" alt="Ford dealership">
+      <img src="images/community3.png" alt="Ford facility">
+      <img src="images/community4.png" alt="Ford service center">
+    </div>
+    <div class="community-text">
+      <h2>Making a Difference Together</h2>
+      <p>Through the Ford Fund and local charity partnerships, we're committed to strengthening communities where we live and work. Join us in making a lasting impact.</p>
+      <div class="stat-item">
+        <span class="stat-dot blue"></span>
+        $50M+ invested in community programs annually
+      </div>
+      <div class="stat-item">
+        <span class="stat-dot navy"></span>
+        100,000+ volunteer hours by our team members
+      </div>
+      <div class="stat-item">
+        <span class="stat-dot teal"></span>
+        Partnerships with 500+ local organizations
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section" id="about">
+    <img src="images/quote-avatar.png" alt="Bill Ford" class="quote-avatar">
+    <div>
+      <p class="quote-text">"Ford is a family company and we stand together even when times are tough. For 118 years, our values have driven us to do the right thing and be there for one another. I am proud of our employees who are inspired by our values to make the world a better place."</p>
+      <div class="quote-author">
+        <strong>Bill Ford</strong>
+        <span>Executive Chair of Ford</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIND ROLE -->
+  <section class="find-role" id="jobs">
+    <h2>Find Your Perfect Role</h2>
+    <p>Search opportunity across our nationwide dealerships network</p>
+    <div class="search-bar">
+      <input type="text" placeholder="📍 Zip code or City">
+      <button>Search</button>
+    </div>
+    <div class="filters">
+      <button class="filter-btn">All Stores</button>
+      <button class="filter-btn">All Positions</button>
+      <button class="filter-btn">Job Type</button>
+      <button class="filter-btn">Experience</button>
+      <button class="filter-btn">Pay</button>
+      <button class="filter-btn">Within 50 mi</button>
+    </div>
+  </section>
+
+  <!-- LISTINGS -->
+  <div class="listings-header">Showing 6 opportunities</div>
+  <div class="listings">
+    <div class="job-list">
+      <div class="job-card">
+        <div class="job-logo"><img src="images/community2.png" alt=""></div>
+        <div class="job-info">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <h4>Automotive Technician</h4>
+            <span class="job-time">14 hours ago</span>
+          </div>
+          <div class="company">Ford Downtown</div>
+          <div class="job-meta">
+            <span>Detroit, MI</span><span>$45,000 - $65,000</span><span>Technician</span><span>Full-time</span>
+          </div>
+        </div>
+      </div>
+      <div class="job-card">
+        <div class="job-logo"><img src="images/community2.png" alt=""></div>
+        <div class="job-info">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <h4>Sales Representative</h4>
+            <span class="job-time">24 hours ago</span>
+          </div>
+          <div class="company">Chicago Ford Center</div>
+          <div class="job-meta">
+            <span>Chicago, IL</span><span>$40,000 - $80,000</span><span>Sales</span><span>Full-time</span>
+          </div>
+        </div>
+      </div>
+      <div class="job-card">
+        <div class="job-logo"><img src="images/community2.png" alt=""></div>
+        <div class="job-info">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <h4>Service Advisor</h4>
+            <span class="job-time">1 day ago</span>
+          </div>
+          <div class="company">Houston Ford</div>
+          <div class="job-meta">
+            <span>Houston, TX</span><span>$50,000 - $85,000</span><span>Sales</span><span>Full-time</span>
+          </div>
+        </div>
+      </div>
+      <div class="job-card">
+        <div class="job-logo"><img src="images/community2.png" alt=""></div>
+        <div class="job-info">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <h4>Finance Manager</h4>
+            <span class="job-time">2 days ago</span>
+          </div>
+          <div class="company">Phoenix Ford</div>
+          <div class="job-meta">
+            <span>Phoenix, AZ</span><span>$45,000 - $65,000</span><span>Admin</span><span>Part-time</span>
+          </div>
+        </div>
+      </div>
+      <div class="job-card">
+        <div class="job-logo"><img src="images/community2.png" alt=""></div>
+        <div class="job-info">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <h4>Parts Specialist</h4>
+            <span class="job-time">3 days ago</span>
+          </div>
+          <div class="company">Philly Ford</div>
+          <div class="job-meta">
+            <span>Philadelphia, PA</span><span>$45,000 - $65,000</span><span>Sales</span><span>Full-time</span>
+          </div>
+        </div>
+      </div>
+      <div class="job-card">
+        <div class="job-logo"><img src="images/community2.png" alt=""></div>
+        <div class="job-info">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <h4>Body Shop Technician</h4>
+            <span class="job-time">4 days ago</span>
+          </div>
+          <div class="company">San Antonio Ford</div>
+          <div class="job-meta">
+            <span>San Antonio, TX</span><span>$45,000 - $65,000</span><span>Technician</span><span>Full-time</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALERT -->
+    <div class="alert-card">
+      <div class="alert-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </div>
+      <h3>Want alerts when jobs are available near you?</h3>
+      <p>Don't see the perfect role? Upload your resume and we'll notify you when opportunities match your profile.</p>
+      <div class="alert-form">
+        <input type="text" placeholder="Email or Phone Number*">
+        <input type="text" placeholder="Zipcode*">
+        <button>Get Alerts</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <img src="images/logo.svg" alt="Ford" class="footer-logo">
+    <span class="footer-text">© 2026 Ford Motor Company</span>
+  </footer>
+
+</body>
+</html>

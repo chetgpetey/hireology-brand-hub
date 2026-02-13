@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Service Technician | Ford Downtown</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; color: #1a2629; background: #f2f3fa; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* NAV */
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; background: #fff; border-bottom: 1px solid #b7c6d8; position: sticky; top: 0; z-index: 100; }
+    .nav-logos { display: flex; align-items: center; gap: 16px; }
+    .nav-logo { height: 28px; width: auto; }
+    .nav-logo-divider { width: 1px; height: 32px; background: #b7c6d8; }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a { font-size: 15px; font-weight: 500; color: #1a2629; }
+    .nav-links a:hover { color: #2a60ca; }
+    .nav-cta { background: #2a60ca; color: #fff; font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; }
+    .nav-cta:hover { background: #1e4fa8; }
+
+    /* MAIN CONTENT */
+    .page-wrapper { background: #fff; max-width: 100%; border-radius: 0 0 16px 16px; }
+    .content-container { max-width: 720px; margin: 0 auto; padding: 60px 0; }
+
+    /* JOB HEADER */
+    .job-header { padding-bottom: 32px; border-bottom: 1px solid #b7c6d8; margin-bottom: 32px; }
+    .job-posted { font-size: 14px; color: #2a60ca; margin-bottom: 8px; }
+    .job-title { font-size: 42px; font-weight: 500; color: #00095b; line-height: 1.15; margin-bottom: 8px; letter-spacing: -1px; }
+    .job-company { font-size: 18px; color: #1a2629; font-weight: 400; margin-bottom: 12px; }
+    .job-details { display: flex; gap: 20px; flex-wrap: wrap; font-size: 15px; color: #374151; margin-bottom: 20px; align-items: center; }
+    .job-details span { display: inline-flex; align-items: center; gap: 6px; }
+    .job-details .divider { color: #d1d5db; }
+    .apply-btn { display: inline-block; background: #2a60ca; color: #fff; font-size: 16px; font-weight: 600; padding: 12px 28px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; }
+    .apply-btn:hover { background: #1e4fa8; }
+
+    /* JOB DESCRIPTION */
+    .job-description { font-size: 18px; color: #040830; line-height: 1.5; }
+    .job-description p { margin-bottom: 16px; }
+    .job-description h3 { font-size: 18px; font-weight: 600; color: #040830; margin: 24px 0 12px; }
+    .job-description ul { margin: 0 0 24px 24px; }
+    .job-description ul li { margin-bottom: 6px; line-height: 1.5; }
+    .job-description .eeo { font-style: italic; margin-top: 24px; color: #040830; }
+
+    /* APPLICATION FORM */
+    .application-form { border-top: 1px solid #b7c6d8; padding-top: 32px; margin-top: 32px; }
+    .application-form h2 { font-size: 32px; font-weight: 500; color: #00095b; margin-bottom: 24px; letter-spacing: -2px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-row-full { margin-bottom: 16px; }
+    .form-input { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; font-family: inherit; color: #1a2629; background: #fff; outline: none; }
+    .form-input:focus { border-color: #2a60ca; }
+    .form-input::placeholder { color: #9ca3af; }
+    select.form-input { appearance: auto; color: #9ca3af; }
+
+    .checkbox-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+    .checkbox-row input[type="checkbox"] { width: 20px; height: 20px; accent-color: #2a60ca; margin-top: 2px; flex-shrink: 0; }
+    .checkbox-row label { font-size: 14px; color: #374151; line-height: 1.4; }
+
+    .resume-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #e5e7eb; margin-bottom: 24px; }
+    .resume-label { font-size: 16px; font-weight: 600; color: #1a2629; }
+    .resume-label span { font-weight: 400; color: #9ca3af; font-size: 14px; }
+    .resume-sublabel { font-size: 13px; color: #9ca3af; }
+    .attach-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; font-weight: 500; color: #1a2629; background: #fff; cursor: pointer; font-family: inherit; }
+
+    .other-info { margin-bottom: 24px; }
+    .other-info h3 { font-size: 16px; font-weight: 600; color: #1a2629; margin-bottom: 4px; }
+    .other-info h3 span { font-weight: 400; color: #9ca3af; font-size: 14px; }
+    .other-info p { font-size: 14px; color: #374151; margin-bottom: 12px; }
+    .other-info textarea { width: 100%; min-height: 120px; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; font-family: inherit; resize: vertical; outline: none; }
+    .other-info textarea:focus { border-color: #2a60ca; }
+
+    /* FORM ACTIONS */
+    .form-actions { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid #e5e7eb; margin-bottom: 24px; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; color: #00095b; padding: 8px 16px; border: 1px solid #b7c6d8; border-radius: 8px; }
+    .back-link:hover { background: #f0f4ff; }
+    .submit-btn { background: #d42b2b; color: #fff; font-size: 16px; font-weight: 600; padding: 12px 28px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; }
+    .submit-btn:hover { background: #b91c1c; }
+
+    .privacy-note { font-size: 14px; color: #7c8c9e; margin-bottom: 32px; }
+
+    /* FOOTER */
+    .footer { background: #0a1628; padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { height: 24px; filter: brightness(0) invert(1); }
+    .footer-text { font-size: 14px; color: #7c8c9e; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .content-container { padding: 32px 24px; }
+      .job-title { font-size: 28px; }
+      .job-details { font-size: 13px; gap: 12px; }
+      .form-row, .form-row-3 { grid-template-columns: 1fr; }
+      .form-actions { flex-direction: column; gap: 16px; }
+      .footer { padding: 24px; flex-direction: column; gap: 12px; }
+      .application-form h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logos">
+      <img src="images/logo.svg" alt="Hawk Auto Group" class="nav-logo">
+      <div class="nav-logo-divider"></div>
+      <svg viewBox="0 0 54 21" fill="none" style="height:24px;width:auto">
+        <text x="0" y="18" fill="#00095b" font-family="serif" font-style="italic" font-weight="700" font-size="22">Ford</text>
+      </svg>
+    </div>
+    <div class="nav-links">
+      <a href="dealer.html">About Us</a>
+      <a href="dealer.html#about">Our Culture</a>
+      <a href="dealer.html#benefits">Benifts</a>
+    </div>
+    <a href="dealer.html#jobs" class="nav-cta">View Positions</a>
+  </nav>
+
+  <!-- PAGE -->
+  <div class="page-wrapper">
+    <div class="content-container">
+
+      <!-- JOB HEADER -->
+      <section class="job-header">
+        <div class="job-posted">24 hours ago</div>
+        <h1 class="job-title">Mobile Service Technician</h1>
+        <div class="job-company">Ford Downtown</div>
+        <div class="job-details">
+          <span>📍 Detroit, MI</span>
+          <span class="divider">|</span>
+          <span>$ $45,000 - $65,000</span>
+          <span class="divider">|</span>
+          <span>🏷 Technician</span>
+          <span class="divider">|</span>
+          <span>🕐 Full-time</span>
+        </div>
+        <button class="apply-btn" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">Apply Now</button>
+      </section>
+
+      <!-- JOB DESCRIPTION -->
+      <section class="job-description">
+        <p>We are looking for a Mobile Service Technician to join our growing team! We have added a third mobile vehicle to help service our customers needs. The right candidate will have a strong service technician background. Previous experience is preferred but not required we welcome technicians who have worked at independent shops or other brand dealers. The day-to-day duties include traveling in the Mobile Service van to customer workplaces and homes to handle basic service needs and recalls.</p>
+
+        <p>By working at a Lincoln/Ford dealership, you can be a part of a brand that honors the past, and is invested in the future. Join the Ford/Lincoln Family where we value service to each other and the world as much as to our customers!</p>
+
+        <h3>Benefits:</h3>
+        <ul>
+          <li>Health, Medical and Dental</li>
+          <li>401K Plan</li>
+          <li>Paid time off and vacation</li>
+          <li>Growth opportunities</li>
+          <li>Employee vehicle purchase plans</li>
+          <li>Family owned and operated</li>
+          <li>Long term job security</li>
+          <li>Flexible Work Schedule</li>
+        </ul>
+
+        <h3>Responsibilities:</h3>
+        <ul>
+          <li>Provide an exceptional customer experience to drive loyalty</li>
+          <li>Engage with many different customers each day and represent the dealership</li>
+          <li>Organize and prepare for the day's appointments</li>
+          <li>Perform vehicle repairs and/or maintenance work as outlined on repair order in a clean and efficient manner</li>
+          <li>Communicate with Parts Department and Service Advisors regularly to effectively manage production and customer communication</li>
+          <li>Accurately document vehicle repairs/work performed on the repair order</li>
+          <li>Stay informed of Ford technical bulletins and complete required training</li>
+          <li>Able to work occasionally in challenging weather conditions</li>
+          <li>Able to drive and maintain a company vehicle responsibly</li>
+        </ul>
+
+        <h3>Qualifications:</h3>
+        <ul>
+          <li>Detail-oriented and organized</li>
+          <li>Valid driver license</li>
+          <li>Mi State certifications – Ford certifications are desirable but not mandatory</li>
+          <li>Service Technician experience preferred but not needed</li>
+          <li>Strong use of technological devices including tablets</li>
+        </ul>
+
+        <p class="eeo">We are an equal opportunity employer and prohibit discrimination/harassment without regard to race, color, religion, age, sex, national origin, disability status, genetics, protected veteran status, sexual orientation, gender identity or expression, or any other characteristic protected by federal, state or local laws.</p>
+      </section>
+
+      <!-- APPLICATION FORM -->
+      <section class="application-form" id="apply">
+        <h2>Apply For Mobile Service Technician</h2>
+
+        <div class="form-row">
+          <input type="text" class="form-input" placeholder="First Name*">
+          <input type="text" class="form-input" placeholder="Last Name*">
+        </div>
+        <div class="form-row">
+          <input type="email" class="form-input" placeholder="Email Address*">
+          <input type="tel" class="form-input" placeholder="Phone Number*">
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="sms-consent" checked>
+          <label for="sms-consent">I would like to communicate with the hiring team via text message about my application and next steps.</label>
+        </div>
+
+        <div class="form-row-full">
+          <input type="text" class="form-input" placeholder="Address">
+        </div>
+        <div class="form-row-3">
+          <input type="text" class="form-input" placeholder="City">
+          <select class="form-input"><option value="">State/Region</option></select>
+          <input type="text" class="form-input" placeholder="Zip/Postal Code">
+        </div>
+
+        <div class="resume-row">
+          <div>
+            <div class="resume-label">Please add your resume <span>(optional)</span></div>
+            <div class="resume-sublabel">10MB limit; pdf, .doc, and .docx file types are accepted.</div>
+          </div>
+          <button class="attach-btn">📎 Attach File</button>
+        </div>
+
+        <div class="other-info">
+          <h3>Other Information <span>(optional)</span></h3>
+          <p>Have you previously worked at a Ford dealership? If yes, please list what dealership.</p>
+          <textarea></textarea>
+        </div>
+
+        <div class="form-actions">
+          <a href="dealer.html#jobs" class="back-link">← View All Opportunities</a>
+          <button class="submit-btn">Submit Your Application</button>
+        </div>
+
+        <p class="privacy-note">Please contact us if you would like to better understand our data collection and usage policies.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <img src="images/logo.svg" alt="Hawk Auto Group" class="footer-logo">
+    <span class="footer-text">© 2026 Ford Motor Company</span>
+    <svg viewBox="0 0 54 21" fill="none" style="height:28px;width:auto">
+      <text x="0" y="18" fill="white" font-family="serif" font-style="italic" font-weight="700" font-size="22">Ford</text>
+    </svg>
+  </footer>
+
+</body>
+</html>
