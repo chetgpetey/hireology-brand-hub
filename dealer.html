@@ -140,7 +140,11 @@
     .job-detail-panel .detail-divider { border: none; border-top: 1px solid #e5e7eb; margin: 20px 0; }
     .job-detail-panel .detail-section-title { font-size: 18px; font-weight: 600; color: #00095b; margin-bottom: 12px; }
     .job-detail-panel .dealer-rating { display: flex; align-items: center; gap: 16px; }
-    .job-detail-panel .rating-badge { width: 48px; height: 48px; border: 2px solid #2a60ca; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: #2a60ca; flex-shrink: 0; }
+    .job-detail-panel .rating-badge { width: 52px; height: 52px; position: relative; flex-shrink: 0; }
+    .job-detail-panel .rating-badge svg { width: 52px; height: 52px; transform: rotate(-90deg); }
+    .job-detail-panel .rating-badge .ring-bg { fill: none; stroke: #F2F3FA; stroke-width: 4; }
+    .job-detail-panel .rating-badge .ring-fg { fill: none; stroke: #2A60CA; stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset 1s ease-out; }
+    .job-detail-panel .rating-number { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: #2A60CA; }
     .job-detail-panel .rating-text { font-size: 14px; color: #6b7280; line-height: 1.5; }
     .job-detail-panel .detail-field { margin-bottom: 8px; font-size: 15px; color: #1a2629; }
     .job-detail-panel .detail-field strong { color: #00095b; }
@@ -672,7 +676,9 @@
         '<div class="detail-meta"><span>' + job.location + '</span><span>' + formatPay(job.pay) + '</span><span>' + job.position + '</span><span>' + job.type + '</span><span class="detail-time">' + job.time + '</span></div>' +
         '<hr class="detail-divider">' +
         '<div class="detail-section-title">Dealer Rating</div>' +
-        '<div class="dealer-rating"><div class="rating-badge">' + rating + '</div>' +
+        '<div class="dealer-rating"><div class="rating-badge">' +
+        '<svg viewBox="0 0 52 52"><circle class="ring-bg" cx="26" cy="26" r="22"/><circle class="ring-fg" id="rating-ring" cx="26" cy="26" r="22" stroke-dasharray="138.23" stroke-dashoffset="138.23"/></svg>' +
+        '<span class="rating-number" id="rating-num">0</span></div>' +
         '<div class="rating-text">Based on 215 frontline employees who took the Breakroom Quiz. ' + Math.floor(rating * 10) + 'th of 94 rated education and training</div></div>' +
         '<hr class="detail-divider">' +
         '<div class="detail-section-title">Job description</div>' +
@@ -682,6 +688,23 @@
         '<div class="ai-summary">' + summary + '</div>' +
         '<div class="detail-buttons"><button class="btn-learn">Learn More</button><button class="btn-apply">Apply Now</button></div>' +
         '</div>';
+      // Animate rating ring + count up
+      setTimeout(function() {
+        var ring = document.getElementById('rating-ring');
+        var numEl = document.getElementById('rating-num');
+        if (!ring || !numEl) return;
+        var circumference = 138.23;
+        var offset = circumference - (circumference * (rating / 10));
+        ring.style.strokeDashoffset = offset;
+        var current = 0;
+        var target = rating;
+        var step = target / 30;
+        var counter = setInterval(function() {
+          current += step;
+          if (current >= target) { current = target; clearInterval(counter); }
+          numEl.textContent = current.toFixed(1);
+        }, 25);
+      }, 50);
     }
 
     // Override selectFilter to also re-render
