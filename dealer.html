@@ -50,7 +50,7 @@
     @keyframes scroll-logos { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ABOUT US */
-    .about { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 40px; padding: 64px; align-items: start; }
+    .about { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 40px; padding: 64px; align-items: start; max-width: 1300px; margin: 0 auto; }
     .about-sidebar h2 { font-size: clamp(32px, 4vw, 50px); font-weight: 600; color: #00095b; margin-bottom: 24px; line-height: 1.1; white-space: nowrap; }
     .about-sidebar-links { display: flex; flex-direction: column; gap: 0; }
     .about-sidebar-links a { font-size: 16px; font-weight: 500; color: #1a2629; padding: 12px 0; border-bottom: 1px solid #e5e7eb; cursor: pointer; transition: color 0.2s; }
@@ -63,6 +63,7 @@
 
     /* BENEFITS */
     .benefits-section { padding: 64px; background: #F2F3FA; }
+    .benefits-section-inner { max-width: 1300px; margin: 0 auto; }
     .benefits-section h2 { font-size: 50px; font-weight: 600; color: #00095b; margin-bottom: 8px; }
     .benefits-section > p { font-size: 24px; font-weight: 500; color: #1a2629; margin-bottom: 8px; }
     .benefits-divider { width: 60px; height: 3px; background: #00095b; margin-bottom: 40px; }
@@ -109,7 +110,7 @@
     .alert-form button { background: #2a60ca; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; font-family: inherit; }
 
     /* DEGREES CTA */
-    .degrees-cta { position: relative; border-radius: 16px; margin: 0 64px 64px; overflow: hidden; min-height: 320px; }
+    .degrees-cta { position: relative; border-radius: 16px; max-width: 1300px; margin: 0 auto 64px; overflow: hidden; min-height: 320px; }
     .degrees-cta-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transform: scaleX(-1); }
     .degrees-cta::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(0, 9, 91, 0.9) 0%, rgba(0, 9, 91, 0.7) 40%, rgba(0, 9, 91, 0.2) 75%, transparent 100%); z-index: 1; }
     .degrees-cta-content { padding: 48px; max-width: 55%; position: relative; z-index: 2; }
@@ -271,6 +272,7 @@
 
   <!-- BENEFITS -->
   <section class="benefits-section" id="benefits">
+   <div class="benefits-section-inner">
     <h2>Benefits</h2>
     <p>We invest in our people — because when you thrive, we all do</p>
     <div class="benefits-divider"></div>
@@ -330,6 +332,7 @@
         </div>
       </div>
     </div>
+   </div>
   </section>
 
   <!-- FIND ROLE -->
