@@ -215,11 +215,11 @@
       .about-image { height: 300px; }
       .benefits-grid { grid-template-columns: repeat(2, 1fr); }
       .listings { grid-template-columns: 1fr; }
-      .hero-images { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; padding: 0 24px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .hero-images { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; padding: 0 0 0 24px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
       .hero-images::-webkit-scrollbar { display: none; }
-      .hero-images img, .hero-images .video-wrap { min-width: 85%; flex-shrink: 0; scroll-snap-align: start; height: 240px; }
+      .hero-images img, .hero-images .video-wrap { min-width: 85%; flex-shrink: 0; scroll-snap-align: start; height: 240px; border-radius: 16px; }
       .hero-images .video-wrap { order: -1; }
-      .hero-images .video-wrap img { min-width: 100%; height: 100%; }
+      .hero-images .video-wrap img { min-width: 100%; height: 100%; border-radius: 16px; }
     }
     @media (max-width: 768px) {
       .nav { padding: 16px 24px; }
