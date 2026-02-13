@@ -106,11 +106,8 @@
     .listings { max-width: 1300px; margin: 0 auto; padding: 0 64px 64px; display: grid; grid-template-columns: 1fr minmax(300px, 0.8fr); gap: 32px; align-items: start; }
     .job-list { display: flex; flex-direction: column; gap: 12px; }
     .job-card { display: flex; gap: 20px; padding: 24px; border: 1px solid #e5e7eb; border-radius: 16px; background: #fff; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); position: relative; }
-    .job-card:hover { border-color: #2a60ca; box-shadow: 0 8px 24px rgba(42, 96, 202, 0.15); transform: translateY(-2px); }
-    .job-card:hover h4 { color: #2a60ca; }
-    .job-card::after { content: '→'; position: absolute; right: 24px; top: 50%; transform: translateY(-50%) translateX(-8px); opacity: 0; font-size: 20px; color: #2a60ca; transition: all 0.3s ease; }
-    .job-card:hover::after { opacity: 1; transform: translateY(-50%) translateX(0); }
-    .job-card a { text-decoration: none; color: inherit; display: contents; }
+    .job-card:hover, .job-card.selected { border-color: #2a60ca; box-shadow: 0 8px 24px rgba(42, 96, 202, 0.15); transform: translateY(-2px); }
+    .job-card:hover h4, .job-card.selected h4 { color: #2a60ca; }
     .job-logo { width: 88px; height: 88px; border-radius: 12px; background: #e8ecf0; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .job-logo img { width: 100%; height: 100%; object-fit: cover; }
     .job-info { flex: 1; }
@@ -120,6 +117,34 @@
     .job-meta { display: flex; gap: 8px; flex-wrap: nowrap; font-size: 12px; color: #6b7280; }
     .job-meta span { background: #f3f4f6; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
     .job-time { font-size: 13px; color: #2a60ca; white-space: nowrap; }
+    /* JOB DETAIL PANEL */
+    .job-detail-panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 32px; position: sticky; top: 80px; }
+    .job-detail-panel .detail-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 4px; }
+    .job-detail-panel .detail-logo { height: 40px; margin-bottom: 16px; }
+    .job-detail-panel .detail-title { font-size: 24px; font-weight: 700; color: #00095b; }
+    .job-detail-panel .detail-actions { display: flex; gap: 12px; align-items: center; }
+    .job-detail-panel .detail-save { width: 40px; height: 40px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .job-detail-panel .detail-save svg { width: 20px; height: 20px; stroke: #374151; fill: none; stroke-width: 2; }
+    .job-detail-panel .detail-apply-top { background: #00095b; color: #fff; font-size: 14px; font-weight: 600; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; }
+    .job-detail-panel .detail-company { font-size: 16px; color: #374151; margin-bottom: 12px; }
+    .job-detail-panel .detail-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; align-items: center; }
+    .job-detail-panel .detail-meta span { background: #f2f3fa; padding: 4px 12px; border-radius: 6px; font-size: 13px; color: #374151; }
+    .job-detail-panel .detail-time { font-size: 13px; color: #2a60ca; margin-left: auto; }
+    .job-detail-panel .detail-divider { border: none; border-top: 1px solid #e5e7eb; margin: 20px 0; }
+    .job-detail-panel .detail-section-title { font-size: 18px; font-weight: 600; color: #00095b; margin-bottom: 12px; }
+    .job-detail-panel .dealer-rating { display: flex; align-items: center; gap: 16px; }
+    .job-detail-panel .rating-badge { width: 48px; height: 48px; border: 2px solid #2a60ca; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: #2a60ca; flex-shrink: 0; }
+    .job-detail-panel .rating-text { font-size: 14px; color: #6b7280; line-height: 1.5; }
+    .job-detail-panel .detail-field { margin-bottom: 8px; font-size: 15px; color: #1a2629; }
+    .job-detail-panel .detail-field strong { color: #00095b; }
+    .job-detail-panel .ai-summary-label { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: #00095b; margin-bottom: 8px; }
+    .job-detail-panel .ai-summary { font-size: 14px; color: #374151; line-height: 1.7; }
+    .job-detail-panel .detail-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+    .job-detail-panel .btn-learn { padding: 14px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; font-size: 15px; font-weight: 600; color: #1a2629; cursor: pointer; font-family: inherit; text-align: center; }
+    .job-detail-panel .btn-learn:hover { background: #f5f6f8; }
+    .job-detail-panel .btn-apply { padding: 14px; border: none; border-radius: 8px; background: #00095b; font-size: 15px; font-weight: 600; color: #fff; cursor: pointer; font-family: inherit; text-align: center; }
+    .job-detail-panel .btn-apply:hover { background: #000740; }
+
     .alert-card { background: #00095b; border-radius: 20px; padding: 48px 40px; text-align: center; }
     .alert-icon { width: 48px; height: 48px; background: #fff; border-radius: 50%; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; }
     .alert-icon svg { width: 22px; height: 22px; stroke: #00095b; }
@@ -553,13 +578,24 @@
       });
     }
 
+    var summaries = [
+      "We are seeking a motivated professional with a passion for automotive excellence. This position involves diagnosing and repairing vehicles using state-of-the-art equipment. The ideal candidate will have strong technical skills and a commitment to customer satisfaction.",
+      "Join our dynamic sales team and help customers find their perfect vehicle. This role requires excellent communication skills, a positive attitude, and the ability to build lasting relationships with clients.",
+      "As a key member of our service department, you'll be the bridge between customers and technicians. This role involves scheduling appointments, providing estimates, and ensuring an exceptional service experience.",
+      "This role oversees all financial aspects of vehicle transactions including securing financing, presenting aftermarket products, and ensuring compliance with all regulatory requirements.",
+      "We're looking for an organized, detail-oriented team member to manage our parts inventory and assist customers with their parts needs. Knowledge of automotive parts and systems is a plus.",
+      "This hands-on role involves restoring vehicles to pre-accident condition using the latest repair techniques and equipment. ASE certification preferred but not required."
+    ];
+    var ratings = [6.1, 7.3, 5.8, 8.2, 6.9, 7.5];
+    var selectedJobIdx = 0;
+
     function renderJobs() {
       var jobs = filterJobs();
       var list = document.getElementById('job-list');
       var header = document.getElementById('listings-header');
       header.textContent = 'Showing ' + jobs.length + ' opportunit' + (jobs.length === 1 ? 'y' : 'ies');
-      list.innerHTML = jobs.map(function(job) {
-        return '<div class="job-card" onclick="window.location.href=\'job-detail.html\'">' +
+      list.innerHTML = jobs.map(function(job, i) {
+        return '<div class="job-card' + (i === selectedJobIdx ? ' selected' : '') + '" data-job-index="' + i + '" onclick="selectJob(' + i + ')">' +
           '<div class="job-logo"><img src="images/dealer/' + job.thumb + '" alt=""></div>' +
           '<div class="job-info"><div class="job-info-header"><h4>' + job.title + '</h4>' +
           '<span class="job-time">' + job.time + '</span></div>' +
@@ -567,12 +603,50 @@
           '<div class="job-meta"><span>' + job.location + '</span><span>' + formatPay(job.pay) + '</span><span>' + job.position + '</span><span>' + job.type + '</span></div>' +
           '</div></div>';
       }).join('');
+      showJobDetail(jobs, selectedJobIdx);
+    }
+
+    function selectJob(idx) {
+      selectedJobIdx = idx;
+      var cards = document.querySelectorAll('.job-card');
+      cards.forEach(function(c, i) { c.classList.toggle('selected', i === idx); });
+      var jobs = filterJobs();
+      showJobDetail(jobs, idx);
+    }
+
+    function showJobDetail(jobs, idx) {
+      var panel = document.getElementById('right-panel');
+      if (!jobs[idx]) { panel.innerHTML = ''; return; }
+      var job = jobs[idx];
+      var rating = ratings[idx % ratings.length];
+      var summary = summaries[idx % summaries.length];
+      panel.innerHTML = '<div class="job-detail-panel">' +
+        '<img src="images/logo.svg" alt="Ford" class="detail-logo">' +
+        '<div class="detail-header"><span class="detail-title">' + job.title + '</span>' +
+        '<div class="detail-actions">' +
+        '<button class="detail-save"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>' +
+        '<button class="detail-apply-top">Apply Now</button></div></div>' +
+        '<div class="detail-company">' + job.store + '</div>' +
+        '<div class="detail-meta"><span>' + job.location + '</span><span>' + formatPay(job.pay) + '</span><span>' + job.position + '</span><span>' + job.type + '</span><span class="detail-time">' + job.time + '</span></div>' +
+        '<hr class="detail-divider">' +
+        '<div class="detail-section-title">Dealer Rating</div>' +
+        '<div class="dealer-rating"><div class="rating-badge">' + rating + '</div>' +
+        '<div class="rating-text">Based on 215 frontline employees who took the Breakroom Quiz. ' + Math.floor(rating * 10) + 'th of 94 rated education and training</div></div>' +
+        '<hr class="detail-divider">' +
+        '<div class="detail-section-title">Job description</div>' +
+        '<div class="detail-field"><strong>Job Title:</strong> ' + job.title + '</div>' +
+        '<div class="detail-field"><strong>Company:</strong> ' + job.store + '</div>' +
+        '<div class="ai-summary-label"><svg viewBox="0 0 24 24" fill="none" stroke="#2a60ca" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> AI Summary</div>' +
+        '<div class="ai-summary">' + summary + '</div>' +
+        '<div class="detail-buttons"><button class="btn-learn">Learn More</button><button class="btn-apply">Apply Now</button></div>' +
+        '</div>';
     }
 
     // Override selectFilter to also re-render
     var _origSelect = selectFilter;
     selectFilter = function(opt) {
       _origSelect(opt);
+      selectedJobIdx = 0;
       renderJobs();
     };
 
@@ -580,16 +654,18 @@
     </script>
 
     <!-- ALERT -->
-    <div class="alert-card" data-animate>
-      <div class="alert-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      </div>
-      <h3>Want alerts when jobs are available near you?</h3>
-      <p>Don't see the perfect role? Upload your resume and we'll notify you when opportunities match your profile.</p>
-      <div class="alert-form">
-        <input type="text" placeholder="Email or Phone Number*">
-        <input type="text" placeholder="Zipcode*">
-        <button>Get Alerts</button>
+    <div id="right-panel">
+      <div class="alert-card" data-animate>
+        <div class="alert-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <h3>Want alerts when jobs are available near you?</h3>
+        <p>Don't see the perfect role? Upload your resume and we'll notify you when opportunities match your profile.</p>
+        <div class="alert-form">
+          <input type="text" placeholder="Email or Phone Number*">
+          <input type="text" placeholder="Zipcode*">
+          <button>Get Alerts</button>
+        </div>
       </div>
     </div>
   </div>
