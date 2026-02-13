@@ -175,6 +175,32 @@
       .degrees-cta h2 { font-size: 32px; }
       .footer { padding: 24px; flex-direction: column; gap: 12px; }
     }
+    /* SCROLL ANIMATIONS */
+    [data-animate] { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    [data-animate].is-visible { opacity: 1; transform: translateY(0); }
+    [data-animate-child] > * { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    [data-animate-child].is-visible > * { opacity: 1; transform: translateY(0); }
+    [data-animate-child].is-visible > *:nth-child(1) { transition-delay: 0ms; }
+    [data-animate-child].is-visible > *:nth-child(2) { transition-delay: 100ms; }
+    [data-animate-child].is-visible > *:nth-child(3) { transition-delay: 200ms; }
+    [data-animate-child].is-visible > *:nth-child(4) { transition-delay: 300ms; }
+    [data-animate-child].is-visible > *:nth-child(5) { transition-delay: 400ms; }
+    [data-animate-child].is-visible > *:nth-child(6) { transition-delay: 500ms; }
+    [data-animate-stagger] > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    [data-animate-stagger].is-visible > * { opacity: 1; transform: translateY(0); }
+    [data-animate-stagger].is-visible > *:nth-child(1) { transition-delay: 0ms; }
+    [data-animate-stagger].is-visible > *:nth-child(2) { transition-delay: 80ms; }
+    [data-animate-stagger].is-visible > *:nth-child(3) { transition-delay: 160ms; }
+    [data-animate-stagger].is-visible > *:nth-child(4) { transition-delay: 240ms; }
+    [data-animate-stagger].is-visible > *:nth-child(5) { transition-delay: 320ms; }
+    [data-animate-stagger].is-visible > *:nth-child(6) { transition-delay: 400ms; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      [data-animate], [data-animate-child] > *, [data-animate-stagger] > * {
+        opacity: 1 !important; transform: none !important; transition: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -195,7 +221,7 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" data-animate-child>
     <h1>Build The Future Of Hawk Auto Group With Us</h1>
     <p>You deserve to find out what your real value is with our competitive pay plans and extensive benefits packages. We are inviting you to be part of our team and jump start your career!</p>
     <div class="hero-buttons">
@@ -212,7 +238,7 @@
   </section>
 
   <!-- BRANDS -->
-  <section class="brands" id="brands">
+  <section class="brands" id="brands" data-animate>
     <h3>Brands we work with</h3>
     <div class="brands-scroll-wrap">
       <div class="brands-track">
@@ -238,7 +264,7 @@
   </section>
 
   <!-- ABOUT US -->
-  <section class="about" id="about">
+  <section class="about" id="about" data-animate-child>
     <div class="about-sidebar">
       <h2>About Us</h2>
       <div class="about-sidebar-links">
@@ -294,12 +320,12 @@
   </section>
 
   <!-- BENEFITS -->
-  <section class="benefits-section" id="benefits">
+  <section class="benefits-section" id="benefits" data-animate>
    <div class="benefits-section-inner">
     <h2>Benefits</h2>
     <p>We invest in our people — because when you thrive, we all do</p>
     <div class="benefits-divider"></div>
-    <div class="benefits-grid">
+    <div class="benefits-grid" data-animate-stagger>
       <div class="benefit-item">
         <div class="benefit-icon-wrap">
           <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 100 6 3 3 0 000-6zM7 8a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm10 0a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM12 9c-2.7 0-5 1.6-5 3.7V15h10v-2.3C17 10.6 14.7 9 12 9z"/></svg>
@@ -359,7 +385,7 @@
   </section>
 
   <!-- FIND ROLE -->
-  <section class="find-role" id="jobs">
+  <section class="find-role" id="jobs" data-animate-child>
     <h2>Find Your Perfect Role</h2>
     <p>Search opportunity across our nationwide dealerships network</p>
     <div class="search-bar">
@@ -380,7 +406,7 @@
   <!-- LISTINGS -->
   <div class="listings-header">Showing 6 opportunities</div>
   <div class="listings">
-    <div class="job-list">
+    <div class="job-list" data-animate-stagger>
       <div class="job-card" onclick="window.location.href='job-detail.html'">
         <div class="job-logo"><img src="images/dealer/job-thumb-1.png" alt=""></div>
         <div class="job-info">
@@ -462,7 +488,7 @@
     </div>
 
     <!-- ALERT -->
-    <div class="alert-card">
+    <div class="alert-card" data-animate>
       <div class="alert-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
       </div>
@@ -477,7 +503,7 @@
   </div>
 
   <!-- DEGREES@WORK CTA -->
-  <div class="degrees-cta">
+  <div class="degrees-cta" data-animate>
     <div class="degrees-cta-content">
       <h2>Expand Your Skills With Degrees@Work</h2>
       <p>Build your skills with courses from Strayer University and Sophia Learning. Take what you need now and continue coursework toward your undergraduate degree when you're ready. Some courses require prerequisites.</p>
@@ -495,5 +521,22 @@
     <img src="images/logo.svg" alt="Ford" style="height:32px;">
   </footer>
 
+  <script>
+  (function() {
+    var seen = new Set();
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !seen.has(entry.target)) {
+          seen.add(entry.target);
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('[data-animate], [data-animate-child], [data-animate-stagger]').forEach(function(el) {
+      observer.observe(el);
+    });
+  })();
+  </script>
 </body>
 </html>
