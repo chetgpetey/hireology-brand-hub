@@ -66,7 +66,9 @@
     .about-sidebar-links a.active { color: #00095b; font-weight: 600; }
     .about-sidebar-links a.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 40px; height: 3px; background: #00095b; }
     .about-sidebar-links a:hover { color: #00095b; }
-    .about-image { width: 100%; height: 420px; object-fit: cover; border-radius: 12px; }
+    .about-image { width: 100%; height: 420px; object-fit: cover; border-radius: 12px; transition: opacity 0.4s ease; }
+    .about-image.fade-out { opacity: 0; }
+    .about-image.fade-in { opacity: 1; }
     .about-text { overflow: hidden; }
     .about-text h3 { font-size: 36px; font-weight: 600; color: #00095b; margin-bottom: 20px; line-height: 1.2; }
     .about-text p { font-size: 15px; color: #1a2629; line-height: 1.8; margin-bottom: 16px; }
@@ -343,30 +345,33 @@
         title: "Our Mission & Vision",
         body: "Our mission is to deliver an exceptional automotive experience by combining cutting-edge technology with genuine customer care. We envision a future where every team member thrives in a culture of innovation, integrity, and excellence.",
         body2: "We believe in investing in our people, providing growth opportunities, and building lasting relationships with the communities we serve.",
-        image: "images/dealer/bfded8a5.png"
+        image: "images/dealer/87210d92.png"
       },
       {
         title: "Giving Back Together",
         body: "At Hawk Auto Group, community partnership isn't just a value — it's a way of life. We actively support local charities, sponsor youth programs, and participate in neighborhood events throughout the Chicagoland area.",
         body2: "From food drives to scholarship programs, our team dedicates thousands of hours each year to making our communities stronger.",
-        image: "images/dealer/bfded8a5.png"
+        image: "images/dealer/099f23fc.png"
       }
     ];
     function switchAboutTab(idx) {
       var tab = aboutTabs[idx];
       var textEl = document.getElementById('about-text');
+      var imgEl = document.getElementById('about-image');
       var links = document.querySelectorAll('.about-sidebar-links a');
       links.forEach(function(a, i) { a.classList.toggle('active', i === idx); });
       textEl.classList.remove('slide-in');
       textEl.classList.add('slide-out');
+      imgEl.classList.add('fade-out');
       setTimeout(function() {
         document.getElementById('about-title').textContent = tab.title;
         document.getElementById('about-body').textContent = tab.body;
         document.getElementById('about-body2').textContent = tab.body2;
-        document.getElementById('about-image').src = tab.image;
+        imgEl.src = tab.image;
+        imgEl.classList.remove('fade-out');
         textEl.classList.remove('slide-out');
         textEl.classList.add('slide-in');
-      }, 250);
+      }, 400);
     }
     </script>
   </section>
