@@ -41,8 +41,13 @@
     /* BRANDS */
     .brands { text-align: center; padding: 48px 64px; background: #fff; }
     .brands h3 { font-size: 24px; font-weight: 500; color: #1a2629; margin-bottom: 32px; }
-    .brands-logos { display: flex; align-items: center; justify-content: center; }
-    .brands-logos img { max-width: 100%; height: auto; }
+    .brands-scroll-wrap { position: relative; overflow: hidden; width: 100%; }
+    .brands-scroll-wrap::before, .brands-scroll-wrap::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
+    .brands-scroll-wrap::before { left: 0; background: linear-gradient(to right, #fff 0%, transparent 100%); }
+    .brands-scroll-wrap::after { right: 0; background: linear-gradient(to left, #fff 0%, transparent 100%); }
+    .brands-track { display: flex; align-items: center; gap: 64px; animation: scroll-logos 20s linear infinite; width: max-content; }
+    .brands-track img { height: 56px; width: auto; object-fit: contain; flex-shrink: 0; }
+    @keyframes scroll-logos { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ABOUT US */
     .about { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 40px; padding: 64px; align-items: start; }
@@ -187,8 +192,26 @@
   <!-- BRANDS -->
   <section class="brands" id="brands">
     <h3>Brands we work with</h3>
-    <div class="brands-logos">
-      <img src="images/dealer/brands-section.png" alt="Mercedes-Benz, Chevrolet, Cadillac, Mazda, Subaru, Nissan, Volkswagen, Chrysler">
+    <div class="brands-scroll-wrap">
+      <div class="brands-track">
+        <img src="images/dealer/7b155341.png" alt="Mercedes-Benz">
+        <img src="images/dealer/d378c5b5.png" alt="Chevrolet">
+        <img src="images/dealer/0b6051a7.png" alt="Cadillac">
+        <img src="images/dealer/d1397c30.png" alt="Mazda">
+        <img src="images/dealer/12ca1ac1.png" alt="Subaru">
+        <img src="images/dealer/1d279b20.png" alt="Nissan">
+        <img src="images/dealer/4dece676.png" alt="Volkswagen">
+        <img src="images/dealer/85135658.png" alt="Chrysler">
+        <!-- duplicate for seamless loop -->
+        <img src="images/dealer/7b155341.png" alt="Mercedes-Benz">
+        <img src="images/dealer/d378c5b5.png" alt="Chevrolet">
+        <img src="images/dealer/0b6051a7.png" alt="Cadillac">
+        <img src="images/dealer/d1397c30.png" alt="Mazda">
+        <img src="images/dealer/12ca1ac1.png" alt="Subaru">
+        <img src="images/dealer/1d279b20.png" alt="Nissan">
+        <img src="images/dealer/4dece676.png" alt="Volkswagen">
+        <img src="images/dealer/85135658.png" alt="Chrysler">
+      </div>
     </div>
   </section>
 
