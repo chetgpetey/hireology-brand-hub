@@ -13,92 +13,85 @@
     img { max-width: 100%; display: block; }
 
     /* NAV */
-    .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; background: #fff; border-bottom: 1px solid #b7c6d8; position: sticky; top: 0; z-index: 100; }
-    .nav-logos { display: flex; align-items: center; gap: 16px; }
-    .nav-logo { height: 28px; width: auto; }
-    .nav-logo-divider { width: 1px; height: 32px; background: #b7c6d8; }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: #fff; border-bottom: 1px solid #b7c6d8; position: sticky; top: 0; z-index: 100; }
+    .nav-logo { display: flex; align-items: flex-end; gap: 16px; }
+    .nav-logo img { height: 36px; width: auto; }
     .nav-links { display: flex; gap: 36px; }
     .nav-links a { font-size: 15px; font-weight: 500; color: #1a2629; }
     .nav-links a:hover { color: #2a60ca; }
     .nav-cta { background: #2a60ca; color: #fff; font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; }
     .nav-cta:hover { background: #1e4fa8; }
 
-    /* MAIN CONTENT */
-    .page-wrapper { background: #fff; max-width: 100%; border-radius: 0 0 16px 16px; }
-    .content-container { max-width: 720px; margin: 0 auto; padding: 60px 0; }
+    /* MAIN CONTAINER */
+    .main-container { background: #fff; border-radius: 0 0 16px 16px; max-width: 100%; }
+    .content-wrap { max-width: 720px; margin: 0 auto; padding: 60px 24px 60px; }
 
     /* JOB HEADER */
     .job-header { padding-bottom: 32px; border-bottom: 1px solid #b7c6d8; margin-bottom: 32px; }
-    .job-posted { font-size: 14px; color: #2a60ca; margin-bottom: 8px; }
-    .job-title { font-size: 42px; font-weight: 500; color: #00095b; line-height: 1.15; margin-bottom: 8px; letter-spacing: -1px; }
-    .job-company { font-size: 18px; color: #1a2629; font-weight: 400; margin-bottom: 12px; }
-    .job-details { display: flex; gap: 20px; flex-wrap: wrap; font-size: 15px; color: #374151; margin-bottom: 20px; align-items: center; }
-    .job-details span { display: inline-flex; align-items: center; gap: 6px; }
-    .job-details .divider { color: #d1d5db; }
-    .apply-btn { display: inline-block; background: #2a60ca; color: #fff; font-size: 16px; font-weight: 600; padding: 12px 28px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; }
+    .posted-time { font-size: 14px; color: #2a60ca; margin-bottom: 8px; }
+    .job-title { font-size: 48px; font-weight: 600; color: #00095b; line-height: 1.1; margin-bottom: 8px; letter-spacing: -1px; }
+    .job-location-name { font-size: 18px; color: #1a2629; font-weight: 500; margin-bottom: 12px; }
+    .job-details-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 14px; color: #6b7280; margin-bottom: 20px; }
+    .job-details-row .detail-item { display: flex; align-items: center; gap: 6px; }
+    .job-details-row .detail-item svg { width: 16px; height: 16px; stroke: #6b7280; fill: none; stroke-width: 2; }
+    .job-details-row .separator { color: #d1d5db; }
+    .apply-btn { display: inline-block; background: #2a60ca; color: #fff; font-size: 16px; font-weight: 600; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; }
     .apply-btn:hover { background: #1e4fa8; }
 
     /* JOB DESCRIPTION */
-    .job-description { font-size: 18px; color: #040830; line-height: 1.5; }
-    .job-description p { margin-bottom: 16px; }
-    .job-description h3 { font-size: 18px; font-weight: 600; color: #040830; margin: 24px 0 12px; }
-    .job-description ul { margin: 0 0 24px 24px; }
-    .job-description ul li { margin-bottom: 6px; line-height: 1.5; }
-    .job-description .eeo { font-style: italic; margin-top: 24px; color: #040830; }
+    .job-description { margin-bottom: 32px; }
+    .job-description p { font-size: 18px; color: #04082f; line-height: 1.5; margin-bottom: 16px; }
+    .job-description h3 { font-size: 18px; font-weight: 600; color: #04082f; margin-bottom: 8px; margin-top: 16px; }
+    .job-description ul { margin-left: 24px; margin-bottom: 16px; }
+    .job-description li { font-size: 18px; color: #04082f; line-height: 1.5; margin-bottom: 4px; }
+    .job-description .eeo-statement { font-style: italic; font-size: 18px; color: #04082f; line-height: 1.5; }
 
     /* APPLICATION FORM */
-    .application-form { border-top: 1px solid #b7c6d8; padding-top: 32px; margin-top: 32px; }
-    .application-form h2 { font-size: 32px; font-weight: 500; color: #00095b; margin-bottom: 24px; letter-spacing: -2px; }
+    .form-section { border-top: 1px solid #b7c6d8; padding-top: 32px; }
+    .form-section h2 { font-size: 32px; font-weight: 500; color: #00095b; margin-bottom: 24px; letter-spacing: -2px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    .form-row-full { margin-bottom: 16px; }
-    .form-input { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; font-family: inherit; color: #1a2629; background: #fff; outline: none; }
-    .form-input:focus { border-color: #2a60ca; }
-    .form-input::placeholder { color: #9ca3af; }
-    select.form-input { appearance: auto; color: #9ca3af; }
-
-    .checkbox-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+    .form-row.full { grid-template-columns: 1fr; }
+    .form-row.triple { grid-template-columns: 1fr 1fr 1fr; }
+    .form-field { display: flex; flex-direction: column; }
+    .form-field input, .form-field select, .form-field textarea { padding: 14px 16px; font-size: 14px; border: 1px solid #b7c6d8; border-radius: 8px; font-family: inherit; outline: none; background: #fff; color: #1a2629; }
+    .form-field input::placeholder, .form-field select, .form-field textarea::placeholder { color: #9ca3af; }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: #2a60ca; }
+    .form-field textarea { resize: vertical; min-height: 120px; }
+    .checkbox-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 16px; }
     .checkbox-row input[type="checkbox"] { width: 20px; height: 20px; accent-color: #2a60ca; margin-top: 2px; flex-shrink: 0; }
-    .checkbox-row label { font-size: 14px; color: #374151; line-height: 1.4; }
-
-    .resume-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #e5e7eb; margin-bottom: 24px; }
-    .resume-label { font-size: 16px; font-weight: 600; color: #1a2629; }
-    .resume-label span { font-weight: 400; color: #9ca3af; font-size: 14px; }
-    .resume-sublabel { font-size: 13px; color: #9ca3af; }
-    .attach-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; font-weight: 500; color: #1a2629; background: #fff; cursor: pointer; font-family: inherit; }
-
+    .checkbox-row label { font-size: 14px; color: #1a2629; line-height: 1.4; }
+    .resume-section { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-top: 1px solid #b7c6d8; margin-top: 8px; margin-bottom: 16px; }
+    .resume-section .resume-label h4 { font-size: 16px; font-weight: 600; color: #1a2629; }
+    .resume-section .resume-label h4 span { font-weight: 400; color: #9ca3af; font-size: 14px; }
+    .resume-section .resume-label p { font-size: 12px; color: #9ca3af; margin-top: 4px; }
+    .attach-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1px solid #b7c6d8; border-radius: 8px; font-size: 14px; font-weight: 500; color: #1a2629; background: #fff; cursor: pointer; font-family: inherit; }
     .other-info { margin-bottom: 24px; }
-    .other-info h3 { font-size: 16px; font-weight: 600; color: #1a2629; margin-bottom: 4px; }
-    .other-info h3 span { font-weight: 400; color: #9ca3af; font-size: 14px; }
-    .other-info p { font-size: 14px; color: #374151; margin-bottom: 12px; }
-    .other-info textarea { width: 100%; min-height: 120px; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; font-family: inherit; resize: vertical; outline: none; }
-    .other-info textarea:focus { border-color: #2a60ca; }
+    .other-info h4 { font-size: 16px; font-weight: 600; color: #1a2629; margin-bottom: 4px; }
+    .other-info h4 span { font-weight: 400; color: #9ca3af; font-size: 14px; }
+    .other-info p { font-size: 14px; color: #1a2629; margin-bottom: 8px; }
 
     /* FORM ACTIONS */
-    .form-actions { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid #e5e7eb; margin-bottom: 24px; }
-    .back-link { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; color: #00095b; padding: 8px 16px; border: 1px solid #b7c6d8; border-radius: 8px; }
-    .back-link:hover { background: #f0f4ff; }
-    .submit-btn { background: #d42b2b; color: #fff; font-size: 16px; font-weight: 600; padding: 12px 28px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; }
-    .submit-btn:hover { background: #b91c1c; }
-
-    .privacy-note { font-size: 14px; color: #7c8c9e; margin-bottom: 32px; }
+    .form-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; margin-bottom: 24px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; color: #2a60ca; padding: 8px 16px; border: 1px solid #b7c6d8; border-radius: 8px; }
+    .submit-btn { display: inline-block; background: #2a60ca; color: #fff; font-size: 16px; font-weight: 600; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; }
+    .submit-btn:hover { background: #1e4fa8; }
+    .privacy-note { font-size: 14px; color: #7d8c9e; margin-top: 16px; }
 
     /* FOOTER */
     .footer { background: #0a1628; padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; }
-    .footer-logo { height: 24px; filter: brightness(0) invert(1); }
+    .footer-logo img { height: 28px; filter: brightness(0) invert(1); }
     .footer-text { font-size: 14px; color: #7c8c9e; }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .nav { padding: 16px 24px; }
       .nav-links { display: none; }
-      .content-container { padding: 32px 24px; }
-      .job-title { font-size: 28px; }
-      .job-details { font-size: 13px; gap: 12px; }
-      .form-row, .form-row-3 { grid-template-columns: 1fr; }
+      .content-wrap { padding: 32px 24px; }
+      .job-title { font-size: 32px; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-row.triple { grid-template-columns: 1fr; }
       .form-actions { flex-direction: column; gap: 16px; }
       .footer { padding: 24px; flex-direction: column; gap: 12px; }
-      .application-form h2 { font-size: 24px; }
     }
   </style>
 </head>
@@ -106,47 +99,55 @@
 
   <!-- NAV -->
   <nav class="nav">
-    <div class="nav-logos">
-      <img src="images/logo.svg" alt="Hawk Auto Group" class="nav-logo">
-      <div class="nav-logo-divider"></div>
-      <svg viewBox="0 0 54 21" fill="none" style="height:24px;width:auto">
-        <text x="0" y="18" fill="#00095b" font-family="serif" font-style="italic" font-weight="700" font-size="22">Ford</text>
-      </svg>
+    <div class="nav-logo">
+      <img src="images/dealer/654a088e.png" alt="Hawk Auto Group">
     </div>
     <div class="nav-links">
-      <a href="dealer.html">About Us</a>
-      <a href="dealer.html#about">Our Culture</a>
-      <a href="dealer.html#benefits">Benifts</a>
+      <a href="#">About Us</a>
+      <a href="#">Our Culture</a>
+      <a href="#">Benifts</a>
     </div>
-    <a href="dealer.html#jobs" class="nav-cta">View Positions</a>
+    <button class="nav-cta">View Positions</button>
   </nav>
 
-  <!-- PAGE -->
-  <div class="page-wrapper">
-    <div class="content-container">
+  <!-- MAIN -->
+  <div class="main-container">
+    <div class="content-wrap">
 
       <!-- JOB HEADER -->
-      <section class="job-header">
-        <div class="job-posted">24 hours ago</div>
+      <div class="job-header">
+        <div class="posted-time">24 hours ago</div>
         <h1 class="job-title">Mobile Service Technician</h1>
-        <div class="job-company">Ford Downtown</div>
-        <div class="job-details">
-          <span>📍 Detroit, MI</span>
-          <span class="divider">|</span>
-          <span>$ $45,000 - $65,000</span>
-          <span class="divider">|</span>
-          <span>🏷 Technician</span>
-          <span class="divider">|</span>
-          <span>🕐 Full-time</span>
+        <div class="job-location-name">Ford Downtown</div>
+        <div class="job-details-row">
+          <span class="detail-item">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Detroit, MI
+          </span>
+          <span class="separator">|</span>
+          <span class="detail-item">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            $45,000 - $65,000
+          </span>
+          <span class="separator">|</span>
+          <span class="detail-item">
+            <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            Technician
+          </span>
+          <span class="separator">|</span>
+          <span class="detail-item">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Full-time
+          </span>
         </div>
-        <button class="apply-btn" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">Apply Now</button>
-      </section>
+        <button class="apply-btn">Apply Now</button>
+      </div>
 
       <!-- JOB DESCRIPTION -->
-      <section class="job-description">
+      <div class="job-description">
         <p>We are looking for a Mobile Service Technician to join our growing team! We have added a third mobile vehicle to help service our customers needs. The right candidate will have a strong service technician background. Previous experience is preferred but not required we welcome technicians who have worked at independent shops or other brand dealers. The day-to-day duties include traveling in the Mobile Service van to customer workplaces and homes to handle basic service needs and recalls.</p>
 
-        <p>By working at a Lincoln/Ford dealership, you can be a part of a brand that honors the past, and is invested in the future. Join the Ford/Lincoln Family where we value service to each other and the world as much as to our customers!</p>
+        <p>By working at a Lincoln/Ford dealership, you can be a part of a brand that honors the past, and is invested in the future. Join the Ford?Lincoln Family where we value service to each other and the world as much as to our customers!</p>
 
         <h3>Benefits:</h3>
         <ul>
@@ -182,20 +183,29 @@
           <li>Strong use of technological devices including tablets</li>
         </ul>
 
-        <p class="eeo">We are an equal opportunity employer and prohibit discrimination/harassment without regard to race, color, religion, age, sex, national origin, disability status, genetics, protected veteran status, sexual orientation, gender identity or expression, or any other characteristic protected by federal, state or local laws.</p>
-      </section>
+        <p class="eeo-statement">We are an equal opportunity employer and prohibit discrimination/harassment without regard to race, color, religion, age, sex, national origin, disability status, genetics, protected veteran status, sexual orientation, gender identity or expression, or any other characteristic protected by federal, state or local laws.</p>
+      </div>
 
       <!-- APPLICATION FORM -->
-      <section class="application-form" id="apply">
+      <div class="form-section">
         <h2>Apply For Mobile Service Technician</h2>
 
         <div class="form-row">
-          <input type="text" class="form-input" placeholder="First Name*">
-          <input type="text" class="form-input" placeholder="Last Name*">
+          <div class="form-field">
+            <input type="text" placeholder="First Name*">
+          </div>
+          <div class="form-field">
+            <input type="text" placeholder="Last Name*">
+          </div>
         </div>
+
         <div class="form-row">
-          <input type="email" class="form-input" placeholder="Email Address*">
-          <input type="tel" class="form-input" placeholder="Phone Number*">
+          <div class="form-field">
+            <input type="email" placeholder="Email Address*">
+          </div>
+          <div class="form-field">
+            <input type="tel" placeholder="Phone Number*">
+          </div>
         </div>
 
         <div class="checkbox-row">
@@ -203,47 +213,63 @@
           <label for="sms-consent">I would like to communicate with the hiring team via text message about my application and next steps.</label>
         </div>
 
-        <div class="form-row-full">
-          <input type="text" class="form-input" placeholder="Address">
-        </div>
-        <div class="form-row-3">
-          <input type="text" class="form-input" placeholder="City">
-          <select class="form-input"><option value="">State/Region</option></select>
-          <input type="text" class="form-input" placeholder="Zip/Postal Code">
+        <div class="form-row full">
+          <div class="form-field">
+            <input type="text" placeholder="Address">
+          </div>
         </div>
 
-        <div class="resume-row">
-          <div>
-            <div class="resume-label">Please add your resume <span>(optional)</span></div>
-            <div class="resume-sublabel">10MB limit; pdf, .doc, and .docx file types are accepted.</div>
+        <div class="form-row triple">
+          <div class="form-field">
+            <input type="text" placeholder="City">
           </div>
-          <button class="attach-btn">📎 Attach File</button>
+          <div class="form-field">
+            <select>
+              <option value="">State/Region</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <input type="text" placeholder="Zip/Postal Code">
+          </div>
+        </div>
+
+        <div class="resume-section">
+          <div class="resume-label">
+            <h4>Please add your resume <span>(optional)</span></h4>
+            <p>10MB limit; pdf, .doc, and .docx file types are accepted.</p>
+          </div>
+          <button class="attach-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+            Attach File
+          </button>
         </div>
 
         <div class="other-info">
-          <h3>Other Information <span>(optional)</span></h3>
+          <h4>Other Information <span>(optional)</span></h4>
           <p>Have you previously worked at a Ford dealership? If yes, please list what dealership.</p>
-          <textarea></textarea>
+          <div class="form-field">
+            <textarea placeholder=""></textarea>
+          </div>
         </div>
 
         <div class="form-actions">
-          <a href="dealer.html#jobs" class="back-link">← View All Opportunities</a>
+          <a href="dealer.html" class="back-link">← View All Opportunities</a>
           <button class="submit-btn">Submit Your Application</button>
         </div>
 
         <p class="privacy-note">Please contact us if you would like to better understand our data collection and usage policies.</p>
-      </section>
+      </div>
 
     </div>
   </div>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <img src="images/logo.svg" alt="Hawk Auto Group" class="footer-logo">
+    <div class="footer-logo">
+      <img src="images/dealer/654a088e.png" alt="Hawk Auto Group">
+    </div>
     <span class="footer-text">© 2026 Ford Motor Company</span>
-    <svg viewBox="0 0 54 21" fill="none" style="height:28px;width:auto">
-      <text x="0" y="18" fill="white" font-family="serif" font-style="italic" font-weight="700" font-size="22">Ford</text>
-    </svg>
+    <div style="height:28px;"></div>
   </footer>
 
 </body>
