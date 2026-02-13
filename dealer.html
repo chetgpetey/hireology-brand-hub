@@ -587,7 +587,7 @@
       "This hands-on role involves restoring vehicles to pre-accident condition using the latest repair techniques and equipment. ASE certification preferred but not required."
     ];
     var ratings = [6.1, 7.3, 5.8, 8.2, 6.9, 7.5];
-    var selectedJobIdx = 0;
+    var selectedJobIdx = -1;
 
     function renderJobs() {
       var jobs = filterJobs();
@@ -616,7 +616,14 @@
 
     function showJobDetail(jobs, idx) {
       var panel = document.getElementById('right-panel');
-      if (!jobs[idx]) { panel.innerHTML = ''; return; }
+      if (idx < 0 || !jobs[idx]) {
+        panel.innerHTML = '<div class="alert-card">' +
+          '<div class="alert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>' +
+          '<h3>Want alerts when jobs are available near you?</h3>' +
+          '<p>Don\'t see the perfect role? Upload your resume and we\'ll notify you when opportunities match your profile.</p>' +
+          '<div class="alert-form"><input type="text" placeholder="Email or Phone Number*"><input type="text" placeholder="Zipcode*"><button>Get Alerts</button></div></div>';
+        return;
+      }
       var job = jobs[idx];
       var rating = ratings[idx % ratings.length];
       var summary = summaries[idx % summaries.length];
