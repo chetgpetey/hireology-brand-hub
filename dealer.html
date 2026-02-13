@@ -64,7 +64,8 @@
     .about-sidebar-links a { font-size: 18px; font-weight: 500; color: #1a2629; padding: 20px 0; border-bottom: 1px solid #d1d5db; cursor: pointer; transition: color 0.2s; text-decoration: none; position: relative; }
     .about-sidebar-links a:first-child { border-top: none; }
     .about-sidebar-links a.active { color: #00095b; font-weight: 600; }
-    .about-sidebar-links a.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 40px; height: 3px; background: #00095b; }
+    .about-sidebar-links a::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 0; height: 3px; background: #00095b; transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .about-sidebar-links a.active::after { width: 40px; }
     .about-sidebar-links a:hover { color: #00095b; }
     .about-image { width: 100%; height: 420px; object-fit: cover; border-radius: 12px; transition: opacity 0.4s ease; }
     .about-image.fade-out { opacity: 0; }
