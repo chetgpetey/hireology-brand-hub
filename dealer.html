@@ -59,8 +59,13 @@
     .about-sidebar-links a.active { color: #2a60ca; font-weight: 600; }
     .about-sidebar-links a:hover { color: #2a60ca; }
     .about-image { width: 100%; height: 400px; object-fit: cover; border-radius: 12px; }
+    .about-text { overflow: hidden; }
     .about-text h3 { font-size: 40px; font-weight: 600; color: #00095b; margin-bottom: 16px; line-height: 1.2; }
     .about-text p { font-size: 16px; color: #05082f; line-height: 1.7; margin-bottom: 16px; }
+    .about-text.slide-out h3, .about-text.slide-out p { animation: slideOut 0.25s ease-in forwards; }
+    .about-text.slide-in h3, .about-text.slide-in p { animation: slideIn 0.25s ease-out forwards; }
+    @keyframes slideOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-16px); } }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
     /* BENEFITS */
     .benefits-section { padding: 64px; background: #F2F3FA; }
@@ -261,12 +266,19 @@
     ];
     function switchAboutTab(idx) {
       var tab = aboutTabs[idx];
-      document.getElementById('about-title').textContent = tab.title;
-      document.getElementById('about-body').textContent = tab.body;
-      document.getElementById('about-body2').textContent = tab.body2;
-      document.getElementById('about-image').src = tab.image;
+      var textEl = document.getElementById('about-text');
       var links = document.querySelectorAll('.about-sidebar-links a');
       links.forEach(function(a, i) { a.classList.toggle('active', i === idx); });
+      textEl.classList.remove('slide-in');
+      textEl.classList.add('slide-out');
+      setTimeout(function() {
+        document.getElementById('about-title').textContent = tab.title;
+        document.getElementById('about-body').textContent = tab.body;
+        document.getElementById('about-body2').textContent = tab.body2;
+        document.getElementById('about-image').src = tab.image;
+        textEl.classList.remove('slide-out');
+        textEl.classList.add('slide-in');
+      }, 250);
     }
     </script>
   </section>
