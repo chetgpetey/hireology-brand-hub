@@ -51,10 +51,12 @@
 
     /* ABOUT US */
     .about { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 40px; padding: 64px; align-items: start; }
-    .about-sidebar h2 { font-size: 50px; font-weight: 600; color: #00095b; margin-bottom: 24px; line-height: 1.1; }
+    .about-sidebar h2 { font-size: clamp(32px, 4vw, 50px); font-weight: 600; color: #00095b; margin-bottom: 24px; line-height: 1.1; white-space: nowrap; }
     .about-sidebar-links { display: flex; flex-direction: column; gap: 0; }
-    .about-sidebar-links a { font-size: 16px; font-weight: 500; color: #1a2629; padding: 12px 0; border-bottom: 1px solid #e5e7eb; }
+    .about-sidebar-links a { font-size: 16px; font-weight: 500; color: #1a2629; padding: 12px 0; border-bottom: 1px solid #e5e7eb; cursor: pointer; transition: color 0.2s; }
     .about-sidebar-links a:first-child { border-top: 2px solid #00095b; }
+    .about-sidebar-links a.active { color: #2a60ca; font-weight: 600; }
+    .about-sidebar-links a:hover { color: #2a60ca; }
     .about-image { width: 100%; height: 400px; object-fit: cover; border-radius: 12px; }
     .about-text h3 { font-size: 40px; font-weight: 600; color: #00095b; margin-bottom: 16px; line-height: 1.2; }
     .about-text p { font-size: 16px; color: #05082f; line-height: 1.7; margin-bottom: 16px; }
@@ -220,17 +222,48 @@
     <div class="about-sidebar">
       <h2>About Us</h2>
       <div class="about-sidebar-links">
-        <a href="#">Who We Are</a>
-        <a href="#">Mission & Vision</a>
-        <a href="#">Community Partnership</a>
+        <a href="#" class="active" onclick="switchAboutTab(0); return false;">Who We Are</a>
+        <a href="#" onclick="switchAboutTab(1); return false;">Mission & Vision</a>
+        <a href="#" onclick="switchAboutTab(2); return false;">Community Partnership</a>
       </div>
     </div>
-    <img src="images/dealer/bfded8a5.png" alt="Ford dealership" class="about-image">
-    <div class="about-text">
-      <h3>Leaders In Our Community</h3>
-      <p>Hawk Auto Group is proud to be an automotive leader in our community. We offer competitive pay plans designed to take care of top performers. We are a group of fast-paced technologically advanced dealerships and are looking for talented team members to continue our growth and provide our customers with exceptional service.</p>
-      <p>Our locations include: Hawk Chevrolet, Hawk Cadillac of Joliet, Hawk CDJR Fiat, Hawk Ford of St Charles, Hawk Ford of Carol Stream, Hawk Mazda of Joliet, Hawk Nissan of St Charles, Hawk Subaru, Hawk Volkswagen of Joliet, Hawk Volkswagen of Monro.</p>
+    <img id="about-image" src="images/dealer/bfded8a5.png" alt="Ford dealership" class="about-image">
+    <div class="about-text" id="about-text">
+      <h3 id="about-title">Leaders In Our Community</h3>
+      <p id="about-body">Hawk Auto Group is proud to be an automotive leader in our community. We offer competitive pay plans designed to take care of top performers. We are a group of fast-paced technologically advanced dealerships and are looking for talented team members to continue our growth and provide our customers with exceptional service.</p>
+      <p id="about-body2">Our locations include: Hawk Chevrolet, Hawk Cadillac of Joliet, Hawk CDJR Fiat, Hawk Ford of St Charles, Hawk Ford of Carol Stream, Hawk Mazda of Joliet, Hawk Nissan of St Charles, Hawk Subaru, Hawk Volkswagen of Joliet, Hawk Volkswagen of Monro.</p>
     </div>
+    <script>
+    var aboutTabs = [
+      {
+        title: "Leaders In Our Community",
+        body: "Hawk Auto Group is proud to be an automotive leader in our community. We offer competitive pay plans designed to take care of top performers. We are a group of fast-paced technologically advanced dealerships and are looking for talented team members to continue our growth and provide our customers with exceptional service.",
+        body2: "Our locations include: Hawk Chevrolet, Hawk Cadillac of Joliet, Hawk CDJR Fiat, Hawk Ford of St Charles, Hawk Ford of Carol Stream, Hawk Mazda of Joliet, Hawk Nissan of St Charles, Hawk Subaru, Hawk Volkswagen of Joliet, Hawk Volkswagen of Monro.",
+        image: "images/dealer/bfded8a5.png"
+      },
+      {
+        title: "Our Mission & Vision",
+        body: "Our mission is to deliver an exceptional automotive experience by combining cutting-edge technology with genuine customer care. We envision a future where every team member thrives in a culture of innovation, integrity, and excellence.",
+        body2: "We believe in investing in our people, providing growth opportunities, and building lasting relationships with the communities we serve.",
+        image: "images/dealer/bfded8a5.png"
+      },
+      {
+        title: "Giving Back Together",
+        body: "At Hawk Auto Group, community partnership isn't just a value — it's a way of life. We actively support local charities, sponsor youth programs, and participate in neighborhood events throughout the Chicagoland area.",
+        body2: "From food drives to scholarship programs, our team dedicates thousands of hours each year to making our communities stronger.",
+        image: "images/dealer/bfded8a5.png"
+      }
+    ];
+    function switchAboutTab(idx) {
+      var tab = aboutTabs[idx];
+      document.getElementById('about-title').textContent = tab.title;
+      document.getElementById('about-body').textContent = tab.body;
+      document.getElementById('about-body2').textContent = tab.body2;
+      document.getElementById('about-image').src = tab.image;
+      var links = document.querySelectorAll('.about-sidebar-links a');
+      links.forEach(function(a, i) { a.classList.toggle('active', i === idx); });
+    }
+    </script>
   </section>
 
   <!-- BENEFITS -->
