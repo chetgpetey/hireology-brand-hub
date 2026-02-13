@@ -82,9 +82,9 @@
     .benefit-item p { font-size: 14px; color: #6b7280; line-height: 1.5; }
 
     /* FIND ROLE */
-    .find-role { text-align: center; padding: 80px 64px 40px; background: #fff; max-width: 1300px; margin: 0 auto; }
-    .find-role h2 { font-size: 50px; font-weight: 600; color: #00095b; margin-bottom: 12px; font-style: normal; }
-    .find-role > p { font-size: 16px; color: #1a2629; margin-bottom: 40px; }
+    .find-role { text-align: center; padding: 80px 64px 40px; background: #fff; max-width: 1100px; margin: 0 auto; }
+    .find-role h2 { font-size: 48px; font-weight: 600; color: #00095b; margin-bottom: 12px; font-style: normal; }
+    .find-role > p { font-size: 16px; color: #6b7280; margin-bottom: 40px; }
     .search-bar { display: flex; align-items: center; margin: 0 auto 20px; border: 1px solid #000; border-radius: 16px; padding: 6px 6px 6px 20px; background: #fff; box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.10); }
     .search-bar svg { width: 20px; height: 20px; stroke: #6b7280; fill: none; stroke-width: 2; flex-shrink: 0; }
     .search-bar input { flex: 1; padding: 12px 12px; font-size: 16px; border: none; outline: none; font-family: inherit; background: transparent; }
@@ -102,8 +102,8 @@
     .filter-option.selected { color: #2a60ca; font-weight: 600; }
 
     /* JOB LISTINGS */
-    .listings-header { text-align: left; max-width: 1300px; margin: 0 auto; padding: 0 64px; font-size: 13px; color: #9ca3af; margin-bottom: 16px; }
-    .listings { max-width: 1300px; margin: 0 auto; padding: 0 64px 64px; display: grid; grid-template-columns: 1fr minmax(300px, 0.8fr); gap: 32px; align-items: start; }
+    .listings-header { text-align: left; max-width: 1100px; margin: 0 auto; padding: 0 64px; font-size: 13px; color: #9ca3af; margin-bottom: 16px; }
+    .listings { max-width: 1100px; margin: 0 auto; padding: 0 64px 64px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; align-items: start; }
     .job-list { display: flex; flex-direction: column; gap: 12px; }
     .job-card { display: flex; gap: 20px; padding: 24px; border: 1px solid #e5e7eb; border-radius: 16px; background: #fff; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); position: relative; }
     .job-card:hover, .job-card.selected { border-color: #2a60ca; box-shadow: 0 8px 24px rgba(42, 96, 202, 0.15); transform: translateY(-2px); }
@@ -117,6 +117,13 @@
     .job-meta { display: flex; gap: 8px; flex-wrap: nowrap; font-size: 12px; color: #6b7280; }
     .job-meta span { background: #f3f4f6; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
     .job-time { font-size: 13px; color: #2a60ca; white-space: nowrap; }
+    .pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; }
+    .pag-btn { padding: 8px 16px; font-size: 14px; font-weight: 500; color: #374151; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; cursor: pointer; font-family: inherit; }
+    .pag-btn:disabled { opacity: 0.4; cursor: default; }
+    .pag-btn:not(:disabled):hover { background: #f2f3fa; }
+    .pag-num { width: 36px; height: 36px; font-size: 14px; font-weight: 500; color: #374151; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; cursor: pointer; font-family: inherit; }
+    .pag-num.active { background: #2a60ca; color: #fff; border-color: #2a60ca; }
+    .pag-num:not(.active):hover { background: #f2f3fa; }
     /* JOB DETAIL PANEL */
     .job-detail-panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 32px; position: sticky; top: 80px; }
     .job-detail-panel .detail-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 4px; }
@@ -589,14 +596,21 @@
     ];
     var ratings = [6.1, 7.3, 5.8, 8.2, 6.9, 7.5];
     var selectedJobIdx = -1;
+    var currentPage = 0;
+    var perPage = 6;
 
     function renderJobs() {
       var jobs = filterJobs();
+      var totalPages = Math.ceil(jobs.length / perPage);
+      if (currentPage >= totalPages) currentPage = 0;
+      var start = currentPage * perPage;
+      var pageJobs = jobs.slice(start, start + perPage);
       var list = document.getElementById('job-list');
       var header = document.getElementById('listings-header');
-      header.textContent = 'Showing ' + jobs.length + ' opportunit' + (jobs.length === 1 ? 'y' : 'ies');
-      list.innerHTML = jobs.map(function(job, i) {
-        return '<div class="job-card' + (i === selectedJobIdx ? ' selected' : '') + '" data-job-index="' + i + '" onclick="selectJob(' + i + ')">' +
+      header.textContent = 'Showing ' + (start + 1) + '–' + Math.min(start + perPage, jobs.length) + ' of ' + jobs.length + ' opportunit' + (jobs.length === 1 ? 'y' : 'ies');
+      list.innerHTML = pageJobs.map(function(job, i) {
+        var globalIdx = start + i;
+        return '<div class="job-card' + (globalIdx === selectedJobIdx ? ' selected' : '') + '" data-job-index="' + globalIdx + '" onclick="selectJob(' + globalIdx + ')">' +
           '<div class="job-logo"><img src="images/dealer/' + job.thumb + '" alt=""></div>' +
           '<div class="job-info"><div class="job-info-header"><h4>' + job.title + '</h4>' +
           '<span class="job-time">' + job.time + '</span></div>' +
@@ -604,7 +618,27 @@
           '<div class="job-meta"><span>' + job.location + '</span><span>' + formatPay(job.pay) + '</span><span>' + job.position + '</span><span>' + job.type + '</span></div>' +
           '</div></div>';
       }).join('');
-      showJobDetail(jobs, selectedJobIdx);
+      // Pagination
+      if (totalPages > 1) {
+        var pag = '<div class="pagination">';
+        pag += '<button class="pag-btn" onclick="goPage(' + (currentPage - 1) + ')"' + (currentPage === 0 ? ' disabled' : '') + '>← Prev</button>';
+        for (var p = 0; p < totalPages; p++) {
+          pag += '<button class="pag-num' + (p === currentPage ? ' active' : '') + '" onclick="goPage(' + p + ')">' + (p + 1) + '</button>';
+        }
+        pag += '<button class="pag-btn" onclick="goPage(' + (currentPage + 1) + ')"' + (currentPage === totalPages - 1 ? ' disabled' : '') + '>Next →</button>';
+        pag += '</div>';
+        list.innerHTML += pag;
+      }
+      showJobDetail(filterJobs(), selectedJobIdx);
+    }
+
+    function goPage(p) {
+      var jobs = filterJobs();
+      var totalPages = Math.ceil(jobs.length / perPage);
+      if (p < 0 || p >= totalPages) return;
+      currentPage = p;
+      selectedJobIdx = -1;
+      renderJobs();
     }
 
     function selectJob(idx) {
@@ -654,7 +688,8 @@
     var _origSelect = selectFilter;
     selectFilter = function(opt) {
       _origSelect(opt);
-      selectedJobIdx = 0;
+      selectedJobIdx = -1;
+      currentPage = 0;
       renderJobs();
     };
 
