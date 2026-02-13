@@ -23,7 +23,7 @@
     .nav-links { display: flex; gap: 36px; }
     .nav-links a { font-size: 15px; font-weight: 500; color: #1a2629; }
     .nav-links a:hover { color: #2a60ca; }
-    .nav-cta { background: #2a60ca; color: #fff; font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; }
+    .nav-cta { background: #2a60ca; color: #fff; font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; transition: background 0.2s; }
     .nav-cta:hover { background: #1e4fa8; }
 
     /* HERO */
@@ -99,7 +99,8 @@
     .search-bar { display: flex; align-items: center; margin: 0 auto 20px; border: 1px solid #000; border-radius: 16px; padding: 6px 6px 6px 20px; background: #fff; box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.10); }
     .search-bar svg { width: 20px; height: 20px; stroke: #6b7280; fill: none; stroke-width: 2; flex-shrink: 0; }
     .search-bar input { flex: 1; padding: 12px 12px; font-size: 16px; border: none; outline: none; font-family: inherit; background: transparent; }
-    .search-bar button { background: #2A60CA; color: #fff; border: none; padding: 12px 32px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; border-radius: 8px; flex-shrink: 0; }
+    .search-bar button { background: #2A60CA; color: #fff; border: none; padding: 12px 32px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; border-radius: 8px; flex-shrink: 0; transition: background 0.2s; }
+    .search-bar button:hover { background: #1e4fa8; }
     .filters { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; margin-bottom: 16px; padding-bottom: 24px; border-bottom: 1px solid #e5e7eb; }
     .filter-wrap { position: relative; }
     .filter-btn { padding: 10px 20px; font-size: 14px; color: #374151; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 8px; }
@@ -142,9 +143,11 @@
     .job-detail-panel .detail-logo { width: 92px; height: auto; margin-bottom: 16px; }
     .job-detail-panel .detail-title { font-size: 24px; font-weight: 700; color: #00095b; }
     .job-detail-panel .detail-actions { display: flex; gap: 12px; align-items: center; }
-    .job-detail-panel .detail-save { width: 40px; height: 40px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .job-detail-panel .detail-save { width: 40px; height: 40px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+    .job-detail-panel .detail-save:hover { background: #f2f3fa; border-color: #2a60ca; }
     .job-detail-panel .detail-save svg { width: 20px; height: 20px; stroke: #374151; fill: none; stroke-width: 2; }
-    .job-detail-panel .detail-apply-top { background: #00095b; color: #fff; font-size: 14px; font-weight: 600; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; }
+    .job-detail-panel .detail-apply-top { background: #00095b; color: #fff; font-size: 14px; font-weight: 600; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+    .job-detail-panel .detail-apply-top:hover { background: #000740; }
     .job-detail-panel .detail-company { font-size: 16px; color: #374151; margin-bottom: 12px; }
     .job-detail-panel .detail-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; align-items: center; }
     .job-detail-panel .detail-meta span { background: #f2f3fa; padding: 4px 12px; border-radius: 6px; font-size: 13px; color: #374151; }
@@ -177,7 +180,8 @@
     .alert-form { display: flex; gap: 8px; width: 100%; }
     .alert-form input { flex: 1; min-width: 0; padding: 12px 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff; color: #1a1a1a; }
     .alert-form input::placeholder { color: #999; }
-    .alert-form button { background: #2a60ca; color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; font-family: inherit; flex-shrink: 0; }
+    .alert-form button { background: #2a60ca; color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; font-family: inherit; flex-shrink: 0; transition: background 0.2s; }
+    .alert-form button:hover { background: #1e4fa8; }
 
     /* DEGREES CTA */
     .degrees-cta { position: relative; border-radius: 16px; max-width: 1300px; margin: 0 auto 64px; margin-inline: max(64px, calc((100% - 1300px) / 2)); overflow: hidden; min-height: 320px; }
