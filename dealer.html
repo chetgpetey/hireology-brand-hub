@@ -10,6 +10,7 @@
   <style>
     html { scroll-behavior: smooth; }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { overflow-x: hidden; width: 100%; }
     body { font-family: 'DM Sans', sans-serif; color: #1a2629; background: #fff; }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
@@ -241,12 +242,16 @@
       .search-bar { flex-direction: row; }
       .search-bar input { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 10px 8px; font-size: 14px; }
       .search-bar button { padding: 10px 20px; font-size: 14px; }
-      .listings { padding: 0 24px 32px; overflow: hidden; }
-      .listings-header { padding: 0 24px; }
-      .alert-card { padding: 32px 20px; }
-      .alert-form { flex-direction: column; }
+      .listings { padding: 0 16px 32px; max-width: 100vw; overflow: hidden; }
+      .listings-header { padding: 0 16px; }
+      .job-card { overflow: hidden; }
+      .job-card .meta span { font-size: 11px; }
+      .alert-card { padding: 28px 16px; max-width: 100%; overflow: hidden; word-wrap: break-word; }
+      .alert-card h3 { font-size: 20px; }
+      .alert-card p { font-size: 13px; }
+      .alert-form { flex-direction: column; gap: 10px; padding: 0; }
       .alert-form input, .alert-form button { width: 100%; box-sizing: border-box; }
-      #right-panel { position: static; }
+      #right-panel { position: static; max-width: 100%; overflow: hidden; }
       .degrees-cta { margin: 0 24px 32px; min-height: 0; }
       .degrees-cta-img { position: absolute; inset: 0; width: 100%; height: 100%; }
       .degrees-cta-content { max-width: 100%; padding: 32px 24px; }
