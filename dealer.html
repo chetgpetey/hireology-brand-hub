@@ -731,6 +731,8 @@
     function isMobile() { return window.innerWidth <= 768; }
 
     var _savedScrollY = 0;
+    var _drawerClosing = false;
+    function _blockScroll(e) { e.preventDefault(); }
     function openDrawerUI() {
       _savedScrollY = window.scrollY;
       document.body.style.position = 'fixed';
@@ -742,16 +744,27 @@
       document.getElementById('drawer-panel').classList.add('open');
     }
     function closeDrawer() {
+      if (_drawerClosing) return;
+      _drawerClosing = true;
       var panel = document.getElementById('drawer-panel');
       panel.style.transform = '';
       panel.classList.remove('open');
       document.getElementById('drawer-overlay').classList.remove('open');
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.overflow = '';
-      window.scrollTo(0, _savedScrollY);
+      document.addEventListener('touchmove', _blockScroll, { passive: false });
+      document.addEventListener('scroll', _blockScroll, { passive: false });
+      setTimeout(function() {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, _savedScrollY);
+        setTimeout(function() {
+          document.removeEventListener('touchmove', _blockScroll);
+          document.removeEventListener('scroll', _blockScroll);
+          _drawerClosing = false;
+        }, 100);
+      }, 350);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
