@@ -623,21 +623,23 @@
     panel.style.transform = '';
     panel.classList.remove('open');
     document.getElementById('drawer-overlay').classList.remove('open');
-    // Block all touch/scroll during transition
     document.addEventListener('touchmove', _blockScroll, { passive: false });
-    document.addEventListener('scroll', _blockScroll, { passive: false });
+    // Restore scroll position BEFORE unfixing body so there's no jump
+    var scrollY = _savedScrollY;
     setTimeout(function() {
+      // Set scrollTo first while still fixed
+      document.documentElement.style.scrollBehavior = 'auto';
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.left = '';
       document.body.style.right = '';
       document.body.style.overflow = '';
-      window.scrollTo(0, _savedScrollY);
+      window.scrollTo({ top: scrollY, behavior: 'instant' });
+      document.documentElement.style.scrollBehavior = '';
       setTimeout(function() {
         document.removeEventListener('touchmove', _blockScroll);
-        document.removeEventListener('scroll', _blockScroll);
         _drawerClosing = false;
-      }, 100);
+      }, 200);
     }, 350);
   }
 

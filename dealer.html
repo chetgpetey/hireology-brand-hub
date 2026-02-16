@@ -751,19 +751,20 @@
       panel.classList.remove('open');
       document.getElementById('drawer-overlay').classList.remove('open');
       document.addEventListener('touchmove', _blockScroll, { passive: false });
-      document.addEventListener('scroll', _blockScroll, { passive: false });
+      var scrollY = _savedScrollY;
       setTimeout(function() {
+        document.documentElement.style.scrollBehavior = 'auto';
         document.body.style.position = '';
         document.body.style.top = '';
         document.body.style.left = '';
         document.body.style.right = '';
         document.body.style.overflow = '';
-        window.scrollTo(0, _savedScrollY);
+        window.scrollTo({ top: scrollY, behavior: 'instant' });
+        document.documentElement.style.scrollBehavior = '';
         setTimeout(function() {
           document.removeEventListener('touchmove', _blockScroll);
-          document.removeEventListener('scroll', _blockScroll);
           _drawerClosing = false;
-        }, 100);
+        }, 200);
       }, 350);
     }
 
