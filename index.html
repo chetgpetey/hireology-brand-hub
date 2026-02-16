@@ -44,7 +44,8 @@
     .benefit-desc { font-size: 14px; font-weight: 400; line-height: 1.6; opacity: 0.9; margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 16px; }
 
     /* COMMUNITY */
-    .community { padding: 80px 64px; display: flex; flex-wrap: wrap; gap: 48px; align-items: start; background: #f0f4f8; margin: 40px 0; }
+    .community-wrapper { background: #f0f4f8; margin: 40px 0; padding: 80px 64px; }
+    .community { display: flex; flex-wrap: wrap; gap: 48px; align-items: start; max-width: 1400px; margin: 0 auto; }
     .community-images { flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
     .community-images .img-row { display: flex; gap: 16px; }
     .community-images .img-row img { border-radius: 12px; height: 220px; object-fit: cover; min-width: 0; }
@@ -182,7 +183,7 @@
       .hero { padding: 32px 24px 0; }
       .hero h1 { font-size: 36px; }
       .benefits { padding: 24px; }
-      .community { padding: 48px 24px; }
+      .community-wrapper { padding: 48px 24px; }
       .community-text h2 { font-size: 28px; }
       .quote-section { padding: 32px 24px; flex-direction: column; align-items: center; text-align: center; }
       .quote-text { font-size: 18px; }
@@ -275,6 +276,7 @@
   </section>
 
   <!-- COMMUNITY -->
+  <div class="community-wrapper">
   <section class="community" id="culture" data-animate>
     <div class="community-images">
       <div class="img-row">
@@ -303,6 +305,7 @@
       </div>
     </div>
   </section>
+  </div>
 
   <!-- QUOTE -->
   <section class="quote-section" id="about" data-animate>
