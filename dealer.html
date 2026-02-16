@@ -252,7 +252,13 @@
       .alert-card p { font-size: 13px !important; max-width: 100% !important; }
       .alert-form { flex-direction: column !important; gap: 10px; }
       .alert-form input, .alert-form button { width: 100% !important; min-width: 0 !important; flex-shrink: 1 !important; }
-      #right-panel { position: static; max-width: 100%; overflow: hidden; }
+      #right-panel { position: static; max-width: 100%; overflow: hidden; display: none; }
+      .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 500; }
+      .drawer-overlay.open { display: block; }
+      .drawer-panel { position: fixed; bottom: 0; left: 0; right: 0; max-height: 85vh; background: #fff; border-radius: 16px 16px 0 0; z-index: 501; transform: translateY(100%); transition: transform 0.3s ease; overflow-y: auto; padding: 24px 16px; }
+      .drawer-panel.open { transform: translateY(0); }
+      .drawer-close { position: sticky; top: 0; display: flex; justify-content: flex-end; margin-bottom: 8px; z-index: 10; }
+      .drawer-close button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid #d1d5db; background: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #374151; }
       #job-list { max-width: 100%; overflow: hidden; }
       .degrees-cta { margin: 0 24px 32px; min-height: 0; }
       .degrees-cta-img { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -722,12 +728,50 @@
       if (dd && !e.target.closest('.detail-save-wrap')) dd.classList.remove('open');
     });
 
+    function isMobile() { return window.innerWidth <= 768; }
+
+    function closeDrawer() {
+      document.getElementById('drawer-overlay').classList.remove('open');
+      document.getElementById('drawer-panel').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
     function selectJob(idx) {
       selectedJobIdx = idx;
       var cards = document.querySelectorAll('.job-card');
       cards.forEach(function(c, i) { c.classList.toggle('selected', i === idx); });
       var jobs = filterJobs();
-      showJobDetail(jobs, idx);
+      if (isMobile()) {
+        // Build detail into drawer
+        var tempDiv = document.createElement('div');
+        tempDiv.id = 'right-panel';
+        document.body.appendChild(tempDiv);
+        showJobDetail(jobs, idx);
+        var html = tempDiv.innerHTML;
+        document.body.removeChild(tempDiv);
+        document.getElementById('drawer-content').innerHTML = html;
+        document.getElementById('drawer-overlay').classList.add('open');
+        document.getElementById('drawer-panel').classList.add('open');
+        document.body.style.overflow = 'hidden';
+        // Re-animate rating
+        setTimeout(function() {
+          var ring = document.getElementById('drawer-content').querySelector('#rating-ring') || document.getElementById('rating-ring');
+          var numEl = document.getElementById('drawer-content').querySelector('#rating-num') || document.getElementById('rating-num');
+          if (!ring || !numEl) return;
+          var rating = ratings[idx % ratings.length];
+          var circumference = 138.23;
+          var offset = circumference - (circumference * (rating / 10));
+          ring.style.strokeDashoffset = offset;
+          var current = 0, step = rating / 30;
+          var counter = setInterval(function() {
+            current += step;
+            if (current >= rating) { current = rating; clearInterval(counter); }
+            numEl.textContent = current.toFixed(1);
+          }, 25);
+        }, 50);
+      } else {
+        showJobDetail(jobs, idx);
+      }
     }
 
     function showJobDetail(jobs, idx) {
@@ -817,6 +861,13 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- MOBILE DRAWER -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="drawer-panel" id="drawer-panel">
+    <div class="drawer-close"><button onclick="closeDrawer()">✕</button></div>
+    <div id="drawer-content"></div>
   </div>
 
   <!-- DEGREES@WORK CTA -->
