@@ -738,8 +738,9 @@
       document.body.style.overflow = '';
     }
 
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
       var panel = document.getElementById('drawer-panel');
+      if (!panel) return;
       var startY = 0, currentY = 0, dragging = false;
       panel.addEventListener('touchstart', function(e) {
         if (panel.scrollTop > 0) return;
@@ -766,7 +767,7 @@
           panel.style.transform = 'translateY(0)';
         }
       });
-    })();
+    });
 
     function selectJob(idx) {
       selectedJobIdx = idx;
