@@ -68,42 +68,86 @@
     .quote-author span { font-size: 14px; color: #6b7280; font-weight: 400; }
 
     /* FIND ROLE */
-    .find-role { text-align: center; padding: 64px; background: #fff; }
-    .find-role h2 { font-size: 40px; font-weight: 600; color: #00095b; margin-bottom: 8px; }
-    .find-role > p { font-size: 16px; color: #6b7280; margin-bottom: 32px; }
-    .search-bar { display: flex; align-items: center; max-width: 580px; margin: 0 auto 24px; border: 1px solid #d1d5db; border-radius: 50px; padding: 6px 6px 6px 20px; }
-    .search-bar svg { width: 18px; height: 18px; stroke: #6b7280; fill: none; stroke-width: 2; flex-shrink: 0; }
-    .search-bar input { flex: 1; padding: 10px 12px; font-size: 15px; border: none; outline: none; font-family: inherit; background: transparent; }
-    .search-bar button { background: #2a60ca; color: #fff; border: none; padding: 10px 28px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; border-radius: 50px; flex-shrink: 0; }
-    .filters { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
-    .filter-btn { padding: 8px 14px; font-size: 13px; color: #374151; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 6px; }
-    .filter-btn::after { content: '▾'; font-size: 10px; }
+    .find-role { text-align: center; padding: 80px 64px 40px; background: #fff; max-width: 1300px; margin: 0 auto; }
+    .find-role h2 { font-size: 48px; font-weight: 600; color: #00095b; margin-bottom: 12px; }
+    .find-role > p { font-size: 16px; color: #6b7280; margin-bottom: 40px; }
+    .search-bar { display: flex; align-items: center; margin: 0 auto 20px; border: 1px solid #000; border-radius: 50px; padding: 6px 6px 6px 20px; background: #fff; box-shadow: 0 4px 10px 0 rgba(0,0,0,0.10); }
+    .search-bar svg { width: 20px; height: 20px; stroke: #6b7280; fill: none; stroke-width: 2; flex-shrink: 0; }
+    .search-bar input { flex: 1; padding: 12px 12px; font-size: 16px; border: none; outline: none; font-family: inherit; background: transparent; }
+    .search-bar button { background: #2A60CA; color: #fff; border: none; padding: 12px 32px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; border-radius: 50px; flex-shrink: 0; transition: background 0.2s; }
+    .search-bar button:hover { background: #1e4fa8; }
+    .filters { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; margin-bottom: 16px; padding-bottom: 24px; border-bottom: 1px solid #e5e7eb; position: relative; z-index: 200; }
+    .filter-wrap { position: relative; }
+    .filter-btn { padding: 10px 20px; font-size: 14px; color: #374151; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 8px; }
+    .filter-btn::after { content: '▾'; font-size: 10px; color: #9ca3af; transition: transform 0.2s; }
+    .filter-wrap.open .filter-btn { border-color: #2a60ca; color: #2a60ca; }
+    .filter-wrap.open .filter-btn::after { transform: rotate(180deg); color: #2a60ca; }
+    .filter-dropdown { position: absolute; top: calc(100% + 6px); left: 0; min-width: 200px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; z-index: 200; display: none; }
+    .filter-wrap.open .filter-dropdown { display: block; }
+    .filter-option { padding: 10px 16px; font-size: 14px; color: #374151; cursor: pointer; font-family: inherit; transition: background 0.15s; }
+    .filter-option:hover { background: #f2f3fa; }
+    .filter-option.selected { color: #2a60ca; font-weight: 600; }
 
     /* JOB LISTINGS */
-    .listings-header { text-align: left; max-width: 1100px; margin: 0 auto; padding: 0 64px; font-size: 13px; color: #9ca3af; margin-bottom: 16px; }
-    .listings { max-width: 1100px; margin: 0 auto; padding: 0 64px 64px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: start; }
+    .listings-header { text-align: left; max-width: 1300px; margin: 0 auto; padding: 0 64px; font-size: 13px; color: #9ca3af; margin-bottom: 16px; }
+    .listings { max-width: 1300px; margin: 0 auto; padding: 0 64px 64px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; align-items: start; }
     .job-list { display: flex; flex-direction: column; gap: 12px; }
-    .job-card { display: flex; gap: 16px; padding: 20px; border: 1px solid #e5e7eb; border-radius: 12px; background: #fff; }
-    .job-logo { width: 72px; height: 72px; border-radius: 10px; background: #e8ecf0; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .job-card { display: flex; gap: 16px; padding: 16px; border: 1px solid #e5e7eb; border-radius: 16px; background: #fff; cursor: pointer; position: relative; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; }
+    .job-card:hover, .job-card.selected { border-color: #2a60ca; box-shadow: 0 8px 24px rgba(42,96,202,0.15); transform: translateY(-2px); }
+    .job-card:hover h4, .job-card.selected h4 { color: #2a60ca; }
+    .job-logo { width: 88px; height: 88px; border-radius: 12px; background: #e8ecf0; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .job-logo img { width: 100%; height: 100%; object-fit: cover; }
     .job-info { flex: 1; }
-    .job-info-header { display: flex; justify-content: space-between; align-items: flex-start; }
-    .job-info h4 { font-size: 16px; font-weight: 600; color: #00095b; }
-    .job-info .company { font-size: 14px; color: #374151; margin: 2px 0 8px; }
+    .job-info-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2px; }
+    .job-info h4 { font-size: 18px; font-weight: 600; color: #00095b; transition: color 0.3s ease; }
+    .job-info .company { font-size: 14px; color: #374151; margin: 4px 0 12px; }
     .job-meta { display: flex; gap: 8px; flex-wrap: nowrap; font-size: 12px; color: #6b7280; }
     .job-meta span { background: #f3f4f6; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
-    .job-time { font-size: 12px; color: #9ca3af; white-space: nowrap; }
+    .job-time { font-size: 13px; color: #7D8C9E; white-space: nowrap; }
+    .pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; }
+    .pag-btn { padding: 8px 16px; font-size: 14px; font-weight: 500; color: #374151; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; cursor: pointer; font-family: inherit; }
+    .pag-btn:disabled { opacity: 0.4; cursor: default; }
+    .pag-btn:not(:disabled):hover { background: #f2f3fa; }
+    .pag-num { width: 36px; height: 36px; font-size: 14px; font-weight: 500; color: #374151; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; cursor: pointer; font-family: inherit; }
+    .pag-num.active { background: #2a60ca; color: #fff; border-color: #2a60ca; }
+    .pag-num:not(.active):hover { background: #f2f3fa; }
+    /* JOB DETAIL PANEL */
+    #right-panel { position: sticky; top: 80px; align-self: start; }
+    .job-detail-panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 32px; }
+    .job-detail-panel .detail-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 4px; }
+    .job-detail-panel .detail-title { font-size: 24px; font-weight: 700; color: #00095b; }
+    .job-detail-panel .detail-actions { display: flex; gap: 12px; align-items: center; }
+    .job-detail-panel .detail-save { width: 40px; height: 40px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+    .job-detail-panel .detail-save:hover { background: #f2f3fa; border-color: #2a60ca; }
+    .job-detail-panel .detail-save svg { width: 20px; height: 20px; stroke: #374151; fill: none; stroke-width: 2; }
+    .job-detail-panel .detail-apply-top { background: #2A60CA; color: #fff; font-size: 14px; font-weight: 600; padding: 10px 24px; border-radius: 50px; border: none; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+    .job-detail-panel .detail-apply-top:hover { background: #1e4fa8; }
+    .job-detail-panel .detail-company { font-size: 16px; color: #374151; margin-bottom: 12px; }
+    .job-detail-panel .detail-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; align-items: center; }
+    .job-detail-panel .detail-meta span { background: #f2f3fa; padding: 4px 12px; border-radius: 6px; font-size: 13px; color: #374151; }
+    .job-detail-panel .detail-meta .detail-time { font-size: 13px; color: #7D8C9E; margin-left: auto; background: none; padding: 0; }
+    .job-detail-panel .detail-divider { border: none; border-top: 1px solid #e5e7eb; margin: 20px 0; }
+    .job-detail-panel .detail-section-title { font-size: 16px; font-weight: 400; color: #00095b; margin-bottom: 16px; }
+    .job-detail-panel .detail-field { margin-bottom: 12px; font-size: 14px; color: #1a2629; }
+    .job-detail-panel .detail-field strong { color: #00095b; font-weight: 600; }
+    .job-detail-panel .ai-summary { font-size: 14px; color: #374151; line-height: 1.7; }
+    .job-detail-panel .detail-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+    .job-detail-panel .btn-learn { padding: 14px; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; font-size: 15px; font-weight: 600; color: #1a2629; cursor: pointer; font-family: inherit; text-align: center; }
+    .job-detail-panel .btn-learn:hover { background: #f5f6f8; }
+    .job-detail-panel .btn-apply { padding: 14px; border: none; border-radius: 50px; background: #2A60CA; font-size: 15px; font-weight: 600; color: #fff; cursor: pointer; font-family: inherit; text-align: center; }
+    .job-detail-panel .btn-apply:hover { background: #1e4fa8; }
 
     /* ALERT CARD */
-    .alert-card { background: #00095b; border-radius: 20px; padding: 48px 32px; text-align: center; }
+    .alert-card { background: #00095b; border-radius: 20px; padding: 48px 40px; text-align: center; }
     .alert-icon { width: 48px; height: 48px; background: #fff; border-radius: 50%; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; }
     .alert-icon svg { width: 22px; height: 22px; stroke: #00095b; }
     .alert-card h3 { font-size: 24px; font-weight: 400; color: #fff; margin-bottom: 12px; }
-    .alert-card p { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 24px; line-height: 1.5; }
-    .alert-form { display: flex; gap: 8px; }
-    .alert-form input { flex: 1; padding: 12px 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff; color: #1a1a1a; }
+    .alert-card p { font-size: 15px; color: rgba(255,255,255,0.7); margin-bottom: 28px; line-height: 1.6; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .alert-form { display: flex; gap: 8px; width: 100%; }
+    .alert-form input { flex: 1; min-width: 0; padding: 12px 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff; color: #1a1a1a; }
     .alert-form input::placeholder { color: #999; }
-    .alert-form button { background: #2a60ca; color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; font-family: inherit; }
+    .alert-form button { background: #2a60ca; color: #fff; border: none; padding: 12px 20px; border-radius: 50px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; font-family: inherit; flex-shrink: 0; transition: background 0.2s; }
+    .alert-form button:hover { background: #1e4fa8; }
 
     /* FOOTER */
     .footer { background: #0a1628; padding: 32px 64px; display: flex; align-items: center; justify-content: space-between; }
@@ -128,11 +172,22 @@
       .quote-text { font-size: 18px; }
       .find-role { padding: 32px 24px; }
       .find-role h2 { font-size: 32px; }
-      .search-bar { flex-direction: column; border-radius: 12px; padding: 8px; }
-      .listings { padding: 0 24px 32px; }
-      .alert-form { flex-direction: column; }
+      .search-bar { flex-direction: row; }
+      .search-bar input { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 10px 8px; font-size: 14px; }
+      .search-bar button { padding: 10px 20px; font-size: 14px; }
+      .listings { padding: 0 16px 32px; max-width: 100%; }
+      .listings-header { padding: 0 16px; }
+      .job-card { overflow: hidden; max-width: 100%; }
+      .job-meta { flex-wrap: wrap !important; }
+      .job-meta span { font-size: 11px; }
+      .alert-card { padding: 28px 16px !important; max-width: 100% !important; overflow: hidden; }
+      .alert-card h3 { font-size: 20px !important; }
+      .alert-card p { font-size: 13px !important; max-width: 100% !important; }
+      .alert-form { flex-direction: column !important; gap: 10px; }
+      .alert-form input, .alert-form button { width: 100% !important; min-width: 0 !important; }
+      #right-panel { position: static; max-width: 100%; overflow: hidden; }
+      #job-list { max-width: 100%; overflow: hidden; }
       .footer { padding: 24px; flex-direction: column; gap: 12px; }
-      .listings-header { padding: 0 24px; }
     }
   </style>
 </head>
@@ -234,120 +289,261 @@
   <!-- FIND ROLE -->
   <section class="find-role" id="jobs">
     <h2>Find Your Perfect Role</h2>
-    <p>Search opportunity across our nationwide dealerships network</p>
+    <p>Search opportunities across our nationwide dealerships network</p>
     <div class="search-bar">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
       <input type="text" placeholder="Zip code or City">
       <button>Search</button>
     </div>
     <div class="filters">
-      <button class="filter-btn">All Stores</button>
-      <button class="filter-btn">All Positions</button>
-      <button class="filter-btn">Job Type</button>
-      <button class="filter-btn">Experience</button>
-      <button class="filter-btn">Pay</button>
-      <button class="filter-btn">Within 50 mi</button>
+      <div class="filter-wrap">
+        <button class="filter-btn" onclick="toggleFilter(this)">All Stores</button>
+        <div class="filter-dropdown">
+          <div class="filter-option selected" onclick="selectFilter(this)">All Stores</div>
+          <div class="filter-option" onclick="selectFilter(this)">Ford Downtown</div>
+          <div class="filter-option" onclick="selectFilter(this)">Chicago Ford Center</div>
+          <div class="filter-option" onclick="selectFilter(this)">Houston Ford</div>
+          <div class="filter-option" onclick="selectFilter(this)">Phoenix Ford</div>
+          <div class="filter-option" onclick="selectFilter(this)">Philly Ford</div>
+          <div class="filter-option" onclick="selectFilter(this)">San Antonio Ford</div>
+        </div>
+      </div>
+      <div class="filter-wrap">
+        <button class="filter-btn" onclick="toggleFilter(this)">All Positions</button>
+        <div class="filter-dropdown">
+          <div class="filter-option selected" onclick="selectFilter(this)">All Positions</div>
+          <div class="filter-option" onclick="selectFilter(this)">Technician</div>
+          <div class="filter-option" onclick="selectFilter(this)">Sales</div>
+          <div class="filter-option" onclick="selectFilter(this)">Admin</div>
+          <div class="filter-option" onclick="selectFilter(this)">Service</div>
+          <div class="filter-option" onclick="selectFilter(this)">Finance</div>
+        </div>
+      </div>
+      <div class="filter-wrap">
+        <button class="filter-btn" onclick="toggleFilter(this)">Job Type</button>
+        <div class="filter-dropdown">
+          <div class="filter-option selected" onclick="selectFilter(this)">All Types</div>
+          <div class="filter-option" onclick="selectFilter(this)">Full-time</div>
+          <div class="filter-option" onclick="selectFilter(this)">Part-time</div>
+        </div>
+      </div>
+      <div class="filter-wrap">
+        <button class="filter-btn" onclick="toggleFilter(this)">Experience</button>
+        <div class="filter-dropdown">
+          <div class="filter-option selected" onclick="selectFilter(this)">Any Experience</div>
+          <div class="filter-option" onclick="selectFilter(this)">Entry Level</div>
+          <div class="filter-option" onclick="selectFilter(this)">1-3 Years</div>
+          <div class="filter-option" onclick="selectFilter(this)">3-5 Years</div>
+          <div class="filter-option" onclick="selectFilter(this)">5+ Years</div>
+        </div>
+      </div>
+      <div class="filter-wrap">
+        <button class="filter-btn" onclick="toggleFilter(this)">Pay</button>
+        <div class="filter-dropdown">
+          <div class="filter-option selected" onclick="selectFilter(this)">Any Pay</div>
+          <div class="filter-option" onclick="selectFilter(this)">$30k - $45k</div>
+          <div class="filter-option" onclick="selectFilter(this)">$45k - $65k</div>
+          <div class="filter-option" onclick="selectFilter(this)">$65k - $85k</div>
+          <div class="filter-option" onclick="selectFilter(this)">$85k+</div>
+        </div>
+      </div>
+      <div class="filter-wrap">
+        <button class="filter-btn" onclick="toggleFilter(this)">Within 50 mi</button>
+        <div class="filter-dropdown">
+          <div class="filter-option" onclick="selectFilter(this)">Within 10 mi</div>
+          <div class="filter-option" onclick="selectFilter(this)">Within 25 mi</div>
+          <div class="filter-option selected" onclick="selectFilter(this)">Within 50 mi</div>
+          <div class="filter-option" onclick="selectFilter(this)">Within 100 mi</div>
+          <div class="filter-option" onclick="selectFilter(this)">Any Distance</div>
+        </div>
+      </div>
     </div>
+    <script>
+    function toggleFilter(btn) {
+      var wrap = btn.parentElement;
+      var wasOpen = wrap.classList.contains('open');
+      document.querySelectorAll('.filter-wrap.open').forEach(function(w) { w.classList.remove('open'); });
+      if (!wasOpen) wrap.classList.add('open');
+    }
+    function selectFilter(opt) {
+      var wrap = opt.closest('.filter-wrap');
+      var btn = wrap.querySelector('.filter-btn');
+      wrap.querySelectorAll('.filter-option').forEach(function(o) { o.classList.remove('selected'); });
+      opt.classList.add('selected');
+      btn.textContent = opt.textContent;
+      wrap.classList.remove('open');
+      selectedJobIdx = -1;
+      currentPage = 0;
+      renderJobs();
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.filter-wrap')) {
+        document.querySelectorAll('.filter-wrap.open').forEach(function(w) { w.classList.remove('open'); });
+      }
+    });
+    </script>
   </section>
 
   <!-- LISTINGS -->
-  <div class="listings-header">Showing 6 opportunities</div>
+  <div class="listings-header" id="listings-header">Showing 6 opportunities</div>
   <div class="listings">
-    <div class="job-list">
-      <div class="job-card">
-        <div class="job-logo"><img src="images/community2.png" alt=""></div>
-        <div class="job-info">
-          <div class="job-info-header">
-            <h4>Automotive Technician</h4>
-            <span class="job-time">14 hours ago</span>
-          </div>
-          <div class="company">Ford Downtown</div>
-          <div class="job-meta">
-            <span>Detroit, MI</span><span>$45,000 - $65,000</span><span>Technician</span><span>Full-time</span>
-          </div>
+    <div class="job-list" id="job-list"></div>
+    <div id="right-panel">
+      <div class="alert-card">
+        <div class="alert-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         </div>
-      </div>
-      <div class="job-card">
-        <div class="job-logo"><img src="images/community2.png" alt=""></div>
-        <div class="job-info">
-          <div class="job-info-header">
-            <h4>Sales Representative</h4>
-            <span class="job-time">24 hours ago</span>
-          </div>
-          <div class="company">Chicago Ford Center</div>
-          <div class="job-meta">
-            <span>Chicago, IL</span><span>$40,000 - $80,000</span><span>Sales</span><span>Full-time</span>
-          </div>
+        <h3>Want alerts when jobs are available near you?</h3>
+        <p>Don't see the perfect role? Upload your resume and we'll notify you when opportunities match your profile.</p>
+        <div class="alert-form">
+          <input type="text" placeholder="Email or Phone Number*">
+          <input type="text" placeholder="Zipcode*">
+          <button>Get Alerts</button>
         </div>
-      </div>
-      <div class="job-card">
-        <div class="job-logo"><img src="images/community2.png" alt=""></div>
-        <div class="job-info">
-          <div class="job-info-header">
-            <h4>Service Advisor</h4>
-            <span class="job-time">1 day ago</span>
-          </div>
-          <div class="company">Houston Ford</div>
-          <div class="job-meta">
-            <span>Houston, TX</span><span>$50,000 - $85,000</span><span>Sales</span><span>Full-time</span>
-          </div>
-        </div>
-      </div>
-      <div class="job-card">
-        <div class="job-logo"><img src="images/community2.png" alt=""></div>
-        <div class="job-info">
-          <div class="job-info-header">
-            <h4>Finance Manager</h4>
-            <span class="job-time">2 days ago</span>
-          </div>
-          <div class="company">Phoenix Ford</div>
-          <div class="job-meta">
-            <span>Phoenix, AZ</span><span>$45,000 - $65,000</span><span>Admin</span><span>Part-time</span>
-          </div>
-        </div>
-      </div>
-      <div class="job-card">
-        <div class="job-logo"><img src="images/community2.png" alt=""></div>
-        <div class="job-info">
-          <div class="job-info-header">
-            <h4>Parts Specialist</h4>
-            <span class="job-time">3 days ago</span>
-          </div>
-          <div class="company">Philly Ford</div>
-          <div class="job-meta">
-            <span>Philadelphia, PA</span><span>$45,000 - $65,000</span><span>Sales</span><span>Full-time</span>
-          </div>
-        </div>
-      </div>
-      <div class="job-card">
-        <div class="job-logo"><img src="images/community2.png" alt=""></div>
-        <div class="job-info">
-          <div class="job-info-header">
-            <h4>Body Shop Technician</h4>
-            <span class="job-time">4 days ago</span>
-          </div>
-          <div class="company">San Antonio Ford</div>
-          <div class="job-meta">
-            <span>San Antonio, TX</span><span>$45,000 - $65,000</span><span>Technician</span><span>Full-time</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ALERT -->
-    <div class="alert-card">
-      <div class="alert-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      </div>
-      <h3>Want alerts when jobs are available near you?</h3>
-      <p>Don't see the perfect role? Upload your resume and we'll notify you when opportunities match your profile.</p>
-      <div class="alert-form">
-        <input type="text" placeholder="Email or Phone Number*">
-        <input type="text" placeholder="Zipcode*">
-        <button>Get Alerts</button>
       </div>
     </div>
   </div>
+
+  <script>
+  var allJobs = [
+    { title:"Automotive Technician", store:"Ford Downtown", location:"Detroit, MI", pay:55000, position:"Technician", type:"Full-time", experience:"1-3 Years", time:"14 hours ago" },
+    { title:"Sales Representative", store:"Chicago Ford Center", location:"Chicago, IL", pay:60000, position:"Sales", type:"Full-time", experience:"1-3 Years", time:"24 hours ago" },
+    { title:"Service Advisor", store:"Houston Ford", location:"Houston, TX", pay:67000, position:"Service", type:"Full-time", experience:"3-5 Years", time:"1 day ago" },
+    { title:"Finance Manager", store:"Phoenix Ford", location:"Phoenix, AZ", pay:55000, position:"Admin", type:"Part-time", experience:"5+ Years", time:"2 days ago" },
+    { title:"Parts Specialist", store:"Philly Ford", location:"Philadelphia, PA", pay:42000, position:"Sales", type:"Full-time", experience:"Entry Level", time:"3 days ago" },
+    { title:"Body Shop Technician", store:"San Antonio Ford", location:"San Antonio, TX", pay:58000, position:"Technician", type:"Full-time", experience:"3-5 Years", time:"4 days ago" },
+    { title:"Lot Attendant", store:"Ford Downtown", location:"Detroit, MI", pay:32000, position:"Admin", type:"Part-time", experience:"Entry Level", time:"4 days ago" },
+    { title:"Express Lane Technician", store:"Houston Ford", location:"Houston, TX", pay:40000, position:"Technician", type:"Full-time", experience:"Entry Level", time:"5 days ago" },
+    { title:"Internet Sales Manager", store:"Chicago Ford Center", location:"Chicago, IL", pay:85000, position:"Sales", type:"Full-time", experience:"3-5 Years", time:"5 days ago" },
+    { title:"Receptionist", store:"Phoenix Ford", location:"Phoenix, AZ", pay:35000, position:"Admin", type:"Full-time", experience:"Entry Level", time:"6 days ago" },
+    { title:"Warranty Administrator", store:"Philly Ford", location:"Philadelphia, PA", pay:52000, position:"Admin", type:"Full-time", experience:"1-3 Years", time:"6 days ago" },
+    { title:"Master Technician", store:"San Antonio Ford", location:"San Antonio, TX", pay:90000, position:"Technician", type:"Full-time", experience:"5+ Years", time:"1 week ago" }
+  ];
+
+  var summaries = [
+    "We are seeking a motivated professional with a passion for automotive excellence. This position involves diagnosing and repairing vehicles using state-of-the-art diagnostic equipment. The ideal candidate will have strong technical skills, ASE certifications preferred, and a commitment to customer satisfaction. Benefits include full medical coverage, 401(k) match, and generous PTO.",
+    "Join our dynamic sales team and help customers find their perfect vehicle. This role requires excellent communication skills, a positive attitude, and the ability to build lasting relationships. Our top performers consistently earn six-figure incomes through our uncapped commission structure.",
+    "As a key member of our service department, you will be the primary bridge between customers and technicians. This role involves scheduling appointments, providing accurate repair estimates, and ensuring an exceptional service experience.",
+    "This role oversees all financial aspects of vehicle transactions including securing competitive financing options and presenting aftermarket products. The ideal candidate has experience in automotive F&I or a strong background in banking and finance.",
+    "We are looking for an organized, detail-oriented team member to manage our parts inventory and assist both internal technicians and retail customers with their parts needs.",
+    "This hands-on role involves restoring vehicles to pre-accident condition using the latest collision repair techniques, equipment, and materials."
+  ];
+
+  var selectedJobIdx = -1;
+  var currentPage = 0;
+  var perPage = 6;
+
+  function getActiveFilters() {
+    var filters = {};
+    document.querySelectorAll('.filter-wrap').forEach(function(wrap, i) {
+      var sel = wrap.querySelector('.filter-option.selected');
+      if (!sel) return;
+      var val = sel.textContent.trim();
+      var keys = ['store','position','type','experience','pay','distance'];
+      filters[keys[i]] = val;
+    });
+    return filters;
+  }
+
+  function matchesPay(jobPay, filterPay) {
+    if (filterPay === 'Any Pay') return true;
+    if (filterPay === '$30k - $45k') return jobPay >= 30000 && jobPay < 45000;
+    if (filterPay === '$45k - $65k') return jobPay >= 45000 && jobPay < 65000;
+    if (filterPay === '$65k - $85k') return jobPay >= 65000 && jobPay < 85000;
+    if (filterPay === '$85k+') return jobPay >= 85000;
+    return true;
+  }
+
+  function formatPay(p) { return '$' + p.toLocaleString(); }
+
+  function filterJobs() {
+    var f = getActiveFilters();
+    return allJobs.filter(function(job) {
+      if (f.store && f.store !== 'All Stores' && job.store !== f.store) return false;
+      if (f.position && f.position !== 'All Positions' && job.position !== f.position) return false;
+      if (f.type && f.type !== 'All Types' && job.type !== f.type) return false;
+      if (f.experience && f.experience !== 'Any Experience' && job.experience !== f.experience) return false;
+      if (f.pay && !matchesPay(job.pay, f.pay)) return false;
+      return true;
+    });
+  }
+
+  function renderJobs() {
+    var jobs = filterJobs();
+    var totalPages = Math.ceil(jobs.length / perPage);
+    if (currentPage >= totalPages) currentPage = 0;
+    var start = currentPage * perPage;
+    var pageJobs = jobs.slice(start, start + perPage);
+    var list = document.getElementById('job-list');
+    var header = document.getElementById('listings-header');
+    header.textContent = 'Showing ' + (start + 1) + '–' + Math.min(start + perPage, jobs.length) + ' of ' + jobs.length + ' opportunit' + (jobs.length === 1 ? 'y' : 'ies');
+    list.innerHTML = pageJobs.map(function(job, i) {
+      var globalIdx = start + i;
+      return '<div class="job-card' + (globalIdx === selectedJobIdx ? ' selected' : '') + '" onclick="selectJob(' + globalIdx + ')">' +
+        '<div class="job-logo"><img src="images/community2.png" alt=""></div>' +
+        '<div class="job-info"><div class="job-info-header"><h4>' + job.title + '</h4>' +
+        '<span class="job-time">' + job.time + '</span></div>' +
+        '<div class="company">' + job.store + '</div>' +
+        '<div class="job-meta"><span>' + job.location + '</span><span>' + formatPay(job.pay) + '</span><span>' + job.position + '</span><span>' + job.type + '</span></div>' +
+        '</div></div>';
+    }).join('');
+    if (totalPages > 1) {
+      var pag = '<div class="pagination">';
+      pag += '<button class="pag-btn" onclick="goPage(' + (currentPage - 1) + ')"' + (currentPage === 0 ? ' disabled' : '') + '>← Prev</button>';
+      for (var p = 0; p < totalPages; p++) {
+        pag += '<button class="pag-num' + (p === currentPage ? ' active' : '') + '" onclick="goPage(' + p + ')">' + (p + 1) + '</button>';
+      }
+      pag += '<button class="pag-btn" onclick="goPage(' + (currentPage + 1) + ')"' + (currentPage === totalPages - 1 ? ' disabled' : '') + '>Next →</button>';
+      pag += '</div>';
+      list.innerHTML += pag;
+    }
+    showJobDetail(jobs, selectedJobIdx);
+  }
+
+  function goPage(p) {
+    var jobs = filterJobs();
+    var totalPages = Math.ceil(jobs.length / perPage);
+    if (p < 0 || p >= totalPages) return;
+    currentPage = p;
+    selectedJobIdx = -1;
+    renderJobs();
+  }
+
+  function selectJob(idx) {
+    selectedJobIdx = idx;
+    renderJobs();
+  }
+
+  function showJobDetail(jobs, idx) {
+    var panel = document.getElementById('right-panel');
+    if (idx < 0 || !jobs[idx]) {
+      panel.innerHTML = '<div class="alert-card">' +
+        '<div class="alert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>' +
+        '<h3>Want alerts when jobs are available near you?</h3>' +
+        '<p>Don\'t see the perfect role? Upload your resume and we\'ll notify you when opportunities match your profile.</p>' +
+        '<div class="alert-form"><input type="text" placeholder="Email or Phone Number*"><input type="text" placeholder="Zipcode*"><button>Get Alerts</button></div></div>';
+      return;
+    }
+    var job = jobs[idx];
+    var summary = summaries[idx % summaries.length];
+    panel.innerHTML = '<div class="job-detail-panel">' +
+      '<div class="detail-header"><span class="detail-title">' + job.title + '</span>' +
+      '<div class="detail-actions">' +
+      '<button class="detail-save"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>' +
+      '<button class="detail-apply-top">Apply Now</button></div></div>' +
+      '<div class="detail-company">' + job.store + '</div>' +
+      '<div class="detail-meta"><span>' + job.location + '</span><span>' + formatPay(job.pay) + '</span><span>' + job.position + '</span><span>' + job.type + '</span><span class="detail-time">' + job.time + '</span></div>' +
+      '<hr class="detail-divider">' +
+      '<div class="detail-section-title">Job description</div>' +
+      '<div class="detail-field"><strong>Job Title:</strong> ' + job.title + '</div>' +
+      '<div class="detail-field"><strong>Company:</strong> ' + job.store + '</div>' +
+      '<div class="ai-summary">' + summary + '</div>' +
+      '<div class="detail-buttons"><button class="btn-learn">Learn More</button><button class="btn-apply">Apply Now</button></div>' +
+      '</div>';
+  }
+
+  renderJobs();
+  </script>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -359,7 +555,6 @@
   (function() {
     const track = document.querySelector('.benefits');
     const cards = [...track.children];
-    // Duplicate cards so there are 8 total
     cards.forEach(c => track.appendChild(c.cloneNode(true)));
   })();
   </script>
