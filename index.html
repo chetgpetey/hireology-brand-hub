@@ -208,8 +208,8 @@
       .drawer-overlay.open { display: block; }
       .drawer-panel { position: fixed; bottom: 0; left: 0; right: 0; max-height: 85vh; background: #fff; border-radius: 16px 16px 0 0; z-index: 501; transform: translateY(100%); transition: transform 0.3s ease; overflow-y: auto; padding: 24px 16px; }
       .drawer-panel.open { transform: translateY(0); }
-      .drawer-close { position: sticky; top: 0; display: flex; justify-content: flex-end; margin-bottom: 8px; z-index: 10; }
-      .drawer-close button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid #d1d5db; background: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #374151; }
+      .drawer-handle { display: flex; justify-content: center; padding: 12px 0 8px; cursor: grab; }
+      .drawer-handle span { width: 40px; height: 4px; border-radius: 2px; background: #d1d5db; }
       #job-list { max-width: 100%; overflow: hidden; }
       .footer { padding: 24px; flex-direction: column; gap: 12px; }
     }
@@ -606,10 +606,42 @@
   }
 
   function closeDrawer() {
+    var panel = document.getElementById('drawer-panel');
+    panel.style.transform = '';
+    panel.classList.remove('open');
     document.getElementById('drawer-overlay').classList.remove('open');
-    document.getElementById('drawer-panel').classList.remove('open');
     document.body.style.overflow = '';
   }
+
+  (function() {
+    var panel = document.getElementById('drawer-panel');
+    var startY = 0, currentY = 0, dragging = false;
+    panel.addEventListener('touchstart', function(e) {
+      if (panel.scrollTop > 0) return;
+      startY = e.touches[0].clientY;
+      dragging = true;
+      panel.style.transition = 'none';
+    });
+    panel.addEventListener('touchmove', function(e) {
+      if (!dragging) return;
+      currentY = e.touches[0].clientY;
+      var diff = currentY - startY;
+      if (diff > 0) {
+        panel.style.transform = 'translateY(' + diff + 'px)';
+      }
+    });
+    panel.addEventListener('touchend', function() {
+      if (!dragging) return;
+      dragging = false;
+      panel.style.transition = 'transform 0.3s ease';
+      var diff = currentY - startY;
+      if (diff > 100) {
+        closeDrawer();
+      } else {
+        panel.style.transform = 'translateY(0)';
+      }
+    });
+  })();
 
   function showJobDetail(jobs, idx) {
     var panel = document.getElementById('right-panel');
@@ -681,7 +713,7 @@
   <!-- MOBILE DRAWER -->
   <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
   <div class="drawer-panel" id="drawer-panel">
-    <div class="drawer-close"><button onclick="closeDrawer()">✕</button></div>
+    <div class="drawer-handle" id="drawer-handle"><span></span></div>
     <div id="drawer-content"></div>
   </div>
 
