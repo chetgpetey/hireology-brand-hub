@@ -741,22 +741,16 @@
       var cards = document.querySelectorAll('.job-card');
       cards.forEach(function(c, i) { c.classList.toggle('selected', i === idx); });
       var jobs = filterJobs();
+      showJobDetail(jobs, idx);
       if (isMobile()) {
-        // Build detail into drawer
-        var tempDiv = document.createElement('div');
-        tempDiv.id = 'right-panel';
-        document.body.appendChild(tempDiv);
-        showJobDetail(jobs, idx);
-        var html = tempDiv.innerHTML;
-        document.body.removeChild(tempDiv);
-        document.getElementById('drawer-content').innerHTML = html;
+        var panel = document.getElementById('right-panel');
+        document.getElementById('drawer-content').innerHTML = panel.innerHTML;
         document.getElementById('drawer-overlay').classList.add('open');
         document.getElementById('drawer-panel').classList.add('open');
         document.body.style.overflow = 'hidden';
-        // Re-animate rating
         setTimeout(function() {
-          var ring = document.getElementById('drawer-content').querySelector('#rating-ring') || document.getElementById('rating-ring');
-          var numEl = document.getElementById('drawer-content').querySelector('#rating-num') || document.getElementById('rating-num');
+          var ring = document.querySelector('#drawer-content #rating-ring');
+          var numEl = document.querySelector('#drawer-content #rating-num');
           if (!ring || !numEl) return;
           var rating = ratings[idx % ratings.length];
           var circumference = 138.23;
@@ -769,8 +763,6 @@
             numEl.textContent = current.toFixed(1);
           }, 25);
         }, 50);
-      } else {
-        showJobDetail(jobs, idx);
       }
     }
 
