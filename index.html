@@ -596,21 +596,35 @@
       var circumference = 138.23;
       var dc = document.getElementById('drawer-content');
       dc.innerHTML = buildDetailHTML(job, summary, rating, circumference);
-      document.getElementById('drawer-overlay').classList.add('open');
-      document.getElementById('drawer-panel').classList.add('open');
-      document.body.style.overflow = 'hidden';
+      openDrawerUI();
       setTimeout(function() { animateRating(rating, circumference); }, 50);
     } else {
       renderJobs();
     }
   }
 
+  var _savedScrollY = 0;
+  function openDrawerUI() {
+    _savedScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + _savedScrollY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.overflow = 'hidden';
+    document.getElementById('drawer-overlay').classList.add('open');
+    document.getElementById('drawer-panel').classList.add('open');
+  }
   function closeDrawer() {
     var panel = document.getElementById('drawer-panel');
     panel.style.transform = '';
     panel.classList.remove('open');
     document.getElementById('drawer-overlay').classList.remove('open');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
     document.body.style.overflow = '';
+    window.scrollTo(0, _savedScrollY);
   }
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -620,6 +634,7 @@
     panel.addEventListener('touchstart', function(e) {
       if (panel.scrollTop > 0) return;
       startY = e.touches[0].clientY;
+      currentY = startY;
       dragging = true;
       panel.style.transition = 'none';
     });
@@ -628,9 +643,10 @@
       currentY = e.touches[0].clientY;
       var diff = currentY - startY;
       if (diff > 0) {
+        e.preventDefault();
         panel.style.transform = 'translateY(' + diff + 'px)';
       }
-    });
+    }, { passive: false });
     panel.addEventListener('touchend', function() {
       if (!dragging) return;
       dragging = false;
@@ -642,6 +658,11 @@
         panel.style.transform = 'translateY(0)';
       }
     });
+
+    // Prevent background scroll when drawer is open
+    document.getElementById('drawer-overlay').addEventListener('touchmove', function(e) {
+      e.preventDefault();
+    }, { passive: false });
   });
 
   function showJobDetail(jobs, idx) {
