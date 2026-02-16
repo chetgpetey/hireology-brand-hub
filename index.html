@@ -352,32 +352,8 @@
   (function() {
     const track = document.querySelector('.benefits');
     const cards = [...track.children];
+    // Duplicate cards so there are 8 total
     cards.forEach(c => track.appendChild(c.cloneNode(true)));
-
-    track.addEventListener('scroll', () => {
-      const half = track.scrollWidth / 2;
-      if (track.scrollLeft >= half) {
-        track.scrollLeft -= half;
-      } else if (track.scrollLeft <= 0) {
-        track.scrollLeft += half;
-      }
-    });
-
-    let isDown = false, startX, scrollLeft;
-    track.addEventListener('mousedown', e => {
-      isDown = true; track.style.cursor = 'grabbing';
-      startX = e.pageX - track.offsetLeft;
-      scrollLeft = track.scrollLeft;
-    });
-    track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = 'grab'; });
-    track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = 'grab'; });
-    track.addEventListener('mousemove', e => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - track.offsetLeft;
-      track.scrollLeft = scrollLeft - (x - startX);
-    });
-    track.style.cursor = 'grab';
   })();
   </script>
 
