@@ -21,12 +21,16 @@
     .nav-links { display: flex; gap: 36px; }
     .nav-links a { font-size: 15px; font-weight: 500; color: #1a2629; }
     .nav-links a:hover { color: #2a60ca; }
-    .nav-cta { background: #2a60ca; color: #fff; font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; }
+    .nav-cta { background: #2a60ca; color: #fff; font-size: 14px; font-weight: 600; padding: 10px 24px; border-radius: 50px; border: none; cursor: pointer; font-family: inherit; transition: background 0.2s; }
     .nav-cta:hover { background: #1e4fa8; }
 
+    /* BACK LINK */
+    .back-to-all { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #2a60ca; padding: 20px 0 0; cursor: pointer; }
+    .back-to-all svg { width: 16px; height: 16px; stroke: #2a60ca; fill: none; stroke-width: 2; }
+
     /* MAIN CONTAINER */
-    .main-container { background: #fff; border-radius: 0 0 16px 16px; max-width: 100%; }
-    .content-wrap { max-width: 720px; margin: 0 auto; padding: 60px 24px 60px; }
+    .main-container { background: #fff; border-radius: 16px; max-width: 720px; margin: 32px auto; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .content-wrap { padding: 40px 48px 60px; }
 
     /* JOB HEADER */
     .job-header { padding-bottom: 32px; border-bottom: 1px solid #b7c6d8; margin-bottom: 32px; }
@@ -37,8 +41,12 @@
     .job-details-row .detail-item { display: flex; align-items: center; gap: 6px; }
     .job-details-row .detail-item svg { width: 16px; height: 16px; stroke: #6b7280; fill: none; stroke-width: 2; }
     .job-details-row .separator { color: #d1d5db; }
-    .apply-btn { display: inline-block; background: #2a60ca; color: #fff; font-size: 16px; font-weight: 600; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; }
+    .apply-actions { display: flex; align-items: center; gap: 12px; }
+    .apply-btn { display: inline-block; background: #2a60ca; color: #fff; font-size: 16px; font-weight: 600; padding: 10px 24px; border-radius: 50px; border: none; cursor: pointer; font-family: inherit; transition: background 0.2s; }
     .apply-btn:hover { background: #1e4fa8; }
+    .share-btn { width: 40px; height: 40px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; }
+    .share-btn:hover { background: #f2f3fa; }
+    .share-btn svg { width: 18px; height: 18px; stroke: #374151; fill: none; stroke-width: 2; }
 
     /* JOB DESCRIPTION */
     .job-description { margin-bottom: 32px; }
@@ -74,8 +82,8 @@
 
     /* FORM ACTIONS */
     .form-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; margin-bottom: 24px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; color: #2a60ca; padding: 8px 16px; border: 1px solid #b7c6d8; border-radius: 8px; }
-    .submit-btn { display: inline-block; background: #2a60ca; color: #fff; font-size: 16px; font-weight: 600; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; color: #2a60ca; padding: 10px 20px; border: 1px solid #b7c6d8; border-radius: 50px; }
+    .submit-btn { display: inline-block; background: #2a60ca; color: #fff; font-size: 16px; font-weight: 600; padding: 12px 28px; border-radius: 50px; border: none; cursor: pointer; font-family: inherit; transition: background 0.2s; }
     .submit-btn:hover { background: #1e4fa8; }
     .privacy-note { font-size: 14px; color: #7d8c9e; margin-top: 16px; }
 
@@ -90,7 +98,8 @@
     @media (max-width: 768px) {
       .nav { padding: 16px 24px; }
       .nav-links { display: none; }
-      .content-wrap { padding: 32px 24px; }
+      .main-container { margin: 16px; border-radius: 12px; }
+      .content-wrap { padding: 24px 20px; }
       .job-title { font-size: 32px; }
       .form-row { grid-template-columns: 1fr; }
       .form-row.triple { grid-template-columns: 1fr; }
@@ -120,8 +129,13 @@
   <div class="main-container">
     <div class="content-wrap">
 
+      <a href="dealer.html#jobs" class="back-to-all">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back to all positions
+      </a>
+
       <!-- JOB HEADER -->
-      <div class="job-header">
+      <div class="job-header" style="margin-top: 24px;">
         <div class="posted-time">24 hours ago</div>
         <h1 class="job-title">Mobile Service Technician</h1>
         <div class="job-location-name">Ford Downtown</div>
@@ -146,7 +160,10 @@
             Full-time
           </span>
         </div>
-        <button class="apply-btn">Apply Now</button>
+        <div class="apply-actions">
+          <button class="apply-btn">Apply Now</button>
+          <button class="share-btn"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+        </div>
       </div>
 
       <!-- JOB DESCRIPTION -->
