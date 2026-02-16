@@ -45,16 +45,19 @@
 
     /* COMMUNITY */
     .community { padding: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-    .community-images { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .community-images img { border-radius: 12px; width: 100%; height: 200px; object-fit: cover; }
+    .community-images { display: flex; flex-direction: column; gap: 16px; }
+    .community-images .img-row { display: flex; gap: 16px; }
+    .community-images .img-row img { border-radius: 12px; height: 220px; object-fit: cover; }
+    .community-images .img-row:first-child img:first-child { flex: 1.5; }
+    .community-images .img-row:first-child img:last-child { flex: 1; }
+    .community-images .img-row:last-child img:first-child { flex: 1; }
+    .community-images .img-row:last-child img:last-child { flex: 1.5; }
     .community-text { padding-top: 40px; }
     .community-text h2 { font-size: 40px; font-weight: 600; color: #00095b; margin-bottom: 16px; line-height: 1.2; }
     .community-text p { font-size: 16px; color: #05082f; line-height: 1.7; margin-bottom: 24px; }
     .stat-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 15px; color: #1a2629; }
-    .stat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .stat-dot.blue { background: #6b7280; }
-    .stat-dot.navy { background: #1e3a5f; }
-    .stat-dot.teal { background: #22c55e; }
+    .stat-check { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; background: #2a60ca; display: flex; align-items: center; justify-content: center; }
+    .stat-check svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 
     /* QUOTE */
     .quote-section { padding: 48px 64px; display: flex; align-items: flex-start; gap: 32px; max-width: 900px; margin: 0 auto; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
@@ -189,24 +192,28 @@
   <!-- COMMUNITY -->
   <section class="community" id="culture">
     <div class="community-images">
-      <img src="images/community1.png" alt="Ford community">
-      <img src="images/community2.png" alt="Ford dealership">
-      <img src="images/community3.png" alt="Ford facility">
-      <img src="images/community4.png" alt="Ford service center">
+      <div class="img-row">
+        <img src="images/community1.png" alt="Ford community">
+        <img src="images/community2.png" alt="Ford dealership">
+      </div>
+      <div class="img-row">
+        <img src="images/community3.png" alt="Ford facility">
+        <img src="images/community4.png" alt="Ford service center">
+      </div>
     </div>
     <div class="community-text">
       <h2>Making a Difference Together</h2>
       <p>Through the Ford Fund and local charity partnerships, we're committed to strengthening communities where we live and work. Join us in making a lasting impact.</p>
       <div class="stat-item">
-        <span class="stat-dot blue"></span>
+        <span class="stat-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
         $50M+ invested in community programs annually
       </div>
       <div class="stat-item">
-        <span class="stat-dot navy"></span>
+        <span class="stat-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
         100,000+ volunteer hours by our team members
       </div>
       <div class="stat-item">
-        <span class="stat-dot teal"></span>
+        <span class="stat-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
         Partnerships with 500+ local organizations
       </div>
     </div>
