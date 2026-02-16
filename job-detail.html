@@ -44,9 +44,15 @@
     .apply-actions { display: flex; align-items: center; gap: 12px; }
     .apply-btn { display: inline-block; background: #2a60ca; color: #fff; font-size: 16px; font-weight: 600; padding: 10px 24px; border-radius: 50px; border: none; cursor: pointer; font-family: inherit; transition: background 0.2s; }
     .apply-btn:hover { background: #1e4fa8; }
+    .share-wrap { position: relative; }
     .share-btn { width: 40px; height: 40px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; }
     .share-btn:hover { background: #f2f3fa; }
     .share-btn svg { width: 18px; height: 18px; stroke: #374151; fill: none; stroke-width: 2; }
+    .share-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; min-width: 200px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; z-index: 250; }
+    .share-dropdown.open { display: block; }
+    .share-dropdown a { display: flex; align-items: center; gap: 12px; padding: 10px 16px; font-size: 14px; color: #1a2629; cursor: pointer; transition: background 0.15s; }
+    .share-dropdown a:hover { background: #f2f3fa; }
+    .share-dropdown a svg { width: 20px; height: 20px; flex-shrink: 0; }
 
     /* JOB DESCRIPTION */
     .job-description { margin-bottom: 32px; }
@@ -164,7 +170,14 @@
         </div>
         <div class="apply-actions">
           <button class="apply-btn">Apply Now</button>
-          <button class="share-btn"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+          <div class="share-wrap">
+            <button class="share-btn" onclick="toggleShare()"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+            <div class="share-dropdown" id="share-dropdown">
+              <a onclick="copyLink()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>Copy link</a>
+              <a onclick="shareEmail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>Email</a>
+              <a onclick="shareSMS()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Text message</a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -296,6 +309,30 @@
     <span class="footer-text">© 2026 Ford Motor Company</span>
     <img src="images/logo.svg" alt="Ford" style="height:32px;">
   </footer>
+
+  <script>
+  function toggleShare() {
+    document.getElementById('share-dropdown').classList.toggle('open');
+  }
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href);
+    toggleShare();
+  }
+  function shareEmail() {
+    window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' + encodeURIComponent(window.location.href));
+    toggleShare();
+  }
+  function shareSMS() {
+    window.open('sms:?body=' + encodeURIComponent(document.title + ' — ' + window.location.href));
+    toggleShare();
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.share-wrap')) {
+      var dd = document.getElementById('share-dropdown');
+      if (dd) dd.classList.remove('open');
+    }
+  });
+  </script>
 
 </body>
 </html>
