@@ -31,8 +31,9 @@
     .hero-img { width: 100%; border-radius: 16px; object-fit: cover; max-height: 420px; }
 
     /* BENEFITS */
-    .benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 40px 64px; }
-    .benefit-card { border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; justify-content: space-between; min-height: 340px; color: #fff; position: relative; overflow: hidden; }
+    .benefits { display: flex; gap: 20px; padding: 40px 64px; overflow-x: auto; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
+    .benefits::-webkit-scrollbar { display: none; }
+    .benefit-card { border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; justify-content: space-between; min-height: 420px; min-width: 320px; flex-shrink: 0; color: #fff; position: relative; overflow: hidden; }
     .benefit-card:nth-child(1) { background: #081534; }
     .benefit-card:nth-child(2) { background: #133a7c; }
     .benefit-card:nth-child(3) { background: #2a6bac; }
@@ -108,7 +109,7 @@
 
     /* RESPONSIVE */
     @media (max-width: 1024px) {
-      .benefits { grid-template-columns: repeat(2, 1fr); }
+      /*.benefits { grid-template-columns: repeat(2, 1fr); }*/
       .community { grid-template-columns: 1fr; }
       .listings { grid-template-columns: 1fr; }
     }
@@ -117,7 +118,7 @@
       .nav-links { display: none; }
       .hero { padding: 32px 24px 0; }
       .hero h1 { font-size: 36px; }
-      .benefits { grid-template-columns: 1fr; padding: 24px; }
+      .benefits { padding: 24px; }
       .community { padding: 32px 24px; }
       .community-text h2 { font-size: 28px; }
       .quote-section { padding: 32px 24px; flex-direction: column; align-items: center; text-align: center; }
@@ -346,6 +347,39 @@
     <img src="images/logo.svg" alt="Ford" class="footer-logo">
     <span class="footer-text">© 2026 Ford Motor Company</span>
   </footer>
+
+  <script>
+  (function() {
+    const track = document.querySelector('.benefits');
+    const cards = [...track.children];
+    cards.forEach(c => track.appendChild(c.cloneNode(true)));
+
+    track.addEventListener('scroll', () => {
+      const half = track.scrollWidth / 2;
+      if (track.scrollLeft >= half) {
+        track.scrollLeft -= half;
+      } else if (track.scrollLeft <= 0) {
+        track.scrollLeft += half;
+      }
+    });
+
+    let isDown = false, startX, scrollLeft;
+    track.addEventListener('mousedown', e => {
+      isDown = true; track.style.cursor = 'grabbing';
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+    track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = 'grab'; });
+    track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = 'grab'; });
+    track.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      track.scrollLeft = scrollLeft - (x - startX);
+    });
+    track.style.cursor = 'grab';
+  })();
+  </script>
 
 </body>
 </html>
