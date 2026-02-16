@@ -104,6 +104,7 @@
     .filters { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; margin-bottom: 16px; padding-bottom: 24px; border-bottom: 1px solid #e5e7eb; }
     .filters { position: relative; z-index: 200; }
     .filter-wrap { position: relative; }
+    .filter-native { display: none; }
     .filter-btn { padding: 10px 20px; font-size: 14px; color: #374151; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 8px; }
     .filter-btn::after { content: '▾'; font-size: 10px; color: #9ca3af; transition: transform 0.2s; }
     .filter-wrap.open .filter-btn { border-color: #2a60ca; color: #2a60ca; }
@@ -244,6 +245,9 @@
       .search-bar button { padding: 10px 20px; font-size: 14px; }
       .listings { padding: 0 16px 32px; max-width: 100%; }
       .listings-header { padding: 0 16px; }
+      .filter-btn { display: none; }
+      .filter-dropdown { display: none !important; }
+      .filter-native { display: block; padding: 10px 20px; font-size: 14px; color: #374151; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; font-family: inherit; -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239ca3af'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
       .job-card { overflow: hidden; max-width: 100%; padding: 8px 14px 8px 8px; }
       .job-meta { flex-wrap: wrap !important; }
       .job-meta span { font-size: 11px; }
@@ -490,6 +494,9 @@
     <div class="filters">
       <div class="filter-wrap">
         <button class="filter-btn" onclick="toggleFilter(this)">All Stores</button>
+        <select class="filter-native" onchange="nativeFilter(this)">
+          <option selected>All Stores</option><option>Hawk Chevrolet</option><option>Hawk Ford of St Charles</option><option>Hawk Cadillac of Joliet</option><option>Hawk CDJR Fiat</option><option>Hawk Mazda of Joliet</option>
+        </select>
         <div class="filter-dropdown">
           <div class="filter-option selected" onclick="selectFilter(this)">All Stores</div>
           <div class="filter-option" onclick="selectFilter(this)">Hawk Chevrolet</div>
@@ -501,6 +508,9 @@
       </div>
       <div class="filter-wrap">
         <button class="filter-btn" onclick="toggleFilter(this)">All Positions</button>
+        <select class="filter-native" onchange="nativeFilter(this)">
+          <option selected>All Positions</option><option>Technician</option><option>Sales</option><option>Finance</option><option>Admin</option><option>Service</option>
+        </select>
         <div class="filter-dropdown">
           <div class="filter-option selected" onclick="selectFilter(this)">All Positions</div>
           <div class="filter-option" onclick="selectFilter(this)">Technician</div>
@@ -512,6 +522,9 @@
       </div>
       <div class="filter-wrap">
         <button class="filter-btn" onclick="toggleFilter(this)">Job Type</button>
+        <select class="filter-native" onchange="nativeFilter(this)">
+          <option selected>All Types</option><option>Full-time</option><option>Part-time</option><option>Contract</option>
+        </select>
         <div class="filter-dropdown">
           <div class="filter-option selected" onclick="selectFilter(this)">All Types</div>
           <div class="filter-option" onclick="selectFilter(this)">Full-time</div>
@@ -521,6 +534,9 @@
       </div>
       <div class="filter-wrap">
         <button class="filter-btn" onclick="toggleFilter(this)">Experience</button>
+        <select class="filter-native" onchange="nativeFilter(this)">
+          <option selected>Any Experience</option><option>Entry Level</option><option>1-3 Years</option><option>3-5 Years</option><option>5+ Years</option>
+        </select>
         <div class="filter-dropdown">
           <div class="filter-option selected" onclick="selectFilter(this)">Any Experience</div>
           <div class="filter-option" onclick="selectFilter(this)">Entry Level</div>
@@ -531,6 +547,9 @@
       </div>
       <div class="filter-wrap">
         <button class="filter-btn" onclick="toggleFilter(this)">Pay</button>
+        <select class="filter-native" onchange="nativeFilter(this)">
+          <option selected>Any Pay</option><option>$30k - $45k</option><option>$45k - $65k</option><option>$65k - $85k</option><option>$85k+</option>
+        </select>
         <div class="filter-dropdown">
           <div class="filter-option selected" onclick="selectFilter(this)">Any Pay</div>
           <div class="filter-option" onclick="selectFilter(this)">$30k - $45k</div>
@@ -541,6 +560,9 @@
       </div>
       <div class="filter-wrap">
         <button class="filter-btn" onclick="toggleFilter(this)">Within 50 mi</button>
+        <select class="filter-native" onchange="nativeFilter(this)">
+          <option>Within 10 mi</option><option>Within 25 mi</option><option selected>Within 50 mi</option><option>Within 100 mi</option><option>Any Distance</option>
+        </select>
         <div class="filter-dropdown">
           <div class="filter-option" onclick="selectFilter(this)">Within 10 mi</div>
           <div class="filter-option" onclick="selectFilter(this)">Within 25 mi</div>
@@ -551,6 +573,17 @@
       </div>
     </div>
     <script>
+    function nativeFilter(sel) {
+      var wrap = sel.closest('.filter-wrap');
+      var val = sel.value;
+      var options = wrap.querySelectorAll('.filter-option');
+      options.forEach(function(o) {
+        o.classList.toggle('selected', o.textContent.trim() === val);
+      });
+      selectedJobIdx = -1;
+      currentPage = 0;
+      renderJobs();
+    }
     function toggleFilter(btn) {
       var wrap = btn.parentElement;
       var wasOpen = wrap.classList.contains('open');
