@@ -44,7 +44,7 @@
     .benefit-desc { font-size: 14px; font-weight: 400; line-height: 1.6; opacity: 0.9; margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 16px; }
 
     /* COMMUNITY */
-    .community { padding: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .community { padding: 80px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; background: #f0f4f8; margin: 40px 0; }
     .community-images { display: flex; flex-direction: column; gap: 16px; }
     .community-images .img-row { display: flex; gap: 16px; }
     .community-images .img-row img { border-radius: 12px; height: 220px; object-fit: cover; }
@@ -113,7 +113,7 @@
     /* RESPONSIVE */
     @media (max-width: 1024px) {
       /*.benefits { grid-template-columns: repeat(2, 1fr); }*/
-      .community { grid-template-columns: 1fr; }
+      .community { grid-template-columns: 1fr; gap: 32px; }
       .listings { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
@@ -122,7 +122,7 @@
       .hero { padding: 32px 24px 0; }
       .hero h1 { font-size: 36px; }
       .benefits { padding: 24px; }
-      .community { padding: 32px 24px; }
+      .community { padding: 48px 24px; }
       .community-text h2 { font-size: 28px; }
       .quote-section { padding: 32px 24px; flex-direction: column; align-items: center; text-align: center; }
       .quote-text { font-size: 18px; }
