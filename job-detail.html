@@ -169,7 +169,7 @@
           </span>
         </div>
         <div class="apply-actions">
-          <button class="apply-btn">Apply Now</button>
+          <button class="apply-btn" onclick="document.getElementById('apply-form').scrollIntoView({behavior:'smooth'})">Apply Now</button>
           <div class="share-wrap">
             <button class="share-btn" onclick="toggleShare()"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
             <div class="share-dropdown" id="share-dropdown">
@@ -225,7 +225,7 @@
       </div>
 
       <!-- APPLICATION FORM -->
-      <div class="form-section">
+      <div class="form-section" id="apply-form">
         <h2>Apply For Mobile Service Technician</h2>
 
         <div class="form-row">
