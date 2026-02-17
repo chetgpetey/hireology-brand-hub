@@ -222,7 +222,7 @@
       .hero-images::-webkit-scrollbar { display: none; }
       .hero-images img, .hero-images .video-wrap { min-width: 85%; flex-shrink: 0; scroll-snap-align: start; height: 240px; border-radius: 16px; }
       .hero-images .video-wrap { order: -1; }
-      .hero-images .video-wrap img { min-width: 100%; height: 100%; border-radius: 16px; }
+      .hero-images .video-wrap img, .hero-images .video-wrap video { min-width: 100%; height: 100%; border-radius: 16px; object-fit: cover; }
     }
     @media (max-width: 768px) {
       .nav { padding: 16px 24px; position: relative; }
@@ -335,7 +335,7 @@
     <div class="hero-images">
       <img src="images/dealer/87210d92.png" alt="Hawk dealership exterior">
       <div class="video-wrap" onclick="openVideoModal()">
-        <img src="images/dealer/92bca1f7.png" alt="Hawk team photo">
+        <video autoplay muted loop playsinline style="width:100%;height:340px;object-fit:cover;border-radius:16px;" src="ford-purpose-30s.mp4"></video>
       </div>
       <img src="images/dealer/099f23fc.png" alt="Showroom interior">
     </div>
