@@ -75,6 +75,9 @@
     .quote-section { padding: 48px 64px; display: flex; align-items: flex-start; gap: 32px; max-width: 1200px; margin: 0 auto; border-top: 2px solid #c5cdd6; border-bottom: none; }
     .quote-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
     .quote-text { font-size: 28px; font-weight: 400; color: #2D4E65; line-height: 1.6; font-style: normal; }
+    .quote-text.typewriter { border-right: 2px solid #2D4E65; animation: blink-caret 0.6s step-end infinite; }
+    .quote-text.typewriter-done { border-right: none; animation: none; }
+    @keyframes blink-caret { 0%, 100% { border-color: transparent; } 50% { border-color: #2D4E65; } }
     .quote-author { margin-top: 20px; }
     .quote-author strong { font-size: 16px; color: #00095b; display: block; font-weight: 600; }
     .quote-author span { font-size: 14px; color: #6b7280; font-weight: 400; }
@@ -861,6 +864,38 @@
     document.querySelectorAll('[data-animate], [data-animate-child]').forEach(function(el) {
       observer.observe(el);
     });
+  })();
+  </script>
+
+  <script>
+  (function() {
+    var qt = document.querySelector('.quote-text');
+    if (!qt) return;
+    var fullText = qt.textContent;
+    qt.textContent = '';
+    qt.classList.add('typewriter');
+    var started = false;
+
+    var obs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting && !started) {
+        started = true;
+        obs.disconnect();
+        var i = 0;
+        var speed = Math.max(8, Math.min(18, 2200 / fullText.length));
+        function type() {
+          if (i < fullText.length) {
+            qt.textContent += fullText.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          } else {
+            qt.classList.remove('typewriter');
+            qt.classList.add('typewriter-done');
+          }
+        }
+        type();
+      }
+    }, { threshold: 0.3 });
+    obs.observe(qt.closest('.quote-section'));
   })();
   </script>
 
