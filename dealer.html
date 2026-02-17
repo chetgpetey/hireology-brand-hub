@@ -107,8 +107,9 @@
     .filter-native { display: none; }
     .filter-btn { padding: 10px 20px; font-size: 14px; color: #374151; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 8px; }
     .filter-btn::after { content: '▾'; font-size: 10px; color: #9ca3af; transition: transform 0.2s; }
-    .filter-wrap.open .filter-btn { border-color: #2a60ca; color: #2a60ca; }
+    .filter-wrap.open .filter-btn, .filter-wrap.has-selection .filter-btn { border-color: #2a60ca; color: #2a60ca; }
     .filter-wrap.open .filter-btn::after { transform: rotate(180deg); color: #2a60ca; }
+    .filter-wrap.has-selection .filter-btn::after { color: #2a60ca; }
     .filter-dropdown { position: absolute; top: calc(100% + 6px); left: 0; min-width: 200px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; z-index: 200; display: none; }
     .filter-wrap.open .filter-dropdown { display: block; }
     .filter-option { padding: 10px 16px; font-size: 14px; color: #374151; cursor: pointer; font-family: inherit; transition: background 0.15s; }
@@ -565,7 +566,7 @@
           <div class="filter-option" onclick="selectFilter(this)">$85k+</div>
         </div>
       </div>
-      <div class="filter-wrap">
+      <div class="filter-wrap has-selection">
         <button class="filter-btn" onclick="toggleFilter(this)">Within 50 mi</button>
         <select class="filter-native" onchange="nativeFilter(this)">
           <option>Within 10 mi</option><option>Within 25 mi</option><option selected>Within 50 mi</option><option>Within 100 mi</option><option>Any Distance</option>
@@ -587,6 +588,7 @@
       options.forEach(function(o) {
         o.classList.toggle('selected', o.textContent.trim() === val);
       });
+      if (/^All |^Any /.test(val)) { wrap.classList.remove('has-selection'); } else { wrap.classList.add('has-selection'); }
       selectedJobIdx = -1;
       currentPage = 0;
       renderJobs();
@@ -604,6 +606,8 @@
       opt.classList.add('selected');
       btn.textContent = opt.textContent;
       wrap.classList.remove('open');
+      var val = opt.textContent.trim();
+      if (/^All |^Any /.test(val)) { wrap.classList.remove('has-selection'); } else { wrap.classList.add('has-selection'); }
     }
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.filter-wrap')) {
