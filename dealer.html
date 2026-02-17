@@ -36,9 +36,9 @@
     .hero-btn-primary:hover { background: #1e4fa8; border-color: #1e4fa8; }
     .hero-btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #1a2629; font-size: 15px; font-weight: 500; padding: 12px 28px; border-radius: 50px; border: 2px solid #B7C6D8; cursor: pointer; }
     .hero-btn-secondary:hover { background: #f5f6f8; }
-    .hero-images { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 0 auto; max-width: 1300px; }
-    .hero-images img { width: 100%; height: 340px; object-fit: cover; border-radius: 16px; }
-    .hero-images .video-wrap { position: relative; cursor: pointer; overflow: hidden; border-radius: 16px; width: 100%; height: 340px; }
+    .hero-images { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 0 auto; max-width: 1400px; }
+    .hero-images img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 16px; }
+    .hero-images .video-wrap { position: relative; cursor: pointer; overflow: hidden; border-radius: 16px; width: 100%; aspect-ratio: 16/9; }
     .hero-images .video-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
     .hero-images .video-wrap::after { content: '▶'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 56px; height: 56px; background: rgba(255,255,255,0.95); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #2a60ca; line-height: 56px; text-align: center; transition: transform 0.2s; }
     .hero-images .video-wrap:hover::after { transform: translate(-50%,-50%) scale(1.1); }
