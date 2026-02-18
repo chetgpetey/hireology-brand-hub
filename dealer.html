@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
   <style>
     html { scroll-behavior: smooth; }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -186,7 +185,7 @@
     /* ALERT BANNER (sticky bottom) */
     .alert-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 400; background: #00095b; padding: 16px 64px; display: flex; align-items: center; gap: 20px; }
     .alert-banner-icon { width: 44px; height: 44px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .alert-banner-icon .material-icons-outlined { font-size: 24px; color: #00095b; }
+    .alert-banner-icon .material-symbols-outlined { font-size: 24px; color: #00095b; }
     .alert-banner-text { flex: 1; }
     .alert-banner-text h3 { font-size: 17px; font-weight: 600; color: #fff; margin: 0 0 2px; }
     .alert-banner-text p { font-size: 13px; color: rgba(255,255,255,0.65); margin: 0; line-height: 1.4; }
@@ -201,7 +200,7 @@
     .alert-modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border: none; background: #f3f4f6; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #374151; transition: background 0.2s; }
     .alert-modal-close:hover { background: #e5e7eb; }
     .alert-modal-icon { width: 56px; height: 56px; background: #eef1f8; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; }
-    .alert-modal-icon .material-icons-outlined { font-size: 28px; color: #2a60ca; }
+    .alert-modal-icon .material-symbols-outlined { font-size: 28px; color: #2a60ca; }
     .alert-modal h3 { font-size: 22px; font-weight: 600; color: #00095b; text-align: center; margin: 0 0 8px; }
     .alert-modal .modal-subtext { font-size: 14px; color: #6b7280; text-align: center; margin: 0 0 28px; line-height: 1.5; }
     .alert-modal label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px; }
@@ -279,7 +278,7 @@
       .job-meta span { font-size: 11px; }
       .alert-banner { padding: 12px 16px; gap: 12px; }
       .alert-banner-icon { width: 36px; height: 36px; }
-      .alert-banner-icon .material-icons-outlined { font-size: 20px; }
+      .alert-banner-icon .material-symbols-outlined { font-size: 20px; }
       .alert-banner-text p { display: none; }
       .alert-banner-text h3 { font-size: 15px; }
       .alert-banner-btn { padding: 10px 20px; font-size: 13px; }
@@ -996,7 +995,7 @@
 
   <!-- ALERT BANNER -->
   <div class="alert-banner">
-    <div class="alert-banner-icon"><span class="material-icons-outlined">notifications_unread</span></div>
+    <div class="alert-banner-icon"><span class="material-symbols-outlined">notifications_unread</span></div>
     <div class="alert-banner-text">
       <h3>Get job alerts near you</h3>
       <p>Don't see the perfect role? We'll notify you when opportunities match your search.</p>
@@ -1008,7 +1007,7 @@
   <div class="alert-modal-overlay" id="alert-modal-overlay" onclick="if(event.target===this)closeAlertModal()">
     <div class="alert-modal">
       <button class="alert-modal-close" onclick="closeAlertModal()">✕</button>
-      <div class="alert-modal-icon"><span class="material-icons-outlined">notifications_unread</span></div>
+      <div class="alert-modal-icon"><span class="material-symbols-outlined">notifications_unread</span></div>
       <h3>Get job alerts near you</h3>
       <p class="modal-subtext">Don't see the perfect role? We'll notify you when opportunities match your search.</p>
       <label for="alert-email">Email</label>
@@ -1046,7 +1045,7 @@
     var zip = document.getElementById('alert-zip').value;
     if (!email || !zip) { alert('Please enter your email and zip code.'); return; }
     var modal = document.querySelector('.alert-modal');
-    modal.innerHTML = '<div class="alert-modal-icon"><span class="material-icons-outlined">check_circle</span></div>' +
+    modal.innerHTML = '<div class="alert-modal-icon"><span class="material-symbols-outlined">check_circle</span></div>' +
       '<h3 style="margin-top:8px;">You\'re all set!</h3>' +
       '<p class="modal-subtext">We\'ll send job alerts to ' + email + ' when new opportunities match your preferences.</p>' +
       '<button class="alert-modal-submit" onclick="closeAlertModal()">Done</button>';
