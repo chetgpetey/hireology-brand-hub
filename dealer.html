@@ -816,16 +816,16 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       var panel = document.getElementById('drawer-panel');
-      if (!panel) return;
+      var handle = document.getElementById('drawer-handle');
+      if (!panel || !handle) return;
       var startY = 0, currentY = 0, dragging = false;
-      panel.addEventListener('touchstart', function(e) {
-        if (panel.scrollTop > 0) return;
+      handle.addEventListener('touchstart', function(e) {
         startY = e.touches[0].clientY;
         currentY = startY;
         dragging = true;
         panel.style.transition = 'none';
       });
-      panel.addEventListener('touchmove', function(e) {
+      handle.addEventListener('touchmove', function(e) {
         if (!dragging) return;
         currentY = e.touches[0].clientY;
         var diff = currentY - startY;
@@ -834,7 +834,7 @@
           panel.style.transform = 'translateY(' + diff + 'px)';
         }
       }, { passive: false });
-      panel.addEventListener('touchend', function() {
+      handle.addEventListener('touchend', function() {
         if (!dragging) return;
         dragging = false;
         panel.style.transition = 'transform 0.3s ease';
