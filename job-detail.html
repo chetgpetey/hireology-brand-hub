@@ -93,6 +93,12 @@
     .submit-btn:hover { background: #1e4fa8; }
     .privacy-note { font-size: 14px; color: #7d8c9e; margin-top: 16px; }
 
+    /* OPTIONAL TOGGLE */
+    .optional-toggle { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #2a60ca; cursor: pointer; padding: 8px 0; margin-bottom: 16px; transition: color 0.2s; }
+    .optional-toggle:hover { color: #1e4fa8; }
+    .optional-toggle svg { transition: transform 0.3s ease; }
+    .optional-toggle.open svg { transform: rotate(45deg); }
+
     /* STICKY APPLY BAR */
     .sticky-apply { position: sticky; top: 0; z-index: 50; background: #fff; padding: 14px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e5e7eb; border-radius: 16px 16px 0 0; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; max-height: 0; overflow: hidden; padding-top: 0; padding-bottom: 0; }
     .sticky-apply.visible { opacity: 1; pointer-events: auto; max-height: 60px; padding: 14px 48px; overflow: visible; }
@@ -300,23 +306,28 @@
           <label for="sms-consent">I would like to communicate with the hiring team via text message about my application and next steps.</label>
         </div>
 
-        <div class="form-row full">
-          <div class="form-field">
-            <input type="text" placeholder="Address">
-          </div>
+        <div class="optional-toggle" id="address-toggle" onclick="toggleAddress()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add address <span style="color:#9ca3af;font-weight:400;">(optional)</span>
         </div>
-
-        <div class="form-row triple">
-          <div class="form-field">
-            <input type="text" placeholder="City">
+        <div class="address-fields" id="address-fields" style="display:none;">
+          <div class="form-row full">
+            <div class="form-field">
+              <input type="text" placeholder="Address">
+            </div>
           </div>
-          <div class="form-field">
-            <select>
-              <option value="">State/Region</option>
-            </select>
-          </div>
-          <div class="form-field">
-            <input type="text" placeholder="Zip/Postal Code">
+          <div class="form-row triple">
+            <div class="form-field">
+              <input type="text" placeholder="City">
+            </div>
+            <div class="form-field">
+              <select>
+                <option value="">State/Region</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <input type="text" placeholder="Zip/Postal Code">
+            </div>
           </div>
         </div>
 
@@ -477,6 +488,16 @@
       stickyBar.classList.remove('visible');
     });
   })();
+  </script>
+
+  <script>
+  function toggleAddress() {
+    var toggle = document.getElementById('address-toggle');
+    var fields = document.getElementById('address-fields');
+    var isOpen = fields.style.display !== 'none';
+    fields.style.display = isOpen ? 'none' : 'block';
+    toggle.classList.toggle('open', !isOpen);
+  }
   </script>
 
   <script>
