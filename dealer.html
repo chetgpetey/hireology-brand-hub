@@ -312,8 +312,9 @@
     }
 
     @media (pointer: coarse) and (max-width: 768px) {
-      .filters { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 16px; }
+      .filters { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 16px; margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
       .filters::-webkit-scrollbar { display: none; }
+      .filter-native { max-width: 140px; text-overflow: ellipsis; }
     }
     /* SCROLL ANIMATIONS */
     [data-animate] { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
