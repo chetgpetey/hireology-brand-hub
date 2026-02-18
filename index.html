@@ -14,6 +14,12 @@
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
 
+    /* MESSAGE BAR */
+    .message-bar { height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; background: url('images/dealer/message-bar-bg.jpg') center/cover no-repeat; font-size: 16px; color: #fff; }
+    .message-bar strong { font-weight: 700; }
+    .message-bar span { font-weight: 400; }
+    @media (max-width: 768px) { .message-bar { font-size: 12px; padding: 0 16px; } }
+
     /* NAV */
     .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 64px; background: #fff; border-bottom: 1px solid #e5e7eb; position: relative; z-index: 300; }
     .nav-logo { height: 28px; width: auto; }
@@ -309,6 +315,7 @@
 <body>
 
   <!-- NAV -->
+  <div class="message-bar"><strong>Welcome to the Ford career site.</strong> <span>The fastest way to apply direct with our dealerships.</span></div>
   <nav class="nav">
     <img src="images/logo.svg" alt="Ford" class="nav-logo">
     <div class="nav-links">
