@@ -169,12 +169,12 @@
 
     /* ALERT BANNER (sticky bottom) */
     .alert-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 400; background: #00095b; padding: 16px 64px; display: flex; align-items: center; gap: 20px; }
-    .alert-banner-icon { width: 44px; height: 44px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .alert-banner-icon .material-icons-outlined { font-size: 24px; color: #fff; }
+    .alert-banner-icon { width: 44px; height: 44px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .alert-banner-icon .material-icons-outlined { font-size: 24px; color: #00095b; }
     .alert-banner-text { flex: 1; }
     .alert-banner-text h3 { font-size: 17px; font-weight: 600; color: #fff; margin: 0 0 2px; }
     .alert-banner-text p { font-size: 13px; color: rgba(255,255,255,0.65); margin: 0; line-height: 1.4; }
-    .alert-banner-btn { background: #2a60ca; color: #fff; border: none; padding: 12px 28px; border-radius: 50px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap; transition: background 0.2s; flex-shrink: 0; }
+    .alert-banner-btn { background: #2a60ca; color: #fff; border: none; padding: 12px 20px; border-radius: 50px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap; transition: background 0.2s; flex-shrink: 0; }
     .alert-banner-btn:hover { background: #1e4fa8; }
     .footer { padding-bottom: 80px !important; }
 
@@ -842,7 +842,7 @@
 
   <!-- ALERT BANNER -->
   <div class="alert-banner">
-    <div class="alert-banner-icon"><span class="material-icons-outlined">notifications_active</span></div>
+    <div class="alert-banner-icon"><span class="material-icons-outlined">notifications_unread</span></div>
     <div class="alert-banner-text">
       <h3>Get job alerts near you</h3>
       <p>Don't see the perfect role? We'll notify you when opportunities match your search.</p>
@@ -854,7 +854,7 @@
   <div class="alert-modal-overlay" id="alert-modal-overlay" onclick="if(event.target===this)closeAlertModal()">
     <div class="alert-modal">
       <button class="alert-modal-close" onclick="closeAlertModal()">✕</button>
-      <div class="alert-modal-icon"><span class="material-icons-outlined">notifications_active</span></div>
+      <div class="alert-modal-icon"><span class="material-icons-outlined">notifications_unread</span></div>
       <h3>Get job alerts near you</h3>
       <p class="modal-subtext">Don't see the perfect role? We'll notify you when opportunities match your search.</p>
       <label for="alert-email">Email</label>
