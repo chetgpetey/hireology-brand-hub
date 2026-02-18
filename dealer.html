@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Hawk Auto Group Careers | Dealer Career Site</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
@@ -184,7 +184,7 @@
     .job-detail-panel .btn-apply:hover { background: #1e4fa8; }
 
     /* ALERT BANNER (sticky bottom) */
-    .alert-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 400; background: #00095b; padding: 16px 64px; display: flex; align-items: center; gap: 20px; }
+    .alert-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 400; background: #00095b; padding: 16px 64px; padding-bottom: calc(16px + env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 20px; }
     .alert-banner-icon { width: 44px; height: 44px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .alert-banner-icon .material-symbols-outlined { font-size: 24px; color: #00095b; }
     .alert-banner-text { flex: 1; }
