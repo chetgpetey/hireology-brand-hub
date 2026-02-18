@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
   <style>
     html { scroll-behavior: smooth; }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -182,16 +183,39 @@
     .job-detail-panel .btn-apply { padding: 14px; border: none; border-radius: 50px; background: #2A60CA; font-size: 15px; font-weight: 600; color: #fff; cursor: pointer; font-family: inherit; text-align: center; }
     .job-detail-panel .btn-apply:hover { background: #1e4fa8; }
 
-    .alert-card { background: #00095b; border-radius: 20px; padding: 48px 40px; text-align: center; }
-    .alert-icon { width: 48px; height: 48px; background: #fff; border-radius: 50%; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; }
-    .alert-icon svg { width: 22px; height: 22px; stroke: #00095b; }
-    .alert-card h3 { font-size: 24px; font-weight: 400; color: #fff; margin-bottom: 12px; }
-    .alert-card p { font-size: 15px; color: rgba(255,255,255,0.7); margin-bottom: 28px; line-height: 1.6; max-width: 460px; margin-left: auto; margin-right: auto; }
-    .alert-form { display: flex; gap: 8px; width: 100%; }
-    .alert-form input { flex: 1; min-width: 0; padding: 12px 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff; color: #1a1a1a; }
-    .alert-form input::placeholder { color: #999; }
-    .alert-form button { background: #2a60ca; color: #fff; border: none; padding: 12px 20px; border-radius: 50px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; font-family: inherit; flex-shrink: 0; transition: background 0.2s; }
-    .alert-form button:hover { background: #1e4fa8; }
+    /* ALERT BANNER (sticky bottom) */
+    .alert-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 400; background: #00095b; padding: 16px 64px; display: flex; align-items: center; gap: 20px; }
+    .alert-banner-icon { width: 44px; height: 44px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .alert-banner-icon .material-icons-outlined { font-size: 24px; color: #fff; }
+    .alert-banner-text { flex: 1; }
+    .alert-banner-text h3 { font-size: 17px; font-weight: 600; color: #fff; margin: 0 0 2px; }
+    .alert-banner-text p { font-size: 13px; color: rgba(255,255,255,0.65); margin: 0; line-height: 1.4; }
+    .alert-banner-btn { background: #2a60ca; color: #fff; border: none; padding: 12px 28px; border-radius: 50px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap; transition: background 0.2s; flex-shrink: 0; }
+    .alert-banner-btn:hover { background: #1e4fa8; }
+    .footer { padding-bottom: 80px !important; }
+
+    /* ALERT MODAL */
+    .alert-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 600; justify-content: center; align-items: center; }
+    .alert-modal-overlay.open { display: flex; }
+    .alert-modal { background: #fff; border-radius: 20px; padding: 40px; max-width: 480px; width: 90%; max-height: 90vh; overflow-y: auto; position: relative; }
+    .alert-modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border: none; background: #f3f4f6; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #374151; transition: background 0.2s; }
+    .alert-modal-close:hover { background: #e5e7eb; }
+    .alert-modal-icon { width: 56px; height: 56px; background: #eef1f8; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; }
+    .alert-modal-icon .material-icons-outlined { font-size: 28px; color: #2a60ca; }
+    .alert-modal h3 { font-size: 22px; font-weight: 600; color: #00095b; text-align: center; margin: 0 0 8px; }
+    .alert-modal .modal-subtext { font-size: 14px; color: #6b7280; text-align: center; margin: 0 0 28px; line-height: 1.5; }
+    .alert-modal label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px; }
+    .alert-modal input[type="email"], .alert-modal input[type="text"] { width: 100%; padding: 12px 14px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 14px; font-family: inherit; margin-bottom: 16px; box-sizing: border-box; }
+    .alert-modal input:focus { outline: none; border-color: #2a60ca; box-shadow: 0 0 0 3px rgba(42,96,202,0.1); }
+    .alert-modal .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .alert-modal .checkbox-group label { display: flex; align-items: center; gap: 6px; font-weight: 400; padding: 8px 14px; border: 1px solid #d1d5db; border-radius: 50px; cursor: pointer; transition: all 0.2s; font-size: 13px; margin-bottom: 0; }
+    .alert-modal .checkbox-group label:hover { border-color: #2a60ca; }
+    .alert-modal .checkbox-group input:checked + span { color: #2a60ca; }
+    .alert-modal .checkbox-group label:has(input:checked) { border-color: #2a60ca; background: #f2f3fa; }
+    .alert-modal .checkbox-group input { display: none; }
+    .alert-modal .field-label { font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 8px; }
+    .alert-modal-submit { width: 100%; background: #2a60ca; color: #fff; border: none; padding: 14px; border-radius: 50px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 8px; transition: background 0.2s; }
+    .alert-modal-submit:hover { background: #1e4fa8; }
 
     /* DEGREES CTA */
     .degrees-cta { position: relative; border-radius: 16px; max-width: 1300px; margin: 0 auto 64px; margin-inline: max(64px, calc((100% - 1300px) / 2)); overflow: hidden; min-height: 320px; }
@@ -212,7 +236,7 @@
 
     /* RESPONSIVE */
     @media (max-width: 1200px) {
-      .alert-form { flex-direction: column; }
+      .alert-banner { padding: 16px 40px; }
     }
     @media (max-width: 1024px) {
       .about { grid-template-columns: 1fr; }
@@ -253,11 +277,12 @@
       .job-card { overflow: hidden; max-width: 100%; padding: 8px 14px 8px 8px; }
       .job-meta { flex-wrap: wrap !important; }
       .job-meta span { font-size: 11px; }
-      .alert-card { padding: 28px 16px !important; max-width: 100% !important; overflow: hidden; word-wrap: break-word; }
-      .alert-card h3 { font-size: 20px !important; }
-      .alert-card p { font-size: 13px !important; max-width: 100% !important; }
-      .alert-form { flex-direction: column !important; gap: 10px; }
-      .alert-form input, .alert-form button { width: 100% !important; min-width: 0 !important; flex-shrink: 1 !important; }
+      .alert-banner { padding: 12px 16px; gap: 12px; }
+      .alert-banner-icon { width: 36px; height: 36px; }
+      .alert-banner-icon .material-icons-outlined { font-size: 20px; }
+      .alert-banner-text p { display: none; }
+      .alert-banner-text h3 { font-size: 15px; }
+      .alert-banner-btn { padding: 10px 20px; font-size: 13px; }
       #right-panel { position: static; max-width: 100%; overflow: hidden; display: none; }
       .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 500; }
       .drawer-overlay.open { display: block; }
@@ -697,7 +722,7 @@
       "This hands-on role involves restoring vehicles to pre-accident condition using the latest collision repair techniques, equipment, and materials. You will perform bodywork, frame straightening, panel replacement, and refinishing to meet manufacturer specifications and insurance guidelines. ASE certification and I-CAR training are preferred but not required — we invest in ongoing education for our team. We offer a well-equipped shop with modern tools, competitive flat-rate pay, and a supportive team environment. Full benefits package includes health insurance, retirement savings plan, paid vacation, and employee vehicle purchase programs."
     ];
     var ratings = [6.1, 7.3, 5.8, 8.2, 6.9, 7.5];
-    var selectedJobIdx = -1;
+    var selectedJobIdx = 0;
     var currentPage = 0;
     var perPage = 10;
 
@@ -884,11 +909,7 @@
     function showJobDetail(jobs, idx) {
       var panel = document.getElementById('right-panel');
       if (idx < 0 || !jobs[idx]) {
-        panel.innerHTML = '<div class="alert-card">' +
-          '<div class="alert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>' +
-          '<h3>Get job alerts near you</h3>' +
-          '<p>Don\'t see the perfect role? We\'ll notify you when opportunities match your search.</p>' +
-          '<div class="alert-form"><input type="text" placeholder="Email or Phone Number*"><input type="text" placeholder="Zipcode*"><button>Get Alerts</button></div></div>';
+        panel.innerHTML = '';
         return;
       }
       var job = jobs[idx];
@@ -954,21 +975,7 @@
     renderJobs();
     </script>
 
-    <!-- ALERT -->
-    <div id="right-panel">
-      <div class="alert-card" data-animate>
-        <div class="alert-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        </div>
-        <h3>Get job alerts near you</h3>
-        <p>Don't see the perfect role? We'll notify you when opportunities match your search.</p>
-        <div class="alert-form">
-          <input type="text" placeholder="Email or Phone Number*">
-          <input type="text" placeholder="Zipcode*">
-          <button>Get Alerts</button>
-        </div>
-      </div>
-    </div>
+    <div id="right-panel"></div>
   </div>
 
   <!-- MOBILE DRAWER -->
@@ -987,6 +994,65 @@
     </div>
     <img src="images/dealer/961426aa.png" alt="Degrees at Work" class="degrees-cta-img">
   </div>
+
+  <!-- ALERT BANNER -->
+  <div class="alert-banner">
+    <div class="alert-banner-icon"><span class="material-icons-outlined">notifications_active</span></div>
+    <div class="alert-banner-text">
+      <h3>Get job alerts near you</h3>
+      <p>Don't see the perfect role? We'll notify you when opportunities match your search.</p>
+    </div>
+    <button class="alert-banner-btn" onclick="openAlertModal()">Get Job Alerts</button>
+  </div>
+
+  <!-- ALERT MODAL -->
+  <div class="alert-modal-overlay" id="alert-modal-overlay" onclick="if(event.target===this)closeAlertModal()">
+    <div class="alert-modal">
+      <button class="alert-modal-close" onclick="closeAlertModal()">✕</button>
+      <div class="alert-modal-icon"><span class="material-icons-outlined">notifications_active</span></div>
+      <h3>Get job alerts near you</h3>
+      <p class="modal-subtext">Don't see the perfect role? We'll notify you when opportunities match your search.</p>
+      <label for="alert-email">Email</label>
+      <input type="email" id="alert-email" placeholder="you@example.com">
+      <label for="alert-zip">Zip Code</label>
+      <input type="text" id="alert-zip" placeholder="Enter your zip code">
+      <div class="field-label">Positions of Interest</div>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="position" value="Technician"><span>Technician</span></label>
+        <label><input type="checkbox" name="position" value="Sales"><span>Sales</span></label>
+        <label><input type="checkbox" name="position" value="Service"><span>Service</span></label>
+        <label><input type="checkbox" name="position" value="Admin"><span>Admin</span></label>
+        <label><input type="checkbox" name="position" value="Finance"><span>Finance</span></label>
+      </div>
+      <div class="field-label">Job Type</div>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="jobtype" value="Full-time"><span>Full-time</span></label>
+        <label><input type="checkbox" name="jobtype" value="Part-time"><span>Part-time</span></label>
+      </div>
+      <button class="alert-modal-submit" onclick="submitAlertForm()">Get Job Alerts</button>
+    </div>
+  </div>
+
+  <script>
+  function openAlertModal() {
+    document.getElementById('alert-modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAlertModal() {
+    document.getElementById('alert-modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function submitAlertForm() {
+    var email = document.getElementById('alert-email').value;
+    var zip = document.getElementById('alert-zip').value;
+    if (!email || !zip) { alert('Please enter your email and zip code.'); return; }
+    var modal = document.querySelector('.alert-modal');
+    modal.innerHTML = '<div class="alert-modal-icon"><span class="material-icons-outlined">check_circle</span></div>' +
+      '<h3 style="margin-top:8px;">You\'re all set!</h3>' +
+      '<p class="modal-subtext">We\'ll send job alerts to ' + email + ' when new opportunities match your preferences.</p>' +
+      '<button class="alert-modal-submit" onclick="closeAlertModal()">Done</button>';
+  }
+  </script>
 
   <!-- FOOTER -->
   <footer class="footer">
