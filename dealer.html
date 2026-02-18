@@ -763,13 +763,13 @@
       header.textContent = 'Showing ' + (start + 1) + '–' + Math.min(start + perPage, jobs.length) + ' of ' + jobs.length + ' opportunit' + (jobs.length === 1 ? 'y' : 'ies');
       list.innerHTML = pageJobs.map(function(job, i) {
         var globalIdx = start + i;
-        var isNew = /hours? ago/.test(job.time);
-        var newBadge = isNew ? '<span class="job-badge-new">New</span>' : '';
+        
+        var isRecent = /hours? ago/.test(job.time) || job.time === '1 day ago';
         var appCount = ((globalIdx * 7 + 13) % 40) + 5;
         return '<div class="job-card' + (globalIdx === selectedJobIdx ? ' selected' : '') + '" data-job-index="' + globalIdx + '" onclick="selectJob(' + globalIdx + ')">' +
           '<div class="job-logo"><img src="images/dealer/' + job.thumb + '" alt=""></div>' +
-          '<div class="job-info"><div class="job-info-header"><h4>' + job.title + newBadge + '</h4>' +
-          '<span class="job-time">' + job.time + '</span></div>' +
+          '<div class="job-info"><div class="job-info-header"><h4>' + job.title + '</h4>' +
+          '<span class="job-time"' + (isRecent ? ' style="color:#2a60ca;font-weight:600;"' : '') + '>' + job.time + '</span></div>' +
           '<div class="company">' + job.store + '</div>' +
           '<div class="job-meta"><span>' + job.location + '</span><span>' + formatPay(job.pay) + '</span><span>' + job.position + '</span><span>' + job.type + '</span></div>' +
           '<div class="job-applicants"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' + appCount + ' applicants</div>' +
