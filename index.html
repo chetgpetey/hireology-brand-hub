@@ -519,7 +519,7 @@
         o.classList.toggle('selected', o.textContent.trim() === val);
       });
       if (/^All |^Any /.test(val)) { wrap.classList.remove('has-selection'); } else { wrap.classList.add('has-selection'); }
-      selectedJobIdx = -1;
+      selectedJobIdx = 0;
       currentPage = 0;
       renderJobs();
     }
@@ -538,7 +538,7 @@
       wrap.classList.remove('open');
       var val = opt.textContent.trim();
       if (/^All |^Any /.test(val)) { wrap.classList.remove('has-selection'); } else { wrap.classList.add('has-selection'); }
-      selectedJobIdx = -1;
+      selectedJobIdx = 0;
       currentPage = 0;
       renderJobs();
     }
@@ -703,7 +703,7 @@
     var totalPages = Math.ceil(jobs.length / perPage);
     if (p < 0 || p >= totalPages) return;
     currentPage = p;
-    selectedJobIdx = -1;
+    selectedJobIdx = 0;
     renderJobs();
   }
 
@@ -808,7 +808,10 @@
   function showJobDetail(jobs, idx) {
     var panel = document.getElementById('right-panel');
     if (idx < 0 || !jobs[idx]) {
-      panel.innerHTML = '';
+      panel.innerHTML = '<div class="job-detail-panel" style="text-align:center;padding:48px 32px;">' +
+        '<h3 style="font-size:20px;font-weight:600;color:#00095b;margin-bottom:8px;">No jobs match your filters</h3>' +
+        '<p style="font-size:14px;color:#6b7280;margin-bottom:20px;line-height:1.5;">Don\'t see the perfect role? We\'ll notify you when opportunities match your search.</p>' +
+        '<button onclick="openAlertModal()" style="background:#2a60ca;color:#fff;border:none;padding:12px 28px;border-radius:50px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">Get Job Alerts</button></div>';
       return;
     }
     var job = jobs[idx];
