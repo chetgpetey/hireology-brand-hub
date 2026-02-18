@@ -102,6 +102,15 @@
     .search-bar input { flex: 1; padding: 12px 12px; font-size: 16px; border: none; outline: none; font-family: inherit; background: transparent; }
     .search-bar button { background: #2A60CA; color: #fff; border: none; padding: 12px 32px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; border-radius: 50px; flex-shrink: 0; transition: background 0.2s; }
     .search-bar button:hover { background: #1e4fa8; }
+    .search-bar { position: relative; }
+    .search-suggestions { display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; z-index: 300; max-height: 280px; overflow-y: auto; }
+    .search-suggestions.open { display: block; }
+    .search-suggestion { display: flex; align-items: center; gap: 12px; padding: 12px 20px; cursor: pointer; transition: background 0.15s; }
+    .search-suggestion:hover { background: #f2f3fa; }
+    .search-suggestion svg { width: 18px; height: 18px; stroke: #9ca3af; fill: none; stroke-width: 2; flex-shrink: 0; }
+    .search-suggestion .sug-text { flex: 1; }
+    .search-suggestion .sug-primary { font-size: 14px; font-weight: 500; color: #1a2629; }
+    .search-suggestion .sug-secondary { font-size: 12px; color: #9ca3af; }
     .filters { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; margin-bottom: 16px; padding-bottom: 24px; border-bottom: 1px solid #e5e7eb; }
     .filters { position: relative; z-index: 200; }
     .filter-wrap { position: relative; }
@@ -537,8 +546,9 @@
     <p>Search opportunities across the Hawk family of dealerships</p>
     <div class="search-bar">
       <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      <input type="text" placeholder="Zip code or City">
+      <input type="text" placeholder="Zip code or City" id="search-input" autocomplete="off">
       <button>Search</button>
+      <div class="search-suggestions" id="search-suggestions"></div>
     </div>
     <div class="filters">
       <div class="filter-wrap">
@@ -1124,5 +1134,52 @@
     });
   })();
   </script>
+
+  <script>
+  (function() {
+    var places = [
+      { city: 'Joliet', state: 'IL', zip: '60431' },
+      { city: 'St Charles', state: 'IL', zip: '60174' },
+      { city: 'Chicago', state: 'IL', zip: '60601' },
+      { city: 'Naperville', state: 'IL', zip: '60540' },
+      { city: 'Aurora', state: 'IL', zip: '60502' },
+      { city: 'Plainfield', state: 'IL', zip: '60544' },
+      { city: 'Bolingbrook', state: 'IL', zip: '60440' },
+      { city: 'Romeoville', state: 'IL', zip: '60446' },
+      { city: 'Wheaton', state: 'IL', zip: '60187' },
+      { city: 'Schaumburg', state: 'IL', zip: '60173' },
+      { city: 'Downers Grove', state: 'IL', zip: '60515' },
+      { city: 'Oak Brook', state: 'IL', zip: '60523' },
+      { city: 'Tinley Park', state: 'IL', zip: '60477' },
+      { city: 'Orland Park', state: 'IL', zip: '60462' },
+      { city: 'Mokena', state: 'IL', zip: '60448' }
+    ];
+    var input = document.getElementById('search-input');
+    var box = document.getElementById('search-suggestions');
+    if (!input || !box) return;
+    var pinSvg = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+    input.addEventListener('input', function() {
+      var q = input.value.trim().toLowerCase();
+      if (q.length < 2) { box.classList.remove('open'); return; }
+      var matches = places.filter(function(p) {
+        return p.city.toLowerCase().indexOf(q) === 0 || p.zip.indexOf(q) === 0;
+      }).slice(0, 5);
+      if (!matches.length) { box.classList.remove('open'); return; }
+      box.innerHTML = matches.map(function(p) {
+        return '<div class="search-suggestion" data-value="' + p.city + ', ' + p.state + ' ' + p.zip + '">' +
+          pinSvg + '<div class="sug-text"><div class="sug-primary">' + p.city + ', ' + p.state + '</div><div class="sug-secondary">' + p.zip + '</div></div></div>';
+      }).join('');
+      box.classList.add('open');
+    });
+    box.addEventListener('click', function(e) {
+      var sug = e.target.closest('.search-suggestion');
+      if (sug) { input.value = sug.dataset.value; box.classList.remove('open'); }
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.search-bar')) box.classList.remove('open');
+    });
+  })();
+  </script>
+
 </body>
 </html>
