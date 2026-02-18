@@ -336,10 +336,16 @@
             <h4>Please add your resume <span>(optional)</span></h4>
             <p>10MB limit; pdf, .doc, and .docx file types are accepted.</p>
           </div>
-          <button class="attach-btn">
+          <input type="file" id="resume-input" accept=".pdf,.doc,.docx" style="display:none" onchange="handleResumeUpload(this)">
+          <button class="attach-btn" id="attach-btn" onclick="document.getElementById('resume-input').click()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
             Attach File
           </button>
+          <div id="resume-file" style="display:none;margin-top:10px;display:none;align-items:center;gap:8px;padding:10px 14px;background:#f2f3fa;border-radius:8px;font-size:13px;color:#1a2629;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2a60ca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span id="resume-name"></span>
+            <button onclick="removeResume()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:#9ca3af;font-size:16px;padding:0 4px;">✕</button>
+          </div>
         </div>
 
         <div class="other-info">
@@ -491,6 +497,22 @@
   </script>
 
   <script>
+  function handleResumeUpload(input) {
+    if (!input.files || !input.files[0]) return;
+    var file = input.files[0];
+    var nameEl = document.getElementById('resume-name');
+    var fileEl = document.getElementById('resume-file');
+    var btnEl = document.getElementById('attach-btn');
+    nameEl.textContent = file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
+    fileEl.style.display = 'flex';
+    btnEl.style.display = 'none';
+  }
+  function removeResume() {
+    document.getElementById('resume-input').value = '';
+    document.getElementById('resume-file').style.display = 'none';
+    document.getElementById('attach-btn').style.display = 'inline-flex';
+  }
+
   function toggleAddress() {
     var toggle = document.getElementById('address-toggle');
     var fields = document.getElementById('address-fields');
