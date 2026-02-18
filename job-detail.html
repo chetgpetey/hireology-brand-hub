@@ -100,6 +100,36 @@
     .footer-text { font-size: 14px; color: #6b7280; }
     .footer .ford-script { height: 32px; }
 
+    /* SIMILAR JOBS MODAL */
+    .similar-modal-overlay { display: flex; position: fixed; inset: 0; background: rgba(0,0,0,0); z-index: 600; justify-content: center; align-items: center; pointer-events: none; opacity: 0; transition: background 0.3s ease, opacity 0.3s ease; }
+    .similar-modal-overlay.open { background: rgba(0,0,0,0.5); pointer-events: auto; opacity: 1; }
+    .similar-modal { background: #fff; border-radius: 20px; padding: 40px; max-width: 560px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; transform: translateY(24px); opacity: 0; transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; }
+    .similar-modal-overlay.open .similar-modal { transform: translateY(0); opacity: 1; }
+    .similar-modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border: none; background: #f3f4f6; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #374151; transition: background 0.2s; }
+    .similar-modal-close:hover { background: #e5e7eb; }
+    .similar-modal h2 { font-size: 22px; font-weight: 600; color: #00095b; margin-bottom: 6px; }
+    .similar-modal .modal-sub { font-size: 14px; color: #6b7280; margin-bottom: 24px; line-height: 1.5; }
+    .similar-job-card { display: flex; align-items: center; gap: 14px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+    .similar-job-card:hover { background: #f9fafb; }
+    .similar-job-card.checked { border-color: #2a60ca; background: #f2f3fa; }
+    .similar-job-card input[type="checkbox"] { display: none; }
+    .similar-check { width: 22px; height: 22px; border: 2px solid #d1d5db; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .similar-job-card.checked .similar-check { background: #2a60ca; border-color: #2a60ca; }
+    .similar-check svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 3; opacity: 0; transition: opacity 0.2s; }
+    .similar-job-card.checked .similar-check svg { opacity: 1; }
+    .similar-job-info { flex: 1; min-width: 0; }
+    .similar-job-info h4 { font-size: 15px; font-weight: 600; color: #00095b; margin-bottom: 2px; }
+    .similar-job-info .sim-company { font-size: 13px; color: #374151; margin-bottom: 4px; }
+    .similar-job-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+    .similar-job-meta span { font-size: 11px; background: #f3f4f6; padding: 2px 8px; border-radius: 4px; color: #6b7280; }
+    .similar-modal-actions { display: flex; gap: 12px; margin-top: 20px; }
+    .similar-skip { flex: 1; padding: 12px; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; font-size: 14px; font-weight: 600; color: #374151; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+    .similar-skip:hover { background: #f5f6f8; }
+    .similar-apply { flex: 1; padding: 12px; border: none; border-radius: 50px; background: #2a60ca; font-size: 14px; font-weight: 600; color: #fff; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+    .similar-apply:hover { background: #1e4fa8; }
+    .similar-apply:disabled { background: #9ca3af; cursor: default; }
+    .similar-count { font-size: 12px; color: #6b7280; text-align: center; margin-top: 12px; }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .nav { padding: 16px 24px; }
@@ -308,6 +338,99 @@
     <span class="footer-text">© 2026 Ford Motor Company</span>
     <img src="images/logo.svg" alt="Ford" style="height:32px;">
   </footer>
+
+  <!-- SIMILAR JOBS MODAL -->
+  <div class="similar-modal-overlay" id="similar-modal" onclick="if(event.target===this)closeSimilarModal()">
+    <div class="similar-modal">
+      <button class="similar-modal-close" onclick="closeSimilarModal()">✕</button>
+      <h2>We found similar jobs for you</h2>
+      <p class="modal-sub">Based on your application for Mobile Service Technician, these roles might also be a great fit. Select any you'd like to apply for using the same information.</p>
+
+      <div id="similar-jobs-list">
+        <div class="similar-job-card" onclick="toggleSimilarJob(this)">
+          <input type="checkbox" name="similar" value="Automotive Technician">
+          <div class="similar-check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="similar-job-info">
+            <h4>Automotive Technician</h4>
+            <div class="sim-company">Hawk Chevrolet</div>
+            <div class="similar-job-meta"><span>Joliet, IL</span><span>$55,000</span><span>Full-time</span></div>
+          </div>
+        </div>
+        <div class="similar-job-card" onclick="toggleSimilarJob(this)">
+          <input type="checkbox" name="similar" value="Service Advisor">
+          <div class="similar-check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="similar-job-info">
+            <h4>Service Advisor</h4>
+            <div class="sim-company">Hawk Mazda of Joliet</div>
+            <div class="similar-job-meta"><span>Joliet, IL</span><span>$67,000</span><span>Full-time</span></div>
+          </div>
+        </div>
+        <div class="similar-job-card" onclick="toggleSimilarJob(this)">
+          <input type="checkbox" name="similar" value="Body Shop Technician">
+          <div class="similar-check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="similar-job-info">
+            <h4>Body Shop Technician</h4>
+            <div class="sim-company">Hawk Ford of St Charles</div>
+            <div class="similar-job-meta"><span>St Charles, IL</span><span>$58,000</span><span>Full-time</span></div>
+          </div>
+        </div>
+        <div class="similar-job-card" onclick="toggleSimilarJob(this)">
+          <input type="checkbox" name="similar" value="Parts Specialist">
+          <div class="similar-check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="similar-job-info">
+            <h4>Parts Specialist</h4>
+            <div class="sim-company">Hawk Volkswagen of Joliet</div>
+            <div class="similar-job-meta"><span>Joliet, IL</span><span>$42,000</span><span>Full-time</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="similar-count" id="similar-count">0 additional jobs selected</div>
+      <div class="similar-modal-actions">
+        <button class="similar-skip" onclick="closeSimilarModal()">No Thanks</button>
+        <button class="similar-apply" id="similar-apply-btn" disabled onclick="submitSimilarJobs()">Apply to Selected</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  function toggleSimilarJob(card) {
+    var cb = card.querySelector('input[type="checkbox"]');
+    cb.checked = !cb.checked;
+    card.classList.toggle('checked', cb.checked);
+    updateSimilarCount();
+  }
+  function updateSimilarCount() {
+    var checked = document.querySelectorAll('#similar-jobs-list input:checked');
+    var count = checked.length;
+    document.getElementById('similar-count').textContent = count + ' additional job' + (count !== 1 ? 's' : '') + ' selected';
+    document.getElementById('similar-apply-btn').disabled = count === 0;
+  }
+  function openSimilarModal() {
+    document.getElementById('similar-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSimilarModal() {
+    document.getElementById('similar-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function submitSimilarJobs() {
+    var checked = document.querySelectorAll('#similar-jobs-list input:checked');
+    var jobs = Array.from(checked).map(function(cb) { return cb.value; });
+    var modal = document.querySelector('.similar-modal');
+    modal.innerHTML = '<div style="text-align:center;padding:20px 0;">' +
+      '<div style="width:56px;height:56px;background:#eef1f8;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2a60ca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>' +
+      '<h2 style="font-size:22px;font-weight:600;color:#00095b;margin-bottom:8px;">Applications submitted!</h2>' +
+      '<p style="font-size:14px;color:#6b7280;line-height:1.5;margin-bottom:24px;">Your application has been sent for Mobile Service Technician and ' + jobs.length + ' additional role' + (jobs.length !== 1 ? 's' : '') + '. We\'ll be in touch!</p>' +
+      '<button onclick="closeSimilarModal()" style="background:#2a60ca;color:#fff;border:none;padding:12px 32px;border-radius:50px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">Done</button></div>';
+  }
+
+  // Hook up the submit button
+  document.querySelector('.submit-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    openSimilarModal();
+  });
+  </script>
 
   <script>
   function toggleShare() {
