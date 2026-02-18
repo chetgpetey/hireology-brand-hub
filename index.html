@@ -626,12 +626,16 @@
   }
   function shareViaEmail() {
     var job = filterJobs()[selectedJobIdx];
-    if (job) window.open('mailto:?subject=' + encodeURIComponent(job.title + ' at ' + job.store) + '&body=' + encodeURIComponent('Check out this job: ' + window.location.href));
+    if (job) {
+      var subject = 'Check out this job: ' + job.title + ' at ' + job.store;
+      var body = 'Hey,\n\nI came across this job opening and thought you might be interested!\n\n' + job.title + ' at ' + job.store + '\nLocation: ' + job.location + '\nPay: ' + formatPay(job.pay) + '\n\nView the full listing and apply here:\n' + window.location.href + '\n\nGood luck!';
+      window.open('mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
+    }
     toggleShareMenu();
   }
   function shareViaSMS() {
     var job = filterJobs()[selectedJobIdx];
-    if (job) window.open('sms:?body=' + encodeURIComponent(job.title + ' at ' + job.store + ' — ' + window.location.href));
+    if (job) window.open('sms:?body=' + encodeURIComponent('Check out this job: ' + job.title + ' at ' + job.store + ' — ' + window.location.href));
     toggleShareMenu();
   }
   document.addEventListener('click', function(e) {

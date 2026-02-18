@@ -437,15 +437,26 @@
     document.getElementById('share-dropdown').classList.toggle('open');
   }
   function copyLink() {
-    navigator.clipboard.writeText(window.location.href);
+    navigator.clipboard.writeText(window.location.href).then(function() {
+      var btn = document.querySelector('.share-dropdown a');
+      var orig = btn.innerHTML;
+      btn.innerHTML = btn.innerHTML.replace('Copy link', 'Copied!');
+      setTimeout(function() { btn.innerHTML = orig; }, 2000);
+    });
     toggleShare();
   }
   function shareEmail() {
-    window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' + encodeURIComponent(window.location.href));
+    var title = document.querySelector('.job-title').textContent;
+    var company = document.querySelector('.job-location-name').textContent;
+    var subject = 'Check out this job: ' + title + ' at ' + company;
+    var body = 'Hey,\n\nI came across this job opening and thought you might be interested!\n\n' + title + ' at ' + company + '\n\nView the full listing and apply here:\n' + window.location.href + '\n\nGood luck!';
+    window.open('mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
     toggleShare();
   }
   function shareSMS() {
-    window.open('sms:?body=' + encodeURIComponent(document.title + ' — ' + window.location.href));
+    var title = document.querySelector('.job-title').textContent;
+    var company = document.querySelector('.job-location-name').textContent;
+    window.open('sms:?body=' + encodeURIComponent('Check out this job: ' + title + ' at ' + company + ' — ' + window.location.href));
     toggleShare();
   }
   document.addEventListener('click', function(e) {
