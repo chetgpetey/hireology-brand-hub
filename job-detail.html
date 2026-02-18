@@ -94,8 +94,8 @@
     .privacy-note { font-size: 14px; color: #7d8c9e; margin-top: 16px; }
 
     /* STICKY APPLY BAR */
-    .sticky-apply { position: sticky; top: 0; z-index: 50; background: #fff; padding: 14px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e5e7eb; border-radius: 16px 16px 0 0; opacity: 0; transform: translateY(-10px); transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
-    .sticky-apply.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .sticky-apply { position: sticky; top: 0; z-index: 50; background: #fff; padding: 14px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e5e7eb; border-radius: 16px 16px 0 0; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; max-height: 0; overflow: hidden; padding-top: 0; padding-bottom: 0; }
+    .sticky-apply.visible { opacity: 1; pointer-events: auto; max-height: 60px; padding: 14px 48px; overflow: visible; }
     .sticky-apply .sticky-title { font-size: 16px; font-weight: 600; color: #00095b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 16px; }
     .sticky-apply .sticky-btn { background: #2a60ca; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 20px; border-radius: 50px; border: none; cursor: pointer; font-family: inherit; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
     .sticky-apply .sticky-btn:hover { background: #1e4fa8; }
