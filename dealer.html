@@ -768,7 +768,7 @@
         return '<div class="job-card' + (globalIdx === selectedJobIdx ? ' selected' : '') + '" data-job-index="' + globalIdx + '" onclick="selectJob(' + globalIdx + ')">' +
           '<div class="job-logo"><img src="images/dealer/' + job.thumb + '" alt=""></div>' +
           '<div class="job-info"><div class="job-info-header"><h4>' + job.title + '</h4>' +
-          '<span class="job-time">' + job.time + '</span></div>' +
+          '<span class="job-time">' + shortTime(job.time) + '</span></div>' +
           '<div class="company">' + job.store + '</div>' +
           '<div class="job-meta"><span>' + job.location + '</span><span>' + formatPay(job.pay) + '</span><span>' + job.position + '</span><span>' + job.type + '</span></div>' +
           '<div class="job-applicants"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' + appCount + ' applicants</div>' +
@@ -841,6 +841,10 @@
       if (dd && !e.target.closest('.detail-save-wrap')) dd.classList.remove('open');
     });
 
+    function shortTime(t) {
+      if (window.innerWidth > 768) return t;
+      return t.replace(/(\d+) hours? ago/, '$1h ago').replace(/(\d+) days? ago/, '$1d ago').replace(/(\d+) weeks? ago/, '$1w ago').replace('1 day ago','1d ago').replace('1 week ago','1w ago');
+    }
     function isMobile() { return window.innerWidth <= 1024; }
 
     var _savedScrollY = 0;
