@@ -203,6 +203,10 @@
     .alert-modal-submit { width: 100%; background: #2a60ca; color: #fff; border: none; padding: 14px; border-radius: 50px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 8px; transition: background 0.2s; }
     .alert-modal-submit:hover { background: #1e4fa8; }
 
+    /* TOAST */
+    .copy-toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1a2629; color: #fff; padding: 12px 24px; border-radius: 50px; font-size: 14px; font-weight: 500; z-index: 700; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
+    .copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
     /* FOOTER */
     .footer { background: #F2F3FA; padding: 32px 64px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #e5e7eb; }
     .footer-logo { height: 24px; }
@@ -620,9 +624,18 @@
     var dd = document.getElementById('share-dropdown');
     if (dd) dd.classList.toggle('open');
   }
+  function showToast(msg) {
+    var t = document.getElementById('copy-toast');
+    if (!t) { t = document.createElement('div'); t.id = 'copy-toast'; t.className = 'copy-toast'; document.body.appendChild(t); }
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function() { t.classList.remove('show'); }, 2000);
+  }
   function copyJobLink() {
     navigator.clipboard.writeText(window.location.href);
     toggleShareMenu();
+    showToast('✓ Link copied to clipboard');
   }
   function shareViaEmail() {
     var job = filterJobs()[selectedJobIdx];

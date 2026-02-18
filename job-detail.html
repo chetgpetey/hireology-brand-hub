@@ -100,6 +100,10 @@
     .footer-text { font-size: 14px; color: #6b7280; }
     .footer .ford-script { height: 32px; }
 
+    /* TOAST */
+    .copy-toast { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1a2629; color: #fff; padding: 12px 24px; border-radius: 50px; font-size: 14px; font-weight: 500; z-index: 700; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
+    .copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
     /* SIMILAR JOBS MODAL */
     .similar-modal-overlay { display: flex; position: fixed; inset: 0; background: rgba(0,0,0,0); z-index: 600; justify-content: center; align-items: center; pointer-events: none; opacity: 0; transition: background 0.3s ease, opacity 0.3s ease; }
     .similar-modal-overlay.open { background: rgba(0,0,0,0.5); pointer-events: auto; opacity: 1; }
@@ -436,14 +440,18 @@
   function toggleShare() {
     document.getElementById('share-dropdown').classList.toggle('open');
   }
+  function showToast(msg) {
+    var t = document.getElementById('copy-toast');
+    if (!t) { t = document.createElement('div'); t.id = 'copy-toast'; t.className = 'copy-toast'; document.body.appendChild(t); }
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function() { t.classList.remove('show'); }, 2000);
+  }
   function copyLink() {
-    navigator.clipboard.writeText(window.location.href).then(function() {
-      var btn = document.querySelector('.share-dropdown a');
-      var orig = btn.innerHTML;
-      btn.innerHTML = btn.innerHTML.replace('Copy link', 'Copied!');
-      setTimeout(function() { btn.innerHTML = orig; }, 2000);
-    });
+    navigator.clipboard.writeText(window.location.href);
     toggleShare();
+    showToast('✓ Link copied to clipboard');
   }
   function shareEmail() {
     var title = document.querySelector('.job-title').textContent;
