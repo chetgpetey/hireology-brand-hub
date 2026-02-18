@@ -252,8 +252,6 @@
       .filter-btn { display: none; }
       .filter-dropdown { display: none !important; }
       .filter-native { display: block; padding: 10px 20px; font-size: 14px; color: #374151; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; font-family: inherit; -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239ca3af'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
-      .filters { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 16px; }
-      .filters::-webkit-scrollbar { display: none; }
       .job-card { overflow: hidden; max-width: 100%; padding: 8px 14px 8px 8px; gap: 12px; }
       .job-logo { width: 60px; height: 60px; border-radius: 8px; }
       .job-info h4 { font-size: 16px; }
@@ -268,6 +266,10 @@
       .alert-banner-btn { padding: 10px 20px; font-size: 13px; }
       #job-list { max-width: 100%; overflow: hidden; }
       .footer { padding: 24px; flex-direction: column; gap: 12px; }
+    }
+    @media (pointer: coarse) and (max-width: 768px) {
+      .filters { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 16px; }
+      .filters::-webkit-scrollbar { display: none; }
     }
     /* SCROLL ANIMATIONS */
     [data-animate] { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
