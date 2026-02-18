@@ -222,7 +222,8 @@
       #right-panel { position: static; max-width: 100%; overflow: hidden; display: none; }
       .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 500; }
       .drawer-overlay.open { display: block; }
-      .drawer-panel { position: fixed; bottom: 0; left: 0; right: 0; max-height: 85vh; background: #fff; border-radius: 16px 16px 0 0; z-index: 501; transform: translateY(100%); transition: transform 0.3s ease; overflow-y: auto; padding: 24px 16px; }
+      .drawer-panel { position: fixed; bottom: 0; left: 0; right: 0; max-height: 85vh; background: #fff; border-radius: 16px 16px 0 0; z-index: 501; transform: translateY(100%); transition: transform 0.3s ease; overflow: hidden; display: flex; flex-direction: column; }
+      #drawer-content { overflow-y: auto; flex: 1; padding: 0 16px 24px; }
       .drawer-panel.open { transform: translateY(0); }
       .drawer-panel .detail-header { flex-wrap: wrap; }
       .drawer-panel .detail-title { width: 100%; font-size: 20px; }
@@ -231,7 +232,7 @@
       .drawer-panel .drawer-actions { display: flex !important; gap: 12px; margin-top: 16px; margin-bottom: 8px; }
       .drawer-panel .drawer-actions .detail-apply-top { flex: 1; text-align: center; padding: 12px; border-radius: 50px; }
       .drawer-panel .drawer-actions .detail-save { width: 48px; height: 48px; }
-      .drawer-handle { display: flex; justify-content: center; padding: 12px 0 8px; cursor: grab; }
+      .drawer-handle { display: flex; justify-content: center; padding: 12px 0 8px; cursor: grab; position: sticky; top: 0; z-index: 1; background: #fff; border-radius: 16px 16px 0 0; flex-shrink: 0; }
       .drawer-handle span { width: 40px; height: 4px; border-radius: 2px; background: #d1d5db; }
       #job-list { max-width: 100%; overflow: hidden; }
       .footer { padding: 24px; flex-direction: column; gap: 12px; }
