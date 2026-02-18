@@ -20,8 +20,8 @@
     .nav-links { display: flex; gap: 32px; }
     .nav-links a { font-size: 15px; font-weight: 500; color: #1a2629; }
     .nav-links a:hover { color: #2a60ca; }
-    .nav-cta { background: #2a60ca; color: #fff; font-size: 14px; font-weight: 600; padding: 10px 24px; border-radius: 24px; border: none; cursor: pointer; font-family: inherit; transition: all 0.2s ease; }
-    .nav-cta:hover { background: #1e4fa8; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(42,96,202,0.25); }
+    .nav-cta { background: #2a60ca; color: #fff; font-size: 14px; font-weight: 600; padding: 10px 24px; border-radius: 24px; border: none; cursor: pointer; font-family: inherit; }
+    .nav-cta:hover { background: #1e4fa8; }
 
     /* HERO */
     .hero { text-align: center; padding: 56px 64px 0; }
@@ -87,8 +87,8 @@
     .search-bar { display: flex; align-items: center; margin: 0 auto 20px; border: 1px solid #000; border-radius: 50px; padding: 6px 6px 6px 20px; background: #fff; box-shadow: 0 4px 10px 0 rgba(0,0,0,0.10); }
     .search-bar svg { width: 20px; height: 20px; stroke: #6b7280; fill: none; stroke-width: 2; flex-shrink: 0; }
     .search-bar input { flex: 1; padding: 12px 12px; font-size: 16px; border: none; outline: none; font-family: inherit; background: transparent; }
-    .search-bar button { background: #2A60CA; color: #fff; border: none; padding: 12px 32px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; border-radius: 50px; flex-shrink: 0; transition: all 0.2s ease; }
-    .search-bar button:hover { background: #1e4fa8; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(42,96,202,0.25); }
+    .search-bar button { background: #2A60CA; color: #fff; border: none; padding: 12px 32px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; border-radius: 50px; flex-shrink: 0; transition: background 0.2s; }
+    .search-bar button:hover { background: #1e4fa8; }
     .filters { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; margin-bottom: 16px; padding-bottom: 24px; border-bottom: 1px solid #e5e7eb; position: relative; z-index: 200; }
     .filter-wrap { position: relative; }
     .filter-native { display: none; }
@@ -137,7 +137,7 @@
     .job-detail-panel .detail-save:hover { background: #f2f3fa; border-color: #2a60ca; }
     .job-detail-panel .detail-save svg { width: 20px; height: 20px; stroke: #374151; fill: none; stroke-width: 2; }
     .job-detail-panel .detail-apply-top { background: #2A60CA; color: #fff; font-size: 14px; font-weight: 600; padding: 10px 24px; border-radius: 50px; border: none; cursor: pointer; font-family: inherit; transition: background 0.2s; max-width: 300px; }
-    .job-detail-panel .detail-apply-top:hover { background: #1e4fa8; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(42,96,202,0.25); }
+    .job-detail-panel .detail-apply-top:hover { background: #1e4fa8; }
     .job-detail-panel .detail-company { font-size: 16px; color: #374151; margin-bottom: 12px; }
     .job-detail-panel .detail-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; align-items: center; }
     .job-detail-panel .detail-meta span { background: #f2f3fa; padding: 4px 12px; border-radius: 6px; font-size: 13px; color: #374151; }
@@ -163,10 +163,10 @@
     .job-detail-panel .ai-summary-label svg { width: 20px; height: 20px; flex-shrink: 0; }
     .job-detail-panel .ai-summary { font-size: 14px; color: #374151; line-height: 1.7; }
     .job-detail-panel .detail-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
-    .job-detail-panel .btn-learn { padding: 14px; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; font-size: 15px; font-weight: 600; color: #1a2629; cursor: pointer; font-family: inherit; text-align: center; transition: all 0.2s ease; }
-    .job-detail-panel .btn-learn:hover { background: #f5f6f8; transform: scale(1.03); }
-    .job-detail-panel .btn-apply { padding: 14px; border: none; border-radius: 50px; background: #2A60CA; font-size: 15px; font-weight: 600; color: #fff; cursor: pointer; font-family: inherit; text-align: center; transition: all 0.2s ease; }
-    .job-detail-panel .btn-apply:hover { background: #1e4fa8; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(42,96,202,0.25); }
+    .job-detail-panel .btn-learn { padding: 14px; border: 1px solid #d1d5db; border-radius: 50px; background: #fff; font-size: 15px; font-weight: 600; color: #1a2629; cursor: pointer; font-family: inherit; text-align: center; }
+    .job-detail-panel .btn-learn:hover { background: #f5f6f8; }
+    .job-detail-panel .btn-apply { padding: 14px; border: none; border-radius: 50px; background: #2A60CA; font-size: 15px; font-weight: 600; color: #fff; cursor: pointer; font-family: inherit; text-align: center; }
+    .job-detail-panel .btn-apply:hover { background: #1e4fa8; }
 
     /* ALERT BANNER (sticky bottom) */
     .alert-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 400; background: #00095b; padding: 16px 64px; padding-bottom: calc(16px + env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 20px; }
@@ -176,7 +176,7 @@
     .alert-banner-text h3 { font-size: 17px; font-weight: 600; color: #fff; margin: 0 0 2px; }
     .alert-banner-text p { font-size: 13px; color: rgba(255,255,255,0.65); margin: 0; line-height: 1.4; }
     .alert-banner-btn { background: #2a60ca; color: #fff; border: none; padding: 12px 20px; border-radius: 50px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap; transition: background 0.2s; flex-shrink: 0; }
-    .alert-banner-btn:hover { background: #1e4fa8; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(42,96,202,0.25); }
+    .alert-banner-btn:hover { background: #1e4fa8; }
     .footer { padding-bottom: 100px !important; }
 
     /* ALERT MODAL */
@@ -201,7 +201,7 @@
     .alert-modal .checkbox-group input { display: none; }
     .alert-modal .field-label { font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 8px; }
     .alert-modal-submit { width: 100%; background: #2a60ca; color: #fff; border: none; padding: 14px; border-radius: 50px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 8px; transition: background 0.2s; }
-    .alert-modal-submit:hover { background: #1e4fa8; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(42,96,202,0.25); }
+    .alert-modal-submit:hover { background: #1e4fa8; }
 
     /* FOOTER */
     .footer { background: #F2F3FA; padding: 32px 64px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #e5e7eb; }
