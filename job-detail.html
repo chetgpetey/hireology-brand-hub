@@ -93,6 +93,17 @@
     .submit-btn:hover { background: #1e4fa8; }
     .privacy-note { font-size: 14px; color: #7d8c9e; margin-top: 16px; }
 
+    /* STICKY APPLY BAR */
+    .sticky-apply { position: sticky; top: 0; z-index: 50; background: #fff; padding: 14px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e5e7eb; border-radius: 16px 16px 0 0; opacity: 0; transform: translateY(-10px); transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
+    .sticky-apply.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .sticky-apply .sticky-title { font-size: 16px; font-weight: 600; color: #00095b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 16px; }
+    .sticky-apply .sticky-btn { background: #2a60ca; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 20px; border-radius: 50px; border: none; cursor: pointer; font-family: inherit; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
+    .sticky-apply .sticky-btn:hover { background: #1e4fa8; }
+    @media (max-width: 768px) {
+      .sticky-apply { padding: 12px 20px; }
+      .sticky-apply .sticky-title { font-size: 14px; }
+    }
+
     /* FOOTER */
     .footer { background: #F2F3FA; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #e5e7eb; }
     .footer-logo { display: flex; align-items: center; gap: 16px; }
@@ -169,6 +180,10 @@
 
   <!-- MAIN -->
   <div class="main-container">
+    <div class="sticky-apply" id="sticky-apply">
+      <span class="sticky-title">Mobile Service Technician</span>
+      <button class="sticky-btn" onclick="document.getElementById('apply-form').scrollIntoView({behavior:'smooth'})">Apply Now</button>
+    </div>
     <div class="content-wrap">
 
       <a href="dealer.html#jobs" class="back-to-all">
@@ -434,6 +449,34 @@
     e.preventDefault();
     openSimilarModal();
   });
+  </script>
+
+  <script>
+  (function() {
+    var stickyBar = document.getElementById('sticky-apply');
+    var jobHeader = document.querySelector('.job-header');
+    var formSection = document.getElementById('apply-form');
+    if (!stickyBar || !jobHeader || !formSection) return;
+
+    function checkSticky() {
+      var headerBottom = jobHeader.getBoundingClientRect().bottom;
+      var formTop = formSection.getBoundingClientRect().top;
+      // Show when header scrolls out of view, hide when form is visible
+      if (headerBottom < 0 && formTop > window.innerHeight * 0.5) {
+        stickyBar.classList.add('visible');
+      } else {
+        stickyBar.classList.remove('visible');
+      }
+    }
+
+    window.addEventListener('scroll', checkSticky, { passive: true });
+    checkSticky();
+
+    // Hide when Apply Now is clicked
+    stickyBar.querySelector('.sticky-btn').addEventListener('click', function() {
+      stickyBar.classList.remove('visible');
+    });
+  })();
   </script>
 
   <script>
