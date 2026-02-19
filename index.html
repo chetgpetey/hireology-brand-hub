@@ -721,6 +721,10 @@
     currentPage = p;
     selectedJobIdx = 0;
     renderJobs();
+    var header = document.getElementById('listings-header');
+    var navHeight = document.querySelector('.nav').offsetHeight + 16;
+    var top = header.getBoundingClientRect().top + window.pageYOffset - navHeight;
+    window.scrollTo({top: top, behavior: 'smooth'});
   }
 
   function shortTime(t) {
