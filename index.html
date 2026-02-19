@@ -43,7 +43,10 @@
     /* BENEFITS */
     .benefits { display: flex; gap: 20px; padding: 40px 64px; overflow-x: auto; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
     .benefits::-webkit-scrollbar { display: none; }
-    .benefit-card { border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; justify-content: space-between; min-height: 420px; min-width: 375px; max-width: 375px; flex-shrink: 0; color: #fff; position: relative; overflow: hidden; }
+    .benefit-card { border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; justify-content: space-between; min-height: 420px; min-width: 375px; max-width: 375px; flex-shrink: 0; color: #fff; position: relative; overflow: hidden; cursor: default; }
+    .benefit-glow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; opacity: 0; transition: opacity 0.3s ease; }
+    .benefit-card:hover .benefit-glow { opacity: 1; }
+    .benefit-card > *:not(.benefit-glow) { position: relative; z-index: 2; }
     .benefit-card:nth-child(4n+1) { background: #081534; }
     .benefit-card:nth-child(4n+2) { background: #133a7c; }
     .benefit-card:nth-child(4n+3) { background: #2a6bac; }
@@ -340,7 +343,7 @@
 
   <!-- BENEFITS -->
   <section class="benefits" id="benefits" data-animate>
-    <div class="benefit-card">
+    <div class="benefit-card"><div class="benefit-glow"></div>
       <div>
         <div class="benefit-icon"><svg viewBox="0 0 80 80">
           <path d="M16.66 43.33H26.66" />
@@ -352,7 +355,7 @@
       </div>
       <p class="benefit-desc">High-value benefits for you and your family, including $0-premium medical options and mental health support.</p>
     </div>
-    <div class="benefit-card">
+    <div class="benefit-card"><div class="benefit-glow"></div>
       <div>
         <div class="benefit-icon"><svg viewBox="0 0 80 80">
           <path d="M6.66 23.33L38.8 7.26C39.24 7.04 39.46 6.94 39.69 6.89C39.89 6.85 40.1 6.85 40.3 6.89C40.53 6.94 40.75 7.04 41.19 7.26L73.33 23.33L41.19 39.4C40.75 39.62 40.53 39.73 40.3 39.77C40.1 39.81 39.89 39.81 39.69 39.77C39.46 39.73 39.24 39.62 38.8 39.4L6.66 23.33Z" />
@@ -363,7 +366,7 @@
       </div>
       <p class="benefit-desc">Ford offers strong financial benefits, including retirement contributions, generous matching, and free investment planning tools.</p>
     </div>
-    <div class="benefit-card">
+    <div class="benefit-card"><div class="benefit-glow"></div>
       <div>
         <div class="benefit-icon"><svg viewBox="0 0 80 80">
           <path d="M51.79 51.79C36.17 67.41 18.23 74.79 11.72 68.28C5.21 61.78 12.59 43.84 28.22 28.22C43.84 12.59 61.78 5.21 68.29 11.72C74.79 18.22 67.41 36.16 51.79 51.79Z" />
@@ -374,7 +377,7 @@
       </div>
       <p class="benefit-desc">Generous vacation, holidays, family care time, and parental support help you recharge and support your growing family.</p>
     </div>
-    <div class="benefit-card">
+    <div class="benefit-card"><div class="benefit-glow"></div>
       <div>
         <div class="benefit-icon"><svg viewBox="0 0 80 80">
           <path d="M30 20H50M23.33 31.67H56.67" />
@@ -1051,6 +1054,58 @@
     });
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.search-bar')) box.classList.remove('open');
+    });
+  })();
+  </script>
+
+  <script>
+  (function() {
+    var cards = document.querySelectorAll('.benefit-card');
+    cards.forEach(function(card) {
+      var glow = card.querySelector('.benefit-glow');
+      if (!glow) return;
+      var prevX = 0, prevY = 0, prevTime = 0;
+      var trails = [];
+      var raf = null;
+
+      function render() {
+        if (!trails.length) { glow.style.background = 'none'; raf = null; return; }
+        var now = Date.now();
+        // Fade out trails over 400ms
+        trails = trails.filter(function(t) { return now - t.time < 400; });
+        if (!trails.length) { glow.style.background = 'none'; raf = null; return; }
+        var gradients = trails.map(function(t) {
+          var age = (now - t.time) / 400;
+          var alpha = 0.18 * (1 - age);
+          var size = 120 + t.speed * 0.8;
+          return 'radial-gradient(circle ' + size + 'px at ' + t.x + 'px ' + t.y + 'px, rgba(255,255,255,' + alpha.toFixed(3) + '), transparent 70%)';
+        });
+        glow.style.background = gradients.join(',');
+        raf = requestAnimationFrame(render);
+      }
+
+      card.addEventListener('mousemove', function(e) {
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        var now = Date.now();
+        var dt = now - prevTime || 16;
+        var dx = x - prevX;
+        var dy = y - prevY;
+        var speed = Math.min(Math.sqrt(dx * dx + dy * dy) / dt * 16, 200);
+        prevX = x; prevY = y; prevTime = now;
+
+        trails.push({ x: x, y: y, time: now, speed: speed });
+        // Cap trail points
+        if (trails.length > 12) trails.shift();
+        if (!raf) raf = requestAnimationFrame(render);
+      });
+
+      card.addEventListener('mouseleave', function() {
+        trails = [];
+        glow.style.background = 'none';
+        if (raf) { cancelAnimationFrame(raf); raf = null; }
+      });
     });
   })();
   </script>
