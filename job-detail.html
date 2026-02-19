@@ -586,5 +586,19 @@
   });
   </script>
 
+<script>
+if (window.location.hash === '#apply-form') {
+  history.replaceState(null, '', window.location.pathname);
+  window.scrollTo(0, 0);
+  setTimeout(function() {
+    var el = document.getElementById('apply-form');
+    if (el) {
+      var navHeight = document.querySelector('.nav') ? document.querySelector('.nav').offsetHeight + 16 : 80;
+      var top = el.getBoundingClientRect().top + window.pageYOffset - navHeight;
+      window.scrollTo({top: top, behavior: 'smooth'});
+    }
+  }, 600);
+}
+</script>
 </body>
 </html>
