@@ -1065,20 +1065,25 @@
       var glow = card.querySelector('.benefit-glow');
       if (!glow) return;
       var prevX = 0, prevY = 0, prevTime = 0;
+      var curX = 0, curY = 0, active = false;
       var trails = [];
       var raf = null;
 
       function render() {
-        if (!trails.length) { glow.style.background = 'none'; raf = null; return; }
+        if (!active) { raf = null; return; }
         var now = Date.now();
-        // Fade out trails over 400ms
-        trails = trails.filter(function(t) { return now - t.time < 400; });
-        if (!trails.length) { glow.style.background = 'none'; raf = null; return; }
-        var gradients = trails.map(function(t) {
-          var age = (now - t.time) / 400;
-          var alpha = 0.18 * (1 - age);
-          var size = 120 + t.speed * 0.8;
-          return 'radial-gradient(circle ' + size + 'px at ' + t.x + 'px ' + t.y + 'px, rgba(255,255,255,' + alpha.toFixed(3) + '), transparent 70%)';
+        // Keep trails for 800ms
+        trails = trails.filter(function(t) { return now - t.time < 800; });
+        // Build gradients: static cursor glow + trail points
+        var gradients = [];
+        // Always-on cursor glow (small, subtle)
+        gradients.push('radial-gradient(circle 60px at ' + curX + 'px ' + curY + 'px, rgba(255,255,255,0.08), transparent 70%)');
+        // Trail points
+        trails.forEach(function(t) {
+          var age = (now - t.time) / 800;
+          var alpha = 0.06 * (1 - age);
+          var size = 40 + t.speed * 0.3;
+          gradients.push('radial-gradient(circle ' + size + 'px at ' + t.x + 'px ' + t.y + 'px, rgba(255,255,255,' + alpha.toFixed(3) + '), transparent 70%)');
         });
         glow.style.background = gradients.join(',');
         raf = requestAnimationFrame(render);
@@ -1092,16 +1097,20 @@
         var dt = now - prevTime || 16;
         var dx = x - prevX;
         var dy = y - prevY;
-        var speed = Math.min(Math.sqrt(dx * dx + dy * dy) / dt * 16, 200);
+        var speed = Math.min(Math.sqrt(dx * dx + dy * dy) / dt * 16, 150);
         prevX = x; prevY = y; prevTime = now;
+        curX = x; curY = y;
 
-        trails.push({ x: x, y: y, time: now, speed: speed });
-        // Cap trail points
-        if (trails.length > 12) trails.shift();
-        if (!raf) raf = requestAnimationFrame(render);
+        // Add trail point even at low speeds
+        if (speed > 1) {
+          trails.push({ x: x, y: y, time: now, speed: speed });
+          if (trails.length > 24) trails.shift();
+        }
+        if (!active) { active = true; raf = requestAnimationFrame(render); }
       });
 
       card.addEventListener('mouseleave', function() {
+        active = false;
         trails = [];
         glow.style.background = 'none';
         if (raf) { cancelAnimationFrame(raf); raf = null; }
