@@ -44,9 +44,9 @@
     .benefits { display: flex; gap: 20px; padding: 40px 64px; overflow-x: auto; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
     .benefits::-webkit-scrollbar { display: none; }
     .benefit-card { border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; justify-content: space-between; min-height: 420px; min-width: 375px; max-width: 375px; flex-shrink: 0; color: #fff; position: relative; overflow: hidden; cursor: default; }
-    .benefit-glow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; opacity: 0; transition: opacity 0.3s ease; }
-    .benefit-card:hover .benefit-glow { opacity: 1; }
+    .benefit-glow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
     .benefit-card > *:not(.benefit-glow) { position: relative; z-index: 2; }
+    .glow-dot { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.08); transform: translate(-50%, -50%); transition: opacity 0.4s ease; }
     .benefit-card:nth-child(4n+1) { background: #081534; }
     .benefit-card:nth-child(4n+2) { background: #133a7c; }
     .benefit-card:nth-child(4n+3) { background: #2a6bac; }
@@ -1060,33 +1060,34 @@
 
   <script>
   (function() {
+    var SIZE = 30;
+    var LIFETIME = 900;
     var cards = document.querySelectorAll('.benefit-card');
     cards.forEach(function(card) {
       var glow = card.querySelector('.benefit-glow');
       if (!glow) return;
       var prevX = 0, prevY = 0, prevTime = 0;
-      var curX = 0, curY = 0, active = false;
-      var trails = [];
-      var raf = null;
+      var distAccum = 0;
+      // Cursor dot (always visible on hover)
+      var cursor = document.createElement('div');
+      cursor.className = 'glow-dot';
+      cursor.style.width = SIZE + 'px';
+      cursor.style.height = SIZE + 'px';
+      cursor.style.opacity = '0';
+      glow.appendChild(cursor);
 
-      function render() {
-        if (!active) { raf = null; return; }
-        var now = Date.now();
-        // Keep trails for 800ms
-        trails = trails.filter(function(t) { return now - t.time < 800; });
-        // Build gradients: static cursor glow + trail points
-        var gradients = [];
-        // Always-on cursor glow (small, subtle)
-        gradients.push('radial-gradient(circle 60px at ' + curX + 'px ' + curY + 'px, rgba(255,255,255,0.08), transparent 70%)');
-        // Trail points
-        trails.forEach(function(t) {
-          var age = (now - t.time) / 800;
-          var alpha = 0.06 * (1 - age);
-          var size = 40 + t.speed * 0.3;
-          gradients.push('radial-gradient(circle ' + size + 'px at ' + t.x + 'px ' + t.y + 'px, rgba(255,255,255,' + alpha.toFixed(3) + '), transparent 70%)');
-        });
-        glow.style.background = gradients.join(',');
-        raf = requestAnimationFrame(render);
+      function spawnDot(x, y) {
+        var dot = document.createElement('div');
+        dot.className = 'glow-dot';
+        dot.style.width = SIZE + 'px';
+        dot.style.height = SIZE + 'px';
+        dot.style.left = x + 'px';
+        dot.style.top = y + 'px';
+        dot.style.opacity = '1';
+        glow.appendChild(dot);
+        // Fade and remove
+        setTimeout(function() { dot.style.opacity = '0'; }, 10);
+        setTimeout(function() { if (dot.parentNode) dot.parentNode.removeChild(dot); }, LIFETIME);
       }
 
       card.addEventListener('mousemove', function(e) {
@@ -1097,23 +1098,32 @@
         var dt = now - prevTime || 16;
         var dx = x - prevX;
         var dy = y - prevY;
-        var speed = Math.min(Math.sqrt(dx * dx + dy * dy) / dt * 16, 150);
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        var speed = dist / dt * 16;
         prevX = x; prevY = y; prevTime = now;
-        curX = x; curY = y;
 
-        // Add trail point even at low speeds
-        if (speed > 1) {
-          trails.push({ x: x, y: y, time: now, speed: speed });
-          if (trails.length > 24) trails.shift();
+        // Move cursor dot
+        cursor.style.left = x + 'px';
+        cursor.style.top = y + 'px';
+        cursor.style.opacity = '1';
+
+        // Spawn trail dots based on distance traveled
+        // Faster = more gap between dots (spawn every N px based on speed)
+        var spacing = Math.max(8, Math.min(speed * 0.6, 40));
+        distAccum += dist;
+        while (distAccum >= spacing) {
+          distAccum -= spacing;
+          // Interpolate position back along the path
+          var ratio = distAccum / (dist || 1);
+          var dotX = x - dx * ratio;
+          var dotY = y - dy * ratio;
+          spawnDot(dotX, dotY);
         }
-        if (!active) { active = true; raf = requestAnimationFrame(render); }
       });
 
       card.addEventListener('mouseleave', function() {
-        active = false;
-        trails = [];
-        glow.style.background = 'none';
-        if (raf) { cancelAnimationFrame(raf); raf = null; }
+        cursor.style.opacity = '0';
+        distAccum = 0;
       });
     });
   })();
