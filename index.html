@@ -1062,16 +1062,10 @@
   (function() {
     var SIZE = 15;
     var LIFETIME = 900;
-    // Card bg colors in order: #081534, #133a7c, #2a6bac, #47a8e5 (repeating 4n+1..4n+4)
-    var cardColors = ['#081534', '#133a7c', '#2a6bac', '#47a8e5'];
     var cards = document.querySelectorAll('.benefit-card');
-    var cardCount = cards.length;
-    cards.forEach(function(card, idx) {
+    cards.forEach(function(card) {
       var glow = card.querySelector('.benefit-glow');
       if (!glow) return;
-      // Glow color = bg color of card to the right (wrap around)
-      var nextIdx = (idx + 1) % cardCount;
-      var glowColor = cardColors[nextIdx % cardColors.length];
       var prevX = 0, prevY = 0, prevTime = 0;
       var distAccum = 0;
       // Cursor dot (always visible on hover)
@@ -1079,7 +1073,7 @@
       cursor.className = 'glow-dot';
       cursor.style.width = SIZE + 'px';
       cursor.style.height = SIZE + 'px';
-      cursor.style.background = glowColor;
+      cursor.style.background = 'rgba(255,255,255,0.08)';
       cursor.style.opacity = '0';
       glow.appendChild(cursor);
 
@@ -1088,7 +1082,7 @@
         dot.className = 'glow-dot';
         dot.style.width = SIZE + 'px';
         dot.style.height = SIZE + 'px';
-        dot.style.background = glowColor;
+        dot.style.background = 'rgba(255,255,255,0.08)';
         dot.style.left = x + 'px';
         dot.style.top = y + 'px';
         dot.style.opacity = '1';
@@ -1127,6 +1121,14 @@
           var dotY = y - dy * ratio;
           spawnDot(dotX, dotY);
         }
+      });
+
+      card.addEventListener('mouseenter', function(e) {
+        var rect = card.getBoundingClientRect();
+        prevX = e.clientX - rect.left;
+        prevY = e.clientY - rect.top;
+        prevTime = Date.now();
+        distAccum = 0;
       });
 
       card.addEventListener('mouseleave', function() {
